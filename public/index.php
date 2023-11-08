@@ -11,6 +11,9 @@ require '../Modules/logout.php';
 //includes the code to connect to the database
 require '../Modules/database.php';
 require '../Modules/common.php';
+//loads the information of the navbar
+require "../Modules/navbar_content.php";
+global $navbarCategoryContent;
 
 session_start();
 //var_dump($_SESSION);
