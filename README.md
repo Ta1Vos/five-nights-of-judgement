@@ -6,7 +6,7 @@ https://www.ictshore.com/php/php-project-structure/
 
 # Configureer de vhosts
 Je kan je XAMP zo configureren dat je meerdere PHP apps kan hosten op je locale PC. De 
-apps kan je dan draaien op bijvoorbeeld: http://healthone.localhost/, http://app2.localhost/
+apps kan je dan draaien op bijvoorbeeld: http://fnoj.localhost/, http://app2.localhost/
 Om dit zo te configureren moet je een aantal configuratie onderdelen bewerken.
 
 ## Windows
@@ -24,9 +24,9 @@ ServerName localhost
 Listen 4001    
 NameVirtualHost *:4001
 <VirtualHost *:80 *:4001>
-    DocumentRoot "C:/xampp/apps/healthone/htdocs/if-sd-php-healthone/public"
-    ServerName healthone.localhost
-    <Directory "C:/xampp/apps/healthone/htdocs/if-sd-php-healthone/public">
+    DocumentRoot "C:/xampp/htdocs/sd22-p6-project-reviewyourexperience-five-nights-of-judgement/public"
+    ServerName fnoj.localhost
+    <Directory "C:/xampp/htdocs/sd22-p6-project-reviewyourexperience-five-nights-of-judgement/public">
         Options Indexes FollowSymLinks ExecCGI Includes
 
 	RewriteEngine on
