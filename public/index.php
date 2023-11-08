@@ -32,7 +32,7 @@ $request = $_SERVER['REQUEST_URI'];
 $params = explode("/", $request);
 print_r($request);
 //this wil be the title of your page
-$title = "HealthOne";
+$title = "FNOJ";
 
 //this variable will add text to your title. you can use this on the different pages.
 $titleSuffix = "";
