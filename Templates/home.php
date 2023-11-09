@@ -17,6 +17,7 @@ include_once('defaults/head.php');
                 <?= $message ?>
             </div>
         <?php endif; ?>
+        <br>
         <h3>Home</h3>
         <br>
         <small class="text-muted">This is the info of this page to show you how the lay-out looks like for our project.</small>
