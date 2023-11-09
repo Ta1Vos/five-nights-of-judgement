@@ -10,9 +10,13 @@
 
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="navbar-nav">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/categories">sportapparaat</a>
+                <li class="nav-item dropdown dropdown-hover">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu dropdown-hover-content">
+                        <?= $navbarCategoryContent; ?>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"  href="/register">registreren</a>
