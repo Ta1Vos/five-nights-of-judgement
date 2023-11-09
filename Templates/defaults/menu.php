@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="/home">
             Sportcenter
@@ -14,8 +14,8 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categories
                     </a>
-                    <ul class="dropdown-menu dropdown-hover-content">
-                        <?= $navbarCategoryContent; ?>
+                    <ul class="dropdown-menu dropdown-hover-content bg-dark text-light">
+                        <?php if (!empty($navbarCategoryContent)) {echo $navbarCategoryContent;}; ?>
                     </ul>
                 </li>
                 <li class="nav-item">

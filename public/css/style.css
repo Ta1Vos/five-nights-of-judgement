@@ -26,3 +26,7 @@ body {
 .product-img {
     width: 70%;
 }
+
+bg-black {
+    background-color: black;
+}

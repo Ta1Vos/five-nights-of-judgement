@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html>
+<?php
+include_once('defaults/head.php');
+?>
+<body>
+<div class="container bg-dark">
     <?php
-    include_once('defaults/head.php');
+    //            include_once ('defaults/header.php');
+    include_once('defaults/menu.php');
+    //            include_once ('defaults/pictures.php');
     ?>
-    <body>
-        <div class="container">
-            <?php
-            include_once ('defaults/header.php');
-            include_once ('defaults/menu.php');
-            include_once ('defaults/pictures.php');
-            ?>
-            <?php if(!empty($message)): ?>
-                <div class="alert alert-success" role="alert">
-                    <?=$message?>
-                </div>
-            <?php endif;?>
-            <h4>Sportcenter HealthOne</h4>
-            Fit en gezond zijn is geen vanzelfsprekendheid. We moeten er zelf wat voor doen. Goede, gezonde voeding is hiervoor de basis.
-            Bewegen hoort hier ook bij. Regelmatig bewegen zorgt voor een goede doorbloeding en draagt bij aan ontspanning van lichaam en geest.
-            Sporten is goed voor sterkere spieren en voor de conditie. Sporcenter HealthOne heeft verschillende sportapparaten om mee te kunnen werken aan je conditie.
-            <hr>
-            <?php
-            include_once ('defaults/footer.php');
-            ?>
+    <div class="bg-black text-light text-center">
+
+        <?php if (!empty($message)): ?>
+            <div class="alert alert-success" role="alert">
+                <?= $message ?>
+            </div>
+        <?php endif; ?>
+        <h3>Home</h3>
+        <br>
+        <small class="text-muted">This is the info of this page to show you how the lay-out looks like for our project.</small>
+        <br><br>
+        <div class="fs-4">Popular pages</div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-6 card-group">
+                <?php if (!empty($frequentlyVisitedPages)) {
+                    echo $frequentlyVisitedPages;
+                }?>
+            </div>
+            <div class="col"></div>
         </div>
-    </body>
+        <hr>
+    </div>
+    <?php
+    include_once('defaults/footer.php');
+    ?>
+</div>
+</body>
 </html>
