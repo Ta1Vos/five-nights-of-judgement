@@ -103,6 +103,7 @@ switch ($params[1]) {
 
     default:
         $titleSuffix = ' | Home';
+        require "../Modules/load_frequently_visited.php";
         include_once "../Templates/home.php";
 }
 
