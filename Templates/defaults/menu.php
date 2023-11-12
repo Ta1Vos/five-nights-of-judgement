@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/home">
-            Sportcenter
+        <a class="navbar-brand pe-5" href="/home">
+            FNOJ
         </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavbar" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -31,5 +31,8 @@
                 </li>
             </ul>
         </div>
+        <a class="navbar-brand ps-5" href="/home">
+            FNOJ
+        </a>
     </div>
 </nav>
