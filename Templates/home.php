@@ -6,9 +6,8 @@ include_once('defaults/head.php');
 <body>
 <div class="container bg-dark">
     <?php
-    //            include_once ('defaults/header.php');
+    include_once('defaults/header.php');
     include_once('defaults/menu.php');
-    //            include_once ('defaults/pictures.php');
     ?>
     <div class="bg-black text-light text-center">
 
