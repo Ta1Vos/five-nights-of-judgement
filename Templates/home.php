@@ -22,17 +22,35 @@ include_once('defaults/head.php');
         <small class="text-muted">This is the info of this page to show you how the lay-out looks like for our
             project.</small>
         <br><br>
-        <div class="fs-4">Popular pages</div>
-        <div class="row">
-            <div class="col"></div>
-            <div class="col-6 card-group">
-                <?php if (!empty($frequentlyVisitedPages)) {
-                    echo $frequentlyVisitedPages;
-                } ?>
+        <div class="container-fluid">
+            <div class="fs-4">Popular categories</div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-6 card-group">
+                    <?php if (!empty($frequentlyVisitedCategories)) {
+                        //Frequently Visited Categories based on visits
+                        echo $frequentlyVisitedCategories;
+                    } ?>
+                </div>
+                <div class="col"></div>
             </div>
-            <div class="col"></div>
+            <br>
+            <hr>
         </div>
-        <hr>
+        <div class="container-fluid">
+            <div class="fs-4">Popular pages</div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-6 card-group">
+                    <?php if (!empty($frequentlyVisitedPages)) {
+                        //Frequently Visited Pages based on visits
+                        echo $frequentlyVisitedPages;
+                    } ?>
+                </div>
+                <div class="col"></div>
+            </div>
+            <hr>
+        </div>
     </div>
     <?php
     include_once('defaults/footer.php');
