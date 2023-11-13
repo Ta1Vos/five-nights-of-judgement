@@ -1,0 +1,95 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="2BB1CD5B-0B71-C3EC-21C1-1358DF3AC766" name="CATEGORY">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 12:52:48 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="AE383754-5293-E2D9-5DB7-2221BA1CF8D3">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 12:52:53 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="name" id="9FDF2110-C44F-8B98-80AD-82BCEDDC7A2F">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 12:53:00 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="picture" id="411B4A4A-8CE3-FA38-F3EB-9AE5B56BAE9E">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 12:53:57 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="description" id="E9E08BA4-F59A-3A62-32BC-746491D6D58F">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 12:54:17 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="visits" id="F49222C0-3D51-A750-78A0-5506050F86E0">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 12:54:40 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="A569B4E2-4D2D-BA82-83BA-7A2FF823705C" name="CATEGORY PK">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 12:52:59 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>AE383754-5293-E2D9-5DB7-2221BA1CF8D3</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
