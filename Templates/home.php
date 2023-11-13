@@ -20,7 +20,8 @@ include_once('defaults/head.php');
         <br>
         <h3>Home</h3>
         <br>
-        <small class="text-muted">This is the info of this page to show you how the lay-out looks like for our project.</small>
+        <small class="text-muted">This is the info of this page to show you how the lay-out looks like for our
+            project.</small>
         <br><br>
         <div class="fs-4">Popular pages</div>
         <div class="row">
@@ -28,7 +29,7 @@ include_once('defaults/head.php');
             <div class="col-6 card-group">
                 <?php if (!empty($frequentlyVisitedPages)) {
                     echo $frequentlyVisitedPages;
-                }?>
+                } ?>
             </div>
             <div class="col"></div>
         </div>

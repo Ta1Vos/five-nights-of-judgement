@@ -30,3 +30,7 @@ body {
 bg-black {
     background-color: black;
 }
+
+.background-gif {
+    z-index: -1;
+}

@@ -27,7 +27,7 @@ if (count($mostVisited) > 0) {
     for ($i = 0; $i < count($mostVisited); $i++) {
         $category = $mostVisited[$i];
 
-        $frequentlyVisitedPages .= "<div class='card bg-dark mx-2' style='width: 18rem;'>
+        $frequentlyVisitedPages .= "<div class='card bg-dark mx-2 border border-3 border-dark rounded-2' style='width: 18rem;'>
   <img src='/img/{$category["picture"]}' class='card-img-top' alt='Image of category'>
   <div class='card-body'>
   <p class='card-title'>{$category["name"]}</p>

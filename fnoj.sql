@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 12 nov 2023 om 14:25
--- Serverversie: 10.4.28-MariaDB
--- PHP-versie: 8.2.4
+-- Gegenereerd op: 13 nov 2023 om 12:57
+-- Serverversie: 10.4.24-MariaDB
+-- PHP-versie: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,17 +36,17 @@ CREATE TABLE `category` (
   `picture` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `visits` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `picture`, `description`, `visits`) VALUES
-(1, 'Roeitrainer', 'categories/roeitrainer.jpg', 'Een roeitrainer is een fitnessapparaat waarmee je het hele lichaam traint. Met een roeitrainer, ook wel roeitoestel of roeimachine, genoemd, boots je de roeibeweging op het water na. Je hebt daarbij voornamelijk je armen, benen en rugspieren nodig, waardoor het een complete workout is. Roeiapparaten zijn er in vele soorten en prijsklassen. ', 0),
-(2, 'Crosstrainer', 'categories/crosstrainer.jpg', 'Een crosstrainer is een fitnessapparaat waarmee je jouw hele lichaam traint. Je maakt namelijk een beweging met zowel je benen als je armen. Daarnaast train je ook de spieren in je core (buik en onderrug), borst, rug en schouders. Zowel in sportscholen als bij thuisgebruik zijn crosstrainers (ook wel elliptical machine genoemd) al geruime tijd een van de populairste fitnessapparaten.', 0),
-(3, 'Hometrainer', 'categories/hometrainer.jpg', '\r\nEen hometrainer is het meest bekende fitnessapparaat voor thuisgebruik en staat ook wel bekend als fitness fiets. Wat is er nu prettiger dan thuis op je gemak te kunnen werken aan je conditie? Met een hometrainer kun je eenvoudig meerdere spiergroepen trainen en je uithoudingsvermogen verbeteren. Daarnaast bepaal je zelf het tempo, het trainingsniveau en het tijdstip van je training.', 0),
-(4, 'Loopband', 'categories/loopband.jpg', 'Een loopband is een veelzijdig fitnessapparaat. Een loopband wordt gebruikt om conditie te verbeteren en vetpercentage te verlagen, maar kan ook ingezet worden voor revalidatie. Het voordeel van een loopband is dat je thuis kunt trainen wanneer het jou uitkomt. Heb je er genoeg van om ‘s avonds in het donker of door weer en wind te lopen, of zou je je spieren, pezen en botten willen ontlasten tijdens het (hard)lopen? Dan is een loopband voor jou de beste oplossing!', 0);
+(0, 'VHS Tapes', 'categories/VHS.jpg', 'The treasures that contain the lore of the universe of five nights at freddy\'s. All the stories about the characters can be found in these tapes. Some say these are cursed, that if you would watch these, you\'re the next victim.', 0),
+(1, 'non-canon', 'categories/non-canon.jpg', 'All the fnaf content that is not in a direct relation to the official five nights at freddy\'s lore.', 0),
+(2, 'Game characters', 'categories/characters.jpg', 'All of the five nights at freddy\'s characters that can be found in the official games.  ', 0),
+(3, 'Official games', 'categories/official_games.jpg', 'All of the main five night at freddy games that have been made by Scott Cawthon. These may include fnaf-related games he has worked on with others.', 0);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -66,7 +66,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT voor een tabel `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
