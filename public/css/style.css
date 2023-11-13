@@ -34,3 +34,7 @@ bg-black {
 .background-gif {
     z-index: -1;
 }
+
+.navbar-logo {
+    width: 100% !important;
+}
