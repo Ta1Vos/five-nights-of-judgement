@@ -1,0 +1,109 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="56CD79A8-6B68-28D6-6E59-A78D658CC202" name="PRODUCT">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:06:42 UTC</createdTime>
+<generatorID>D23C5527-7FC3-718A-C0F9-7FC164255CCA</generatorID>
+<ownerDesignName>database_ERD</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="1E01EB1E-4716-6F11-E63F-CBCDA12EE01E">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:06:42 UTC</createdTime>
+<generatorID>924679B7-733C-14BA-BF0C-7065FBF5A183</generatorID>
+<ownerDesignName>database_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="name" id="88C8ED5D-D34C-DC94-FB92-954177A85D33">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:06:42 UTC</createdTime>
+<generatorID>EFBE6D31-67B7-C5D8-C4F3-6771AB03C1DF</generatorID>
+<ownerDesignName>database_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="picture" id="3D7716AE-A699-0EF5-BACF-5624098BC0ED">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:06:42 UTC</createdTime>
+<generatorID>1CAB7BA7-B0EB-85B1-64FC-32BF2D636580</generatorID>
+<ownerDesignName>database_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="description" id="9205E45A-6B74-E1B7-69CA-45672CD34DAC">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:06:42 UTC</createdTime>
+<generatorID>AFAE7D85-BA12-E520-8818-E49D387A01CA</generatorID>
+<ownerDesignName>database_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="visits" id="02EA41A0-CD00-BDE2-80B4-4CFB9372902F">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:06:42 UTC</createdTime>
+<generatorID>B8F085C4-D81E-5CEC-B8A1-A435D856BCDD</generatorID>
+<ownerDesignName>database_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CATEGORY_id" id="530C61A7-E8A2-ED95-D63E-F0BC09989E37">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:06:42 UTC</createdTime>
+<generatorID>A3DFB76B-A312-B26F-F004-7B4512B3C95D</generatorID>
+<ownerDesignName>database_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="71BB3D5F-39B2-B89D-DF1F-E698A4FDD070" referredColumn="4986E914-BB7C-7DF0-ADB3-80CA981EC7F9"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="783DED0E-86A7-E82A-8186-17176E0236AF" name="PRODUCT_PK">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:06:42 UTC</createdTime>
+<generatorID>29E00702-6039-BC51-1D9E-35CC94EFA1DF</generatorID>
+<ownerDesignName>database_ERD</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1E01EB1E-4716-6F11-E63F-CBCDA12EE01E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6516631B-D5D8-19F3-2F7F-C7BCB85B8914" name="PRODUCT_CATEGORY_FK">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:06:42 UTC</createdTime>
+<generatorID>F1615559-0829-AA22-2FCC-48C2520C4C4F</generatorID>
+<ownerDesignName>database_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="530C61A7-E8A2-ED95-D63E-F0BC09989E37"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
