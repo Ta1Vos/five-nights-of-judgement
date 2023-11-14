@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 13 nov 2023 om 16:00
+-- Gegenereerd op: 14 nov 2023 om 15:09
 -- Serverversie: 10.4.24-MariaDB
 -- PHP-versie: 8.1.6
 
@@ -69,7 +69,15 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `picture`, `description`, `visits`, `category_id`) VALUES
+<<<<<<< Updated upstream
 (1, 'Freddy (FNAF 1)', 'products/characters/freddy_fnaf_1.png', 'The main character of FNAF 1.<br><br> Freddy is one of the hardest characters to understand in this game, as he cannot always be seen on the camera\'s around the office. Watch out when he is around you, as otherwise you\'ll soon feel a tap on your shoulder..', 0, 2);
+=======
+(1, 'Freddy (FNAF 1)', 'products/characters/freddy_fnaf_1.png', 'Freddy is the main singer of his band, standing in the middle on the stage.<br><br>\r\nHe is the main character of FNAF 1.<br> Freddy is one of the hardest characters to understand in this game, as he cannot always be seen on the camera\'s around the office. Watch out when he is around you, as otherwise you\'ll soon feel a tap on your shoulder..', 0, 2),
+(2, 'Chica (FNAF 1)', 'products/characters/chica_fnaf_1.png', 'Chica is the backup singer in freddy\'s band, on the right side of the stage.<br><br> In the game chica mostly can be heard in the kitchen, and otherwise appears at the right door.', 0, 2),
+(3, 'Bonnie (FNAF 1)', 'products/characters/bonnie_fnaf_1.png', 'Bonnie is the guitarist in freddy\'s band, appearing on the left side of the stage.<br><br> In the game bonnie appears in the left door, and is known for standing in the closet.', 0, 2),
+(4, 'Foxy (FNAF 1)', 'products/characters/foxy_fnaf_1.png', 'Foxy is a discontinued animatronic in FNAF 1. He is not visible to the public and is found on his own stage, called \'pirates cove\'.<br><br>\r\nIn the game, foxy has one of the hardest mechanics. If you keep your eye off of him for too long, he\'ll be in your office in no time.', 0, 2),
+(5, 'Golden Freddy (FNAF 1)', 'products/characters/golden_freddy_fnaf_1.png', 'Golden Freddy is a discontinued animatronic, who was formerly a mascot at Fredbear\'s Family Diner.<br><br>\r\nGolden Freddy is an easter egg in the FNAF 1 game, who rarely appears during gameplay. If you see him in the night, all hope is lost and he will kill you within seconds.<br><b>UNLESS you look at the cameras fast enough. This gives you the chance to most likely dodge him in that case.</b> ', 0, 2);
+>>>>>>> Stashed changes
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -102,7 +110,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT voor een tabel `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Beperkingen voor geëxporteerde tabellen
