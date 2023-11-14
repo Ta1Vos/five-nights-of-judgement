@@ -26,3 +26,15 @@ body {
 .product-img {
     width: 70%;
 }
+
+bg-black {
+    background-color: black;
+}
+
+.background-gif {
+    z-index: -1;
+}
+
+.navbar-logo {
+    width: 100% !important;
+}

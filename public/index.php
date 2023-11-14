@@ -6,6 +6,8 @@
 
 //make sure you add all the modules.
 require '../Modules/categories.php';
+require "../Modules/products.php";
+require "../Modules/frequently_visited.php";
 require '../Modules/login.php';
 require '../Modules/logout.php';
 //includes the code to connect to the database
@@ -67,7 +69,9 @@ switch ($params[1]) {
         break;
 
     case 'category':
-        include_once "../Templates/home.php";
+
+        $products=getProducts($params[2]);
+        include_once "../Templates/products.php";
         break;
 
     case 'product':
@@ -103,6 +107,12 @@ switch ($params[1]) {
 
     default:
         $titleSuffix = ' | Home';
+
+        $frequentlyVisitedCategories = calculateFrequentlyVisited("category");
+        $frequentlyVisitedPages = calculateFrequentlyVisited("product");
+
+        $frequentlyVisitedCategories = loadCardContents($frequentlyVisitedCategories, "category");
+        $frequentlyVisitedPages = loadCardContents($frequentlyVisitedPages, "product");
         include_once "../Templates/home.php";
 }
 

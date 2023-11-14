@@ -1,21 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/home">
-            Sportcenter
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid row">
+        <a class="col navbar-brand pe-5" href="/home">
+            <img src="/img/fnoj_logo.jpg" class="navbar-logo" alt="Logo image">
         </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavbar" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
 
-        <div class="collapse navbar-collapse" id="myNavbar">
+        <div class="col-8 collapse navbar-collapse" id="myNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown dropdown-hover">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categories
                     </a>
-                    <ul class="dropdown-menu dropdown-hover-content">
-                        <?= $navbarCategoryContent; ?>
+                    <ul class="dropdown-menu dropdown-hover-content bg-dark text-light">
+                        <?php if (!empty($navbarCategoryContent)) {echo $navbarCategoryContent;}; ?>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -31,5 +31,8 @@
                 </li>
             </ul>
         </div>
+        <a class="col navbar-brand ps-5 text-right" href="/home">
+            <img src="/img/fnoj_logo.jpg" class="navbar-logo" alt="Logo">
+        </a>
     </div>
 </nav>
