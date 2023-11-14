@@ -35,6 +35,8 @@ include_once('defaults/head.php');
                 <div class="col"></div>
             </div>
             <br>
+            <a class="btn btn-light" href="/categories" role="button">Go to the category page</a>
+            <br><br>
             <hr>
         </div>
         <div class="container-fluid">
@@ -49,6 +51,7 @@ include_once('defaults/head.php');
                 </div>
                 <div class="col"></div>
             </div>
+            <br>
             <hr>
         </div>
     </div>
