@@ -69,7 +69,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `picture`, `description`, `visits`, `category_id`) VALUES
-(1, 'Freddy (FNAF 1)', 'products/characters/freddy.png', 'The main character of FNAF 1.<br><br> Freddy is one of the hardest characters to understand in this game, as he cannot always be seen on the camera\'s around the office. Watch out when he is around you, as otherwise you\'ll soon feel a tap on your shoulder..', 0, 2);
+(1, 'Freddy (FNAF 1)', 'products/characters/freddy_fnaf1.png', 'The main character of FNAF 1.<br><br> Freddy is one of the hardest characters to understand in this game, as he cannot always be seen on the camera\'s around the office. Watch out when he is around you, as otherwise you\'ll soon feel a tap on your shoulder..', 0, 2);
 
 --
 -- Indexen voor geëxporteerde tabellen
