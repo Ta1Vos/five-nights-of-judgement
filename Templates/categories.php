@@ -37,7 +37,7 @@ include_once('defaults/head.php');
                             <h5 class='card-title text-white'><?= $category->name; ?></h5>
                             <hr>
                             <p class="card-text text-light"><?= $category->description; ?></p>
-                            <a href='/$pageType/<?= $category->id; ?>' class='stretched-link'></a>
+                            <a href='/category/<?= $category->id; ?>' class='stretched-link'></a>
                         </div>
                     </div>
                 </div>
