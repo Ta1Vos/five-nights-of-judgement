@@ -28,7 +28,7 @@ body {
 }
 
 bg-black {
-    background-color: black;
+    background-color: black !important;
 }
 
 .background-gif {
