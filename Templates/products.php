@@ -35,9 +35,8 @@ include_once('defaults/head.php');
                     <div class='card bg-dark mx-2 border border-3 border-dark rounded-2' style='width: 18rem;'>
                         <img src='/img/<?= $product->picture; ?>' class='card-img-top' alt='Image of $pageType'>
                         <div class='card-body'>
-                            <h5 class='card-title text-white'><?= $product->name; ?></h5>
                             <hr>
-                            <p class="card-text text-light"><?= $product->description; ?></p>
+                            <h5 class='card-title text-white'><?= $product->name; ?></h5>
                             <a href='/product/<?= $product->id; ?>' class='stretched-link'></a>
                         </div>
                     </div>
