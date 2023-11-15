@@ -11,3 +11,16 @@ function getProducts($id):array
     //gives back all the category objects
     return $products;
 }
+
+function getProductDetails($id):array
+{
+    //$pdo is the connection to the database.
+    global $pdo;
+    /*
+     * this will collect all the categories from the category table and makes objects from the category class.
+     * check Category.php in the Classes folder.
+     */
+    $productDetails = $pdo->query("SELECT * FROM product WHERE id=$id")->fetchAll(PDO::FETCH_CLASS, 'Product');
+    //gives back all the category objects
+    return $productDetails;
+}

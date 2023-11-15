@@ -75,6 +75,9 @@ switch ($params[1]) {
         break;
 
     case 'product':
+
+        $productDetails=getProductDetails($params[2]);
+        include_once "../Templates/product-detail.php";
         break;
 
     case 'login':
