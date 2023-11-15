@@ -8,6 +8,7 @@
 require '../Modules/categories.php';
 require "../Modules/products.php";
 require "../Modules/frequently_visited.php";
+require "../Modules/database_update.php";
 require '../Modules/login.php';
 require '../Modules/logout.php';
 //includes the code to connect to the database
@@ -69,14 +70,14 @@ switch ($params[1]) {
         break;
 
     case 'category':
-
+        updateVisits("category", $params[2]);
         $products=getProducts($params[2]);//Fetches the products
         $categoryName = getCategoryName();//Gets category name for the breadcrumb link
         include_once "../Templates/products.php";
         break;
 
     case 'product':
-
+        updateVisits("product", $params[2]);
         $productDetails=getProductDetails($params[2]);//Fetches the product details
         $categoryName = getCategoryName();//Gets category name for the breadcrumb link
 
