@@ -16,25 +16,35 @@ function getCategories():array
     return $categories;
 }
 
-function getCategoryName(int $id):string
+function getCategoryName():string
 {
+    //Requests URI link and the function reads out the information, so it can find the category id
+    $request = $_SERVER['REQUEST_URI'];
+    $params = explode("/", $request);
+
     global $pdo;
-    $categories = null;
+    $categories = "";
 
-    switch ($params[1]) {
-        case "category":
-            //Grabs the id of the category from the link and searches the category name
-            $categories = $pdo->query('SELECT name FROM category WHERE id=$params[2]')->fetch(PDO::FETCH_CLASS, 'Category');
-            break;
+    if (isset($params[1])) {
+        switch ($params[1]) {
+            case "category":
+                //Grabs the id of the category from the link and searches the category name
+                $categories = $pdo->query("SELECT name FROM category WHERE id=$params[2]")->fetchAll(PDO::FETCH_CLASS, 'Category');
+                $categories = $categories[0]->name;
+                break;
 
-        case "product":
-            //Grabs the id of the product from the link and searches the product. Then display the category_id to
-            $categoryId = $pdo->query('SELECT category_id FROM product WHERE id=$params[2]')->fetch(PDO::FETCH_CLASS, 'Category');
-            $categoryId = $categoryId->category_id;
-            //Finds the category name from the fetched category id
-            $categories = $pdo->query('SELECT name FROM category WHERE id=$categoryId')->fetch(PDO::FETCH_CLASS, 'Category');
-            break;
+            case "product":
+                //Grabs the id of the product from the link and searches the product. Then display the category_id to
+                $categoryId = $pdo->query("SELECT category_id FROM product WHERE id=" . $params[2])->fetchAll(PDO::FETCH_CLASS, 'Category');
+                $categoryId = $categoryId[0]->category_id;
+                //Finds the category name from the fetched category id
+                $categories = $pdo->query("SELECT name FROM category WHERE id=" . $categoryId)->fetchAll(PDO::FETCH_CLASS, 'Category');
+                $categories = $categories[0]->name;
+                break;
+        }
+
+        return $categories;
     }
 
-    return $categories;
+    return "Error";
 }

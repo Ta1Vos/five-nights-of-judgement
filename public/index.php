@@ -70,13 +70,17 @@ switch ($params[1]) {
 
     case 'category':
 
-        $products=getProducts($params[2]);
+        $products=getProducts($params[2]);//Fetches the products
+        $categoryName = getCategoryName();//Gets category name for the breadcrumb link
         include_once "../Templates/products.php";
         break;
 
     case 'product':
 
-        $productDetails=getProductDetails($params[2]);
+        $productDetails=getProductDetails($params[2]);//Fetches the product details
+        $categoryName = getCategoryName();//Gets category name for the breadcrumb link
+
+        $product = $productDetails[0];
         include_once "../Templates/product-detail.php";
         break;
 

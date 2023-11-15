@@ -3,8 +3,8 @@
 <?php
 // Adds the head for the page.
 include_once('defaults/head.php');
-global $productDetails;
-$product = $productDetails[0];
+global $product;
+global $categoryName;
 ?>
 
 <body>
@@ -22,7 +22,7 @@ $product = $productDetails[0];
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/home">Home</a></li>
                 <li class="breadcrumb-item"><a href="/categories">Categories</a></li>
-                <li class="breadcrumb-item"><a href="/category/<?php if(isset($product->category_id)){echo $product->category_id;} ?>">Products</a></li>
+                <li class="breadcrumb-item"><a href="/category/<?php if(isset($product->category_id)){echo $product->category_id;} ?>"><?= $categoryName; ?></a></li>
                 <li class="breadcrumb-item"><a href="/product/<?php if(isset($product->id)){echo $product->id;} ?>"><?= $product->name ?></a></li>
             </ol>
         </nav>
