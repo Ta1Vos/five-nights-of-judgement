@@ -6,8 +6,8 @@ global $pdo;
     $query = $pdo->prepare("SELECT visits FROM $tableName WHERE id=$id");
     $query->execute();
     //Updates the visits by one
-    $visits = $query->fetch(PDO::FETCH_CLASS);
-    $visits = $visits->visits;
+    $visits = $query->fetchAll(PDO::FETCH_CLASS, 'Category');
+    $visits = $visits[0]->visits;
     $visits++;
     //Updates the visits in the database
     $query = $pdo->prepare("UPDATE $tableName SET visits=:visits WHERE id=:id");
