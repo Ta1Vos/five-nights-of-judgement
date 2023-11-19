@@ -18,7 +18,7 @@ function calculateFrequentlyVisited($dbTable)
                     if (count($mostVisited) <= 2) {
                         $mostVisited[] = $category; //If there's less than 3 categories, automatically fill them up
                         break;
-                    } else if ($category['visits'] >= $mostVisited[$i]["visits"]) {
+                    } else if (isset($mostVisited[$i]) && $category['visits'] >= $mostVisited[$i]["visits"]) {
                         $mostVisited[$i] = $category; //Replace a category if it has fewer visits than the one its being compared to.
                         break;
                     }
@@ -32,7 +32,8 @@ function calculateFrequentlyVisited($dbTable)
     return "Something went wrong!";
 }
 
-function loadCardContents($mostVisited, $pageType) {
+function loadCardContents($mostVisited, $pageType)
+{
     if (is_array($mostVisited) && isset($pageType)) {
         $cardContents = "";
 
