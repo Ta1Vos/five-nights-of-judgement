@@ -5,6 +5,8 @@
 include_once('defaults/head.php');
 global $product;
 global $categoryName;
+global $reviewMessages;
+global $pageReviews;
 ?>
 
 <body>
@@ -27,12 +29,6 @@ global $categoryName;
             </ol>
         </nav>
         <div class="row gy-3">
-            <!--
-                this will loop through all the categories as category.
-                because category is an object you use "->" to get the specific data.
-                so if you want to see the id from a category you type $category->id
-            -->
-<!--            --><?php //foreach ($productDetails as $product): ?>
             <div class="col-sm-12 d-flex flex-column">
                 <h2><?= $product->name; ?></h2>
                 <br><br>
@@ -53,11 +49,11 @@ global $categoryName;
                     <div class="col-md-3"></div>
                 </div>
             </div>
-<!--            --><?php //endforeach; ?>
-
         </div>
-
         <hr>
+        <div class="reviews">
+            <?= $reviewMessages; ?>
+        </div>
     </div>
     <?php
     include_once('defaults/footer.php');

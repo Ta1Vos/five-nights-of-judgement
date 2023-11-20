@@ -77,9 +77,10 @@ switch ($params[1]) {
         break;
 
     case 'product':
-        updateVisits("product", $params[2]);
+        updateVisits("product", $params[2]);//Updates visits by one
         $productDetails=getProductDetails($params[2]);//Fetches the product details
         $categoryName = getCategoryName();//Gets category name for the breadcrumb link
+        $reviewMessages = loadReviews($params[2]);//Gets review messages to show all of the reviews
 
         $product = $productDetails[0];
         include_once "../Templates/product-detail.php";
