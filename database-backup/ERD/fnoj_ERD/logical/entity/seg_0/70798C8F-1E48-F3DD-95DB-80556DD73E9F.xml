@@ -52,7 +52,7 @@
 <logicalDatatype>LOGDT040</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="rating (max1len)" id="4B0905EB-450C-B543-FA26-C9A213231BFA">
+<Attribute name="rating" id="4B0905EB-450C-B543-FA26-C9A213231BFA">
 <createdBy>timav</createdBy>
 <createdTime>2023-11-20 10:54:23 UTC</createdTime>
 <ownerDesignName>fnoj_ERD</ownerDesignName>
@@ -61,8 +61,9 @@
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>4</dataTypeSize>
+<ownDataTypeParameters>4,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="publish_time" id="00919768-B5B2-C84D-AE54-FE2B4D30B00C">
 <createdBy>timav</createdBy>
@@ -110,8 +111,9 @@
 <createdBy>timav</createdBy>
 <createdTime>2023-11-20 10:53:47 UTC</createdTime>
 <ownerDesignName>fnoj_ERD</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

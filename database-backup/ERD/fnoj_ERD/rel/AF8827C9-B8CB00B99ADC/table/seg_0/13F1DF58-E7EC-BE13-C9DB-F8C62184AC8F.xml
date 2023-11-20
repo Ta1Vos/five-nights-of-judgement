@@ -42,15 +42,16 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="rating_(max1len)" id="D831E148-0E2D-AE76-344E-A3589CE64B87">
+<Column name="rating" id="D831E148-0E2D-AE76-344E-A3589CE64B87">
 <createdBy>timav</createdBy>
 <createdTime>2023-11-20 10:59:10 UTC</createdTime>
 <generatorID>4B0905EB-450C-B543-FA26-C9A213231BFA</generatorID>
 <ownerDesignName>fnoj_ERD</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>4</dataTypeSize>
+<ownDataTypeParameters>4,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 <Column name="publish_time" id="62489B2D-37F9-8F50-7CD9-CE3643A4C46F">

@@ -81,14 +81,28 @@
 <dataTypeSize>100</dataTypeSize>
 <ownDataTypeParameters>100,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="role" id="6C8359D7-EA01-00BD-1477-91C50A413A1D">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 11:06:07 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="778056B5-1144-D981-9A0F-301157D1EBC8" name="REGISTERED_USER PK">
 <createdBy>timav</createdBy>
 <createdTime>2023-11-20 10:56:09 UTC</createdTime>
 <ownerDesignName>fnoj_ERD</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
