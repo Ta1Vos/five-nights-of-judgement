@@ -1,0 +1,134 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="13F1DF58-E7EC-BE13-C9DB-F8C62184AC8F" name="REVIEW">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>70798C8F-1E48-F3DD-95DB-80556DD73E9F</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="ED87B436-A3B3-1E0F-0D11-FC2114EA3EFD">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>D504183A-A68D-8106-B4C9-3180C686BFAE</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="user_name" id="A612FFED-0981-E1B1-F2DF-0093AC05AE0A">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>1229979F-311C-FE19-5C7D-ED0C1415D487</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="message" id="CA9D71B3-6BE9-FFAC-330C-82E45EEB14B4">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>9F84F876-AF22-EB4C-F106-F8A78EE9290F</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="rating_(max1len)" id="D831E148-0E2D-AE76-344E-A3589CE64B87">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>4B0905EB-450C-B543-FA26-C9A213231BFA</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="publish_time" id="62489B2D-37F9-8F50-7CD9-CE3643A4C46F">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>00919768-B5B2-C84D-AE54-FE2B4D30B00C</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PRODUCT_id" id="6D1F1461-4E8E-6698-1831-FC04E38EBB63">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>E6450FF5-0489-04EA-1B69-AC0E7FD819AE</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B8C6E882-616B-F8BC-A740-4096E5462F4D" referredColumn="1E01EB1E-4716-6F11-E63F-CBCDA12EE01E"/>
+</associations>
+</Column>
+<Column name="REGISTERED_USER_id" id="3595D068-A185-9FE1-25C9-DEB0BCC08238">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>131FD92F-EB20-408E-D1CB-6AF7F1B6FEF7</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="623C05A6-5595-2806-4016-75D06787870B" referredColumn="1DACF091-A8D0-1091-A21A-38E4B3476B12"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="C47F5D8F-BEDB-1591-2637-09EE88C69253" name="REVIEW_PK">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>D50FD310-0963-A727-5598-0176B653BE71</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="ED87B436-A3B3-1E0F-0D11-FC2114EA3EFD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="AB0B849E-D7DD-E5FE-91C4-B8620F622ECA" name="REVIEW_PRODUCT_FK">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>F1F744BE-B044-16BD-9F6E-7AC766C9BF82</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6D1F1461-4E8E-6698-1831-FC04E38EBB63"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A3C2831A-011B-9CED-72CB-824F399E9CFD" name="REVIEW_REGISTERED_USER_FK">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>00349345-1E52-A9D3-ED65-A3E387C6F74A</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3595D068-A185-9FE1-25C9-DEB0BCC08238"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
