@@ -1,9 +1,24 @@
 <?php
 
-function checkLogin():string
+function checkLogin($user):string
 {
     global $pdo;
 
+    $dbUser = $pdo->query("SELECT * FROM registered_user WHERE first_name=" . $user["first-name"] . " AND password=" . $user["password"])->fetchAll(PDO::FETCH_CLASS, 'User');
+
+    if (count($dbUser) > 0) {
+        $dbUser = $dbUser[0];
+
+        if (!empty($dbUser->first_name) && !empty($dbUser->password)) {
+            if ($user["first-name"] == $dbUser->first_name && $user["password"] == $dbUser->password) {
+                return "login true";
+            }
+        } else {
+            return "Something went wrong!";
+        }
+    }
+
+    return "no account detected";
 }
 
 function isAdmin():bool
@@ -42,7 +57,15 @@ function isMember():bool
     return false;
 }
 
+function isAlreadyRegistered($username):bool {
+    global $pdo;
+
+    return false;
+}
+
 function makeRegistration():string
 {
+    global $pdo;
 
+    return "false";
 }
