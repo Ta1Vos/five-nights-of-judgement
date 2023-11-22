@@ -11,7 +11,15 @@ function checkLogin($user):string
 
         if (!empty($dbUser->first_name) && !empty($dbUser->password)) {
             if ($user["first-name"] == $dbUser->first_name && $user["password"] == $dbUser->password) {
-                return "login true";
+                $_SESSION["user"] = $dbUser;
+
+                if (isMember()) {
+                    return "login true";
+                } else if (isAdmin()) {
+                    return "admin login true";
+                } else {
+                    return "Something went wrong!";
+                }
             }
         } else {
             return "Something went wrong!";
@@ -63,9 +71,22 @@ function isAlreadyRegistered($username):bool {
     return false;
 }
 
-function makeRegistration():string
+function makeRegistration($user):string
 {
     global $pdo;
+
+    $query = $pdo->query("INSERT INTO registered_user(first_name, last_name, email, password, role) VALUES(:first_name, :last_name, :email, :password, 'member')");
+    $query->bindParam("first_name", $user["first_name"]);
+    $query->bindParam("last_name", $user["last_name"]);
+    $query->bindParam("email", $user["email"]);
+    $query->bindParam("password", $user["password"]);
+
+    if ($query->execute()) {
+        checkLogin($user);
+        return "User registered and logged in!";
+    } else {
+        return "Something went wrong!";
+    }
 
     return "false";
 }
