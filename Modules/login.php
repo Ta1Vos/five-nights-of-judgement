@@ -1,6 +1,6 @@
 <?php
 
-function checkLogin($user):string
+function checkLogin($user): string
 {
     global $pdo;
 
@@ -29,49 +29,87 @@ function checkLogin($user):string
     return "no account detected";
 }
 
-function isAdmin():bool
+function isAdmin(): bool
 {
     //controleer of er ingelogd is en de user de rol admin heeft
-    if(isset($_SESSION['user'])&&!empty($_SESSION['user']))
-    {
-        $user=$_SESSION['user'];
-        if ($user->role == "admin")
-        {
+    if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+        $user = $_SESSION['user'];
+        if ($user->role == "admin") {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
     return false;
 }
 
-function isMember():bool
+function isMember(): bool
 {
     //controleer of er ingelogd is en de user de rol admin heeft
-    if(isset($_SESSION['user'])&&!empty($_SESSION['user']))
-    {
-        $user=$_SESSION['user'];
-        if ($user->role === "member")
-        {
+    if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+        $user = $_SESSION['user'];
+        if ($user->role === "member") {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
     return false;
 }
 
-function isAlreadyRegistered($username):bool {
-    global $pdo;
+function validateRegistration()
+{
+    $firstName = $_POST['reg-fname'];
+    $lastName = $_POST['reg-lname'];
+    $email = $_POST['email'];
+    $password = $_POST['reg-password'];
 
-    return false;
+    if (isset($_POST['submit-register'])) {
+        $wrongInput = false;
+
+        if (empty($firstName)) {
+            $firstNameError = "*Please fill in this field";
+            $wrongInput = true;
+        } else if (strlen($firstName) > 255) {
+            $firstNameError = "*Please pick a first name shorter than 255 characters!";
+            $wrongInput = true;
+        }
+
+        if (strlen($lastName) > 255) {
+            $lastNameError = "*Please pick a last name shorter than 255 characters!";
+            $wrongInput = true;
+        }
+
+        else if (strlen($email) > 255) {
+            $firstNameError = "*Please pick an email shorter than 255 characters!";
+            $wrongInput = true;
+        } else if (!empty($email)) {
+            if (filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL)) {
+                $emailError = "*Please fill in a correct email!";
+                $wrongInput = true;
+            }
+        }
+
+        if (empty($password)) {
+            $wrongInput = true;
+        } else if (strlen($password) > 100) {
+            $passwordError = "*Please pick a password shorter than 100 characters!";
+        } else if ($_POST['reg-password'] <= 8) {
+            $passwordError = "*A password has to be longer than 8 characters!";
+            $wrongInput = true;
+        }
+
+
+        if (!$wrongInput) {
+            //CODE FOR CORRECT REGISTER
+//            makeRegistration();
+        } else {
+            $errorMessage = "Please fill in all fields!";
+        }
+    }
 }
 
-function makeRegistration($user):string
+function makeRegistration($user): string
 {
     global $pdo;
 
