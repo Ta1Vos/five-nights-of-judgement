@@ -118,8 +118,8 @@ switch ($params[1]) {
         break;
 
     case 'contact':
-        $titleSuffix = ' | Home';
-        include_once "../Templates/home.php";
+        $titleSuffix = ' | Contact';
+        include_once "../Templates/contact.php";
         break;
 
     case 'admin':
