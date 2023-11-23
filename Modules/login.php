@@ -5,9 +5,11 @@ function checkLogin($user): string
     try {
         global $pdo;
 
-        $dbUser = $pdo->query("SELECT * FROM registered_user WHERE first_name=" . $user["first_name"] . " AND password=" . $user["password"])->fetchAll(PDO::FETCH_CLASS, 'User');
-
-        echo "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+        $dbUser = $pdo->prepare("SELECT * FROM registered_user WHERE first_name = :first_name AND password = :password");
+        $dbUser->bindParam("first_name", $user["first_name"]);
+        $dbUser->bindParam("password", $user["password"]);
+        $dbUser->execute();
+        $dbUser = $dbUser->fetchAll(PDO::FETCH_CLASS, 'User');
 
         if (count($dbUser) > 0) {
             $dbUser = $dbUser[0];
