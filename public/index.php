@@ -104,11 +104,14 @@ switch ($params[1]) {
         $lastName = null;
         $email = null;
         $password = null;
+        $passwordConfirm = null;
         //Error fields
         $firstNameError = null;
         $lastNameError = null;
         $emailError = null;
         $passwordError = null;
+        $passwordConfirmError = null;
+        $mainErrorField = null;
 
         validateRegistration();
         include_once "../Templates/register.php";
