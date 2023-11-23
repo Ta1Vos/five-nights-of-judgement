@@ -38,3 +38,7 @@ bg-black {
 .navbar-logo {
     width: 100% !important;
 }
+
+.error-field {
+    color: red;
+}

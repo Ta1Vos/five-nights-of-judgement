@@ -97,8 +97,24 @@ switch ($params[1]) {
         break;
 
     case 'register':
-        $titleSuffix = ' | Home';
-        include_once "../Templates/home.php";
+        $titleSuffix = ' | Register';
+        $errorMessage = null;
+        //Values
+        $firstName = null;
+        $lastName = null;
+        $email = null;
+        $password = null;
+        $passwordConfirm = null;
+        //Error fields
+        $firstNameError = null;
+        $lastNameError = null;
+        $emailError = null;
+        $passwordError = null;
+        $passwordConfirmError = null;
+        $mainErrorField = null;
+
+        validateRegistration();
+        include_once "../Templates/register.php";
         break;
 
     case 'contact':
