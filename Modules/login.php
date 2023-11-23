@@ -5,8 +5,9 @@ function checkLogin($user): string
     try {
         global $pdo;
 
-        $dbUser = $pdo->prepare("SELECT * FROM registered_user WHERE first_name = :first_name AND password = :password");
+        $dbUser = $pdo->prepare("SELECT * FROM registered_user WHERE first_name = :first_name AND last_name = :last_name AND password = :password");
         $dbUser->bindParam("first_name", $user["first_name"]);
+        $dbUser->bindParam("last_name", $user["last_name"]);
         $dbUser->bindParam("password", $user["password"]);
         $dbUser->execute();
         $dbUser = $dbUser->fetchAll(PDO::FETCH_CLASS, 'User');
@@ -14,8 +15,8 @@ function checkLogin($user): string
         if (count($dbUser) > 0) {
             $dbUser = $dbUser[0];
 
-            if (!empty($dbUser->first_name) && !empty($dbUser->password)) {
-                if ($user["first_name"] == $dbUser->first_name && $user["password"] == $dbUser->password) {
+            if (!empty($dbUser->first_name) && !empty($dbUser->last_name) &&!empty($dbUser->password)) {
+                if ($user["first_name"] == $dbUser->first_name && $user["last_name"] == $dbUser->last_name &&$user["password"] == $dbUser->password) {
                     $_SESSION["user"] = $dbUser;
 
                     if (isMember()) {
@@ -68,19 +69,20 @@ function isMember(): bool
 function validateRegistration()
 {
     if (isset($_POST['reg-submit'])) {
+        //Accessing inputs
         global $firstName;
         global $lastName;
         global $email;
         global $password;
         global $passwordConfirm;
-
+        //Accessing error fields
         global $firstNameError;
         global $lastNameError;
         global $emailError;
         global $passwordError;
         global $passwordConfirmError;
         global $mainErrorField;
-
+        //Filling the inputs back in
         $firstName = $_POST['reg-fname'];
         $lastName = $_POST['reg-lname'];
         $email = $_POST['reg-email'];
@@ -97,14 +99,19 @@ function validateRegistration()
             $wrongInput = true;
         }
 
-        if (strlen($lastName) > 255) {
-            $lastNameError = "*Please pick a last name shorter than 255 characters!";
+        if (empty($lastName)) {
+            $lastNameError = "*Please fill in this field";
             $wrongInput = true;
-        } else if (strlen($email) > 255) {
-            $firstNameError = "*Please pick an email shorter than 255 characters!";
+        } else if (strlen($lastName) > 255) {
+            $lastNameError = "*Please pick a first name shorter than 255 characters!";
+            $wrongInput = true;
+        }
+
+        if (strlen($email) > 255) {
+            $emailError = "*Please pick an email shorter than 255 characters!";
             $wrongInput = true;
         } else if (!empty($email)) {
-            if (filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL)) {
+            if (!filter_input(INPUT_POST, "reg-email", FILTER_VALIDATE_EMAIL)) {
                 $emailError = "*Please fill in a correct email!";
                 $wrongInput = true;
             }
@@ -151,7 +158,6 @@ function validateRegistration()
             }
         } else {
             $mainErrorField = "Please fill in all fields and fill them in correctly!";
-            echo "AAAAAAAAA";
         }
     }
 }
