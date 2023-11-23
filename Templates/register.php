@@ -37,7 +37,7 @@ include_once('defaults/head.php');
                     <br><br><br><br>
                     <div class="col-12">
                         <label>
-                            <div>Last name</div>
+                            <div>* Last name</div>
                             <small class="error-field">
                                 <?= $lastNameError; ?>
                             </small>

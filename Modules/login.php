@@ -5,10 +5,9 @@ function checkLogin($user): string
     try {
         global $pdo;
 
-        $dbUser = $pdo->prepare("SELECT * FROM registered_user WHERE first_name = :first_name AND last_name = :last_name AND password = :password");
+        $dbUser = $pdo->prepare("SELECT * FROM registered_user WHERE first_name = :first_name AND last_name = :last_name");
         $dbUser->bindParam("first_name", $user["first_name"]);
         $dbUser->bindParam("last_name", $user["last_name"]);
-        $dbUser->bindParam("password", $user["password"]);
         $dbUser->execute();
         $dbUser = $dbUser->fetchAll(PDO::FETCH_CLASS, 'User');
 
@@ -258,7 +257,7 @@ function makeRegistration($user): string
             return "User registered and logged in!";
         }
 
-        return "Account detected";
+        return "Account name detected, please create one with a different name combination!";
     } else {
         return "Something went wrong!";
     }
