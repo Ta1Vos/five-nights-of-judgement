@@ -87,18 +87,34 @@ switch ($params[1]) {
         break;
 
     case 'login':
-        $titleSuffix = ' | Home';
-        include_once "../Templates/home.php";
+        $titleSuffix = ' | Log In';
+
+        //Values
+        $firstName = null;
+        $lastName = null;
+        $email = null;
+        $password = null;
+        $passwordConfirm = null;
+        //Error fields
+        $firstNameError = null;
+        $lastNameError = null;
+        $emailError = null;
+        $passwordError = null;
+        $passwordConfirmError = null;
+        $mainErrorField = null;
+
+        validateLogIn();
+        include_once "../Templates/login.php";
         break;
 
     case 'logout':
-        $titleSuffix = ' | Home';
+        $titleSuffix = ' | Log Out';
         include_once "../Templates/home.php";
         break;
 
     case 'register':
         $titleSuffix = ' | Register';
-        $errorMessage = null;
+
         //Values
         $firstName = null;
         $lastName = null;

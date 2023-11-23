@@ -67,8 +67,14 @@ function isMember(): bool
 }
 
 //Code used in 2 places, for the shared inputs
-function validateInputs($firstName, $lastName, $email, $password): object
+function validateInputs($firstName, $lastName, $email, $password, $emailPost): array
 {
+    $wrongInput = false;
+    $firstNameError = null;
+    $lastNameError = null;
+    $emailError = null;
+    $passwordError = null;
+
     if (empty($firstName)) {
         $firstNameError = "*Please fill in this field";
         $wrongInput = true;
@@ -89,7 +95,7 @@ function validateInputs($firstName, $lastName, $email, $password): object
         $emailError = "*Please pick an email shorter than 255 characters!";
         $wrongInput = true;
     } else if (!empty($email)) {
-        if (!filter_input(INPUT_POST, "reg-email", FILTER_VALIDATE_EMAIL)) {
+        if (!filter_input(INPUT_POST, $emailPost, FILTER_VALIDATE_EMAIL)) {
             $emailError = "*Please fill in a correct email!";
             $wrongInput = true;
         }
@@ -106,11 +112,11 @@ function validateInputs($firstName, $lastName, $email, $password): object
         $wrongInput = true;
     }
 
+    $result["wrong_input"] = $wrongInput;
     $result["first_name_error"] = $firstNameError;
     $result["last_name_error"] = $lastNameError;
     $result["email_error"] = $emailError;
     $result["password_error"] = $passwordError;
-    $result["wrong_input"] = $wrongInput;
 
     return $result;
 }
@@ -139,11 +145,11 @@ function validateRegistration()
         $password = $_POST['reg-password'];
         $passwordConfirm = $_POST['reg-password-confirm'];
 
-        $result = validateInputs($firstName, $lastName, $email, $password);
+        $result = validateInputs($firstName, $lastName, $email, $password, "reg-email");
         $firstNameError = $result["first_name_error"];
-        $firstNameError = $result["last_name_error"];
-        $firstNameError = $result["email_error"];
-        $firstNameError = $result["password_error"];
+        $lastNameError = $result["last_name_error"];
+        $emailError = $result["email_error"];
+        $passwordError = $result["password_error"];
         $wrongInput = $result["wrong_input"];
 
         if (empty($passwordConfirm)) {
@@ -169,7 +175,7 @@ function validateRegistration()
             $message = makeRegistration($user);
             //Check if the user has been registered, then log them in
             if ($message == "User registered and logged in!") {
-                $mainErrorField = ($user);
+                $mainErrorField = logIn($user);
             } else {
                 $mainErrorField = $message;
             }
@@ -202,7 +208,7 @@ function validateLogIn()
         $email = $_POST['login-email'];
         $password = $_POST['login-password'];
 
-        $result = validateInputs($firstName, $lastName, $email, $password);
+        $result = validateInputs($firstName, $lastName, $email, $password, "login-email");
         $firstNameError = $result["first_name_error"];
         $lastNameError = $result["last_name_error"];
         $emailError = $result["email_error"];
@@ -259,7 +265,8 @@ function makeRegistration($user): string
 }
 
 //Log in the user
-function logIn($user): string {
+function logIn($user): string
+{
     $message = checkLogin($user);
     //Check if message contains true, then log user in
     if (str_contains($message, "true")) {
