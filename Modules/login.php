@@ -145,6 +145,7 @@ function validateRegistration()
 
             if ($message == "User registered and logged in!") {
                 $mainErrorField = "<span class='text-success'>" . makeRegistration($user) . "</span>";
+                header("Location: index.php");
             } else {
                 $mainErrorField = $message;
             }
@@ -155,6 +156,7 @@ function validateRegistration()
     }
 }
 
+//Registers an user
 function makeRegistration($user): string
 {
     global $pdo;
@@ -166,7 +168,7 @@ function makeRegistration($user): string
             return $login;
         }
 
-        return "Account detected";
+        return "The account under this name already exists!";
     }
 
     $query = $pdo->prepare("INSERT INTO registered_user(first_name, last_name, email, password, role) VALUES(:first_name, :last_name, :email, :password, 'member')");
@@ -182,7 +184,7 @@ function makeRegistration($user): string
             return "User registered and logged in!";
         }
 
-        return "Account detected 101";
+        return "Account detected";
     } else {
         return "Something went wrong!";
     }
