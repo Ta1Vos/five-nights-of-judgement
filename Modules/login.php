@@ -4,13 +4,13 @@ function checkLogin($user): string
 {
     global $pdo;
 
-    $dbUser = $pdo->query("SELECT * FROM registered_user WHERE first_name=" . $user["first-name"] . " AND password=" . $user["password"])->fetchAll(PDO::FETCH_CLASS, 'User');
+    $dbUser = $pdo->query("SELECT * FROM registered_user WHERE first_name=" . $user["first_name"] . " AND password=" . $user["password"])->fetchAll(PDO::FETCH_CLASS, 'User');
 
     if (count($dbUser) > 0) {
         $dbUser = $dbUser[0];
 
         if (!empty($dbUser->first_name) && !empty($dbUser->password)) {
-            if ($user["first-name"] == $dbUser->first_name && $user["password"] == $dbUser->password) {
+            if ($user["first_name"] == $dbUser->first_name && $user["password"] == $dbUser->password) {
                 $_SESSION["user"] = $dbUser;
 
                 if (isMember()) {
@@ -128,8 +128,12 @@ function validateRegistration()
         }
 
         if (!$wrongInput) {
-            //CODE FOR CORRECT REGISTER
-//            makeRegistration();
+            $user["first_name"] = $firstName;
+            $user["last_name"] = $lastName;
+            $user["email"] = $email;
+            $user["password"] = $password;
+
+           $mainErrorField = "<span class='text-success'>" . makeRegistration($user) . "</span>";
         } else {
             $mainErrorField = "Please fill in all fields and fill them in correctly!";
             echo "AAAAAAAAA";
@@ -141,7 +145,7 @@ function makeRegistration($user): string
 {
     global $pdo;
 
-    $query = $pdo->query("INSERT INTO registered_user(first_name, last_name, email, password, role) VALUES(:first_name, :last_name, :email, :password, 'member')");
+    $query = $pdo->prepare("INSERT INTO registered_user(first_name, last_name, email, password, role) VALUES(:first_name, :last_name, :email, :password, 'member')");
     $query->bindParam("first_name", $user["first_name"]);
     $query->bindParam("last_name", $user["last_name"]);
     $query->bindParam("email", $user["email"]);
