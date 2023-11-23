@@ -2,31 +2,37 @@
 
 function checkLogin($user): string
 {
-    global $pdo;
+    try {
+        global $pdo;
 
-    $dbUser = $pdo->query("SELECT * FROM registered_user WHERE first_name=" . $user["first_name"] . " AND password=" . $user["password"])->fetchAll(PDO::FETCH_CLASS, 'User');
+        $dbUser = $pdo->query("SELECT * FROM registered_user WHERE first_name=" . $user["first_name"] . " AND password=" . $user["password"])->fetchAll(PDO::FETCH_CLASS, 'User');
 
-    if (count($dbUser) > 0) {
-        $dbUser = $dbUser[0];
+        echo "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
 
-        if (!empty($dbUser->first_name) && !empty($dbUser->password)) {
-            if ($user["first_name"] == $dbUser->first_name && $user["password"] == $dbUser->password) {
-                $_SESSION["user"] = $dbUser;
+        if (count($dbUser) > 0) {
+            $dbUser = $dbUser[0];
 
-                if (isMember()) {
-                    return "login true";
-                } else if (isAdmin()) {
-                    return "admin login true";
-                } else {
-                    return "Something went wrong!";
+            if (!empty($dbUser->first_name) && !empty($dbUser->password)) {
+                if ($user["first_name"] == $dbUser->first_name && $user["password"] == $dbUser->password) {
+                    $_SESSION["user"] = $dbUser;
+
+                    if (isMember()) {
+                        return "login true";
+                    } else if (isAdmin()) {
+                        return "admin login true";
+                    } else {
+                        return "Something went wrong!";
+                    }
                 }
+            } else {
+                return "Something went wrong!";
             }
-        } else {
-            return "Something went wrong!";
         }
-    }
 
-    return "no account detected";
+        return "no account detected";
+    } catch (PDOException $exception) {
+        return "Something went wrong! Error code: $exception";
+    }
 }
 
 function isAdmin(): bool
@@ -133,7 +139,13 @@ function validateRegistration()
             $user["email"] = $email;
             $user["password"] = $password;
 
-           $mainErrorField = "<span class='text-success'>" . makeRegistration($user) . "</span>";
+            $message = makeRegistration($user);
+
+            if ($message == "User registered and logged in!") {
+                $mainErrorField = "<span class='text-success'>" . makeRegistration($user) . "</span>";
+            } else {
+                $mainErrorField = $message;
+            }
         } else {
             $mainErrorField = "Please fill in all fields and fill them in correctly!";
             echo "AAAAAAAAA";
@@ -145,6 +157,16 @@ function makeRegistration($user): string
 {
     global $pdo;
 
+    $login = checkLogin($user);
+
+    if ($login != "no account detected") {
+        if (str_contains($login, "Something went wrong")) {
+            return $login;
+        }
+
+        return "Account detected";
+    }
+
     $query = $pdo->prepare("INSERT INTO registered_user(first_name, last_name, email, password, role) VALUES(:first_name, :last_name, :email, :password, 'member')");
     $query->bindParam("first_name", $user["first_name"]);
     $query->bindParam("last_name", $user["last_name"]);
@@ -152,8 +174,13 @@ function makeRegistration($user): string
     $query->bindParam("password", $user["password"]);
 
     if ($query->execute()) {
-        checkLogin($user);
-        return "User registered and logged in!";
+        $login = checkLogin($user);
+
+        if ($login != "no account detected") {
+            return "User registered and logged in!";
+        }
+
+        return "Account detected 101";
     } else {
         return "Something went wrong!";
     }
