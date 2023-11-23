@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 20 nov 2023 om 12:09
--- Serverversie: 10.4.28-MariaDB
--- PHP-versie: 8.2.4
+-- Gegenereerd op: 23 nov 2023 om 14:49
+-- Serverversie: 10.4.25-MariaDB
+-- PHP-versie: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,17 +36,17 @@ CREATE TABLE `category` (
   `picture` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `visits` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `picture`, `description`, `visits`) VALUES
-(0, 'VHS Tapes', 'categories/VHS.jpg', 'The treasures that contain the lore of the universe of five nights at freddy\'s. All the stories about the characters can be found in these tapes. Some say these are cursed, that if you would watch these, you\'re the next victim.', 0),
-(1, 'non-canon', 'categories/non-canon.jpg', 'All the fnaf content that is not in a direct relation to the official five nights at freddy\'s lore.', 0),
-(2, 'Game characters', 'categories/characters.jpg', 'All of the five nights at freddy\'s characters that can be found in the official games.  ', 12),
-(3, 'Official games', 'categories/official_games.jpg', 'All of the main five night at freddy games that have been made by Scott Cawthon. These may include fnaf-related games he has worked on with others.', 1);
+(0, 'VHS Tapes', 'categories/VHS.jpg', 'The treasures that contain the lore of the universe of five nights at freddy\'s. All the stories about the characters can be found in these tapes. Some say these are cursed, that if you would watch these, you\'re the next victim.', 1),
+(1, 'non-canon', 'categories/non-canon.jpg', 'All the fnaf content that is not in a direct relation to the official five nights at freddy\'s lore.', 1),
+(2, 'Game characters', 'categories/characters.jpg', 'All of the five nights at freddy\'s characters that can be found in the official games.  ', 17),
+(3, 'Official games', 'categories/official_games.jpg', 'All of the main five night at freddy games that have been made by Scott Cawthon. These may include fnaf-related games he has worked on with others.', 2);
 
 -- --------------------------------------------------------
 
@@ -62,7 +62,7 @@ CREATE TABLE `product` (
   `description` text NOT NULL,
   `visits` int(11) NOT NULL,
   `category_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `product`
@@ -70,7 +70,7 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`id`, `name`, `picture`, `description`, `visits`, `category_id`) VALUES
 (1, 'Freddy (FNAF 1)', 'products/characters/freddy_fnaf_1.png', 'Freddy is the main singer of his band, standing in the middle on the stage.\r\n<h5>Game Mechanics</h5>\r\nHe is the main character of FNAF 1.<br> Freddy is one of the hardest characters to understand in this game, as he cannot always be seen on the camera\'s around the office. Watch out when he is around you, as otherwise you\'ll soon feel a tap on your shoulder..\r\n<br><br>\r\nYou will know where he is, by listening to his laugh, which will gradually move away or get closer to the office.', 1, 2),
-(2, 'Chica (FNAF 1)', 'products/characters/chica_fnaf_1.png', 'Chica is the backup singer in freddy\'s band, on the right side of the stage.\r\n<h5>Game Mechanics</h5>\r\nIn the game chica mostly can be heard in the kitchen, and otherwise appears at the right door.', 2, 2),
+(2, 'Chica (FNAF 1)', 'products/characters/chica_fnaf_1.png', 'Chica is the backup singer in freddy\'s band, on the right side of the stage.\r\n<h5>Game Mechanics</h5>\r\nIn the game chica mostly can be heard in the kitchen, and otherwise appears at the right door.', 4, 2),
 (3, 'Bonnie (FNAF 1)', 'products/characters/bonnie_fnaf_1.png', 'Bonnie is the guitarist in freddy\'s band, appearing on the left side of the stage.<h5>Game Mechanics</h5>\r\nIn the game bonnie appears in the left door, and is known for standing in the closet.', 1, 2),
 (4, 'Foxy (FNAF 1)', 'products/characters/foxy_fnaf_1.png', 'Foxy is a discontinued animatronic in FNAF 1. He is not visible to the public and is found on his own stage, called \'pirates cove\'.\r\n<h5>Game Mechanics</h5>\r\n\r\nIn the game, foxy has one of the hardest mechanics. If you keep your eye off of him for too long, he\'ll be in your office in no time.', 0, 2),
 (5, 'Golden Freddy (FNAF 1)', 'products/characters/golden_freddy_fnaf_1.png', 'Golden Freddy is a discontinued animatronic, who was formerly a mascot at Fredbear\'s Family Diner.\r\n<h5>Game Mechanics</h5>\r\nGolden Freddy is an easter egg in the FNAF 1 game, who rarely appears during gameplay. If you see him in the night, all hope is lost and he will kill you within seconds.<br><b>UNLESS you look at the cameras fast enough. This gives you the chance to most likely dodge him in that case.</b> ', 0, 2),
@@ -95,11 +95,21 @@ DROP TABLE IF EXISTS `registered_user`;
 CREATE TABLE `registered_user` (
   `id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(100) NOT NULL,
   `role` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `registered_user`
+--
+
+INSERT INTO `registered_user` (`id`, `first_name`, `last_name`, `email`, `password`, `role`) VALUES
+(1, 'Tim', 'Vos', '302196386@student.rocmondriaan.nl', 'testestest', 'member'),
+(2, 'Tee', 'Vos', '302196386@student.rocmondriaan.nl', 'testestest', 'member'),
+(3, 'Tim', 'Vos', '302196386@student.rocmondriaan.nl', 'testestestee', 'member'),
+(4, 'Tim', 'Vos', '302196386@student.rocmondriaan.nl', 'ggggggggggggggggg', 'member');
 
 -- --------------------------------------------------------
 
@@ -116,7 +126,7 @@ CREATE TABLE `review` (
   `publish_time` datetime NOT NULL,
   `product_id` int(11) NOT NULL,
   `registered_user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -169,7 +179,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT voor een tabel `registered_user`
 --
 ALTER TABLE `registered_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT voor een tabel `review`

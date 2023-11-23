@@ -36,7 +36,6 @@
 <createdTime>2023-11-20 10:59:10 UTC</createdTime>
 <generatorID>B2F7242F-46CA-D725-3F28-83AE2121D3D0</generatorID>
 <ownerDesignName>fnoj_ERD</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
