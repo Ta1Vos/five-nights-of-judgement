@@ -25,41 +25,51 @@ include_once('defaults/head.php');
             <div class="row gy-3">
                 <form method="post" class="row text-light text-center">
                     <div class="col-12">
-                        <label><small>* First name</small><br>
-                            <input type="text" name="reg-fname" value="<?= $firstName; ?>">
-                            <div class="error-field">
+                        <label>
+                            <div>* First name</div>
+                            <small class="error-field">
                                 <?= $firstNameError; ?>
-                            </div>
+                            </small>
+                            <br>
+                            <input type="text" name="reg-fname" value="<?= $firstName; ?>">
                         </label>
                     </div>
                     <br><br>
                     <div class="col-12">
-                        <label><small>Last name</small><br>
-                            <input type="text" name="reg-lname" value="<?= $lastName; ?>">
-                            <div class="error-field">
+                        <label>
+                            <div>Last name</div>
+                            <small class="error-field">
                                 <?= $lastNameError; ?>
-                            </div>
+                            </small>
+                            <br>
+                            <input type="text" name="reg-lname" value="<?= $lastName; ?>">
                         </label>
-                        <label><small>Email</small><br>
-                            <input type="text" name="reg-email" value="<?= $email; ?>">
-                            <div class="error-field">
+                        <label>
+                            <div>Email</div>
+                            <small class="error-field">
                                 <?= $emailError; ?>
-                            </div>
+                            </small>
+                            <br>
+                            <input type="text" name="reg-email" value="<?= $email; ?>">
                         </label>
                     </div>
                     <br><br>
                     <div class="col-12">
-                        <label><small>* Password</small><br>
-                            <input type="text" name="reg-password" value="<?= $password; ?>">
-                            <div class="error-field">
+                        <label>
+                            <div>* Password</div>
+                            <small class="error-field">
                                 <?= $passwordError; ?>
-                            </div>
+                            </small>
+                            <br>
+                            <input type="text" name="reg-password" value="<?= $password; ?>">
                         </label>
-                        <label><small>* Confirm Password</small><br>
-                            <input type="text" name="reg-password-confirm" value="<?= $passwordConfirm; ?>">
-                            <div class="error-field">
+                        <label>
+                            <div>* Confirm Password</div>
+                            <small class="error-field">
                                 <?= $passwordConfirmError; ?>
-                            </div>
+                            </small>
+                            <br>
+                            <input type="text" name="reg-password-confirm" value="<?= $passwordConfirm; ?>">
                         </label>
                     </div>
                     <div class="explanation">
@@ -70,7 +80,7 @@ include_once('defaults/head.php');
                         <input type="submit" name="reg-submit" value="Register">
                     </label>
                 </form>
-                <div class="error-field text-light">
+                <div class="error-field">
                     <?= $mainErrorField; ?>
                 </div>
             </div>

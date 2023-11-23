@@ -59,12 +59,26 @@ function isMember(): bool
 
 function validateRegistration()
 {
-    $firstName = $_POST['reg-fname'];
-    $lastName = $_POST['reg-lname'];
-    $email = $_POST['email'];
-    $password = $_POST['reg-password'];
+    if (isset($_POST['reg-submit'])) {
+        global $firstName;
+        global $lastName;
+        global $email;
+        global $password;
+        global $passwordConfirm;
 
-    if (isset($_POST['submit-register'])) {
+        global $firstNameError;
+        global $lastNameError;
+        global $emailError;
+        global $passwordError;
+        global $passwordConfirmError;
+        global $mainErrorField;
+
+        $firstName = $_POST['reg-fname'];
+        $lastName = $_POST['reg-lname'];
+        $email = $_POST['reg-email'];
+        $password = $_POST['reg-password'];
+        $passwordConfirm = $_POST['reg-password-confirm'];
+
         $wrongInput = false;
 
         if (empty($firstName)) {
@@ -78,9 +92,7 @@ function validateRegistration()
         if (strlen($lastName) > 255) {
             $lastNameError = "*Please pick a last name shorter than 255 characters!";
             $wrongInput = true;
-        }
-
-        else if (strlen($email) > 255) {
+        } else if (strlen($email) > 255) {
             $firstNameError = "*Please pick an email shorter than 255 characters!";
             $wrongInput = true;
         } else if (!empty($email)) {
@@ -91,20 +103,36 @@ function validateRegistration()
         }
 
         if (empty($password)) {
+            $passwordError = "*Please fill in this field";
             $wrongInput = true;
         } else if (strlen($password) > 100) {
             $passwordError = "*Please pick a password shorter than 100 characters!";
-        } else if ($_POST['reg-password'] <= 8) {
+            $wrongInput = true;
+        } else if (strlen($password) <= 8) {
             $passwordError = "*A password has to be longer than 8 characters!";
             $wrongInput = true;
         }
 
+        if (empty($passwordConfirm)) {
+            $passwordConfirmError = "*Please fill in this field";
+            $wrongInput = true;
+        } else if (strlen($passwordConfirm) > 100) {
+            $passwordConfirmError = "*Please pick a password shorter than 100 characters!";
+            $wrongInput = true;
+        } else if (strlen($passwordConfirm) <= 8) {
+            $passwordConfirmError = "*A password has to be longer than 8 characters!";
+            $wrongInput = true;
+        } else if ($passwordConfirm != $password) {
+            $passwordConfirmError = "*Confirmation password is not equal to the password!";
+            $wrongInput = true;
+        }
 
         if (!$wrongInput) {
             //CODE FOR CORRECT REGISTER
 //            makeRegistration();
         } else {
-            $errorMessage = "Please fill in all fields!";
+            $mainErrorField = "Please fill in all fields and fill them in correctly!";
+            echo "AAAAAAAAA";
         }
     }
 }
@@ -125,6 +153,4 @@ function makeRegistration($user): string
     } else {
         return "Something went wrong!";
     }
-
-    return "false";
 }
