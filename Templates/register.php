@@ -34,7 +34,7 @@ include_once('defaults/head.php');
                             <input type="text" name="reg-fname" value="<?= $firstName; ?>">
                         </label>
                     </div>
-                    <br><br>
+                    <br><br><br><br>
                     <div class="col-12">
                         <label>
                             <div>Last name</div>
@@ -44,6 +44,9 @@ include_once('defaults/head.php');
                             <br>
                             <input type="text" name="reg-lname" value="<?= $lastName; ?>">
                         </label>
+                    </div>
+                    <br><br><br><br>
+                    <div class="col-12">
                         <label>
                             <div>Email</div>
                             <small class="error-field">
@@ -53,7 +56,7 @@ include_once('defaults/head.php');
                             <input type="text" name="reg-email" value="<?= $email; ?>">
                         </label>
                     </div>
-                    <br><br>
+                    <br><br><br><br>
                     <div class="col-12">
                         <label>
                             <div>* Password</div>
@@ -63,6 +66,9 @@ include_once('defaults/head.php');
                             <br>
                             <input type="text" name="reg-password" value="<?= $password; ?>">
                         </label>
+                    </div>
+                    <br><br><br><br>
+                    <div class="col-12">
                         <label>
                             <div>* Confirm Password</div>
                             <small class="error-field">
