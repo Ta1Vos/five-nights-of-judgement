@@ -46,6 +46,9 @@ $titleSuffix = "";
 //if you want to send a message to the user you can use this variable.
 $message = "";
 
+$navbarCategoryContent = null;
+loadNavbarContent();
+
 /*$params[1] is the action (the page you are visiting).
  *$params[2] is parameter you give to the page.
  *the switch statement checks which page you want to go.
