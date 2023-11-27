@@ -24,15 +24,15 @@ include_once('defaults/head.php');
         <br><br>
         <div class="container-fluid">
             <div class="fs-4">Popular categories</div>
-            <div class="row">
-                <div class="col"></div>
-                <div class="col-6 card-group">
+            <div class="row d-flex justify-content-center">
+                <div class="col-0 col-lg"></div>
+                <div class="row col-12 col-lg-6 card-group">
                     <?php if (!empty($frequentlyVisitedCategories)) {
                         //Frequently Visited Categories based on visits
                         echo $frequentlyVisitedCategories;
                     } ?>
                 </div>
-                <div class="col"></div>
+                <div class="col-0 col-lg"></div>
             </div>
             <br>
             <a class="btn btn-light" href="/categories" role="button">Go to the category page</a>
@@ -41,15 +41,15 @@ include_once('defaults/head.php');
         </div>
         <div class="container-fluid">
             <div class="fs-4">Popular pages</div>
-            <div class="row">
-                <div class="col"></div>
-                <div class="col-6 card-group">
+            <div class="row d-flex justify-content-center">
+                <div class="col-0 col-lg"></div>
+                <div class="row col-12 col-lg-6 card-group">
                     <?php if (!empty($frequentlyVisitedPages)) {
                         //Frequently Visited Pages based on visits
                         echo $frequentlyVisitedPages;
                     } ?>
                 </div>
-                <div class="col"></div>
+                <div class="col-0 col-lg"></div>
             </div>
             <br>
             <hr>

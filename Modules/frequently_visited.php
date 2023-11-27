@@ -42,7 +42,7 @@ function loadCardContents($mostVisited, $pageType)
             for ($i = 0; $i < count($mostVisited); $i++) {
                 $category = $mostVisited[$i];
 
-                $cardContents .= "<div class='card bg-dark mx-2 border border-3 border-dark rounded-2' style='width: 18rem;'>
+                $cardContents .= "<div class='card col-12 col-xl-4 col-xxl-3 bg-dark mx-2 border border-3 border-dark rounded-2'>
   <img src='/img/{$category["picture"]}' class='card-img-top' alt='Image of $pageType'>
   <div class='card-body'>
   <p class='card-title'>{$category["name"]}</p>
