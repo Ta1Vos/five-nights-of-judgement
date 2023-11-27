@@ -22,7 +22,7 @@ include_once('defaults/head.php');
                 <li class="breadcrumb-item"><a href="/categories">Categories</a></li>
             </ol>
         </nav>
-        <div class="row gy-3">
+        <div class="row gy-3 text-center d-flex justify-content-center flex-row">
             <!--
                 this will loop through all the categories as category.
                 because category is an object you use "->" to get the specific data.
@@ -30,7 +30,7 @@ include_once('defaults/head.php');
             -->
             <?php global $categories; ?>
             <?php foreach ($categories as $category): ?>
-                <div class="col-sm-4 col-md-3 card-group">
+                <div class="col-sm-6 col-md-4 col-lg-3 card-group">
                     <div class='card bg-dark mx-2 border border-3 border-dark rounded-2' style='width: 18rem;'>
                         <img src='/img/<?= $category->picture; ?>' class='card-img-top' alt='Image of $pageType'>
                         <div class='card-body'>
