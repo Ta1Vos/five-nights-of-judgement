@@ -19,11 +19,11 @@ function closeDropdown() {
 }
 
 //Sends user to the categories page, because the href on the dropdown toggle does not work
-function redirectToCategories() {
-    window.location = "http://fnoj.localhost/categories";
-}
+// function redirectToCategories() {
+//     window.location = "http://fnoj.localhost/categories";
+// }
 
 //Activates eventlistener
 categoryDropdown.addEventListener("mouseenter", openDropdown);
 categoryDropdown.addEventListener("mouseleave", closeDropdown);
-categoryToggle.addEventListener("click", redirectToCategories);
+// categoryToggle.addEventListener("click", redirectToCategories);

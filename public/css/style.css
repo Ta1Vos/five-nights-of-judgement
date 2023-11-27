@@ -1,3 +1,8 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
 body {
     background-color: gainsboro;
 }
@@ -37,8 +42,15 @@ bg-black {
 
 .navbar-logo {
     width: 100% !important;
+    max-width: 117px;
 }
 
 .error-field {
     color: red;
+}
+
+@media screen and (max-width: 992px) {
+    .navbar-logo {
+        width: 50% !important;
+    }
 }

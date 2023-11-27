@@ -16,7 +16,7 @@ function loadNavbarContent() {
     foreach ($result as $item) {
         //Places category names in the dropdown in the navbar.
         //This counts as a quick link, so you don't have to visit the categories page.
-        $navbarCategoryContent .= "<a href='/category/{$item['id']}'>{$item['name']}</a><br>";
+        $navbarCategoryContent .= "<li class='nav-item'><a class='nav-link' href='/category/{$item['id']}'>{$item['name']}</a></li>";
     }
 
     return null;
