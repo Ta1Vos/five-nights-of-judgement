@@ -24,7 +24,7 @@ global $categoryName;
                 <li class="breadcrumb-item"><a href="/category/<?php if(isset($params[2])){echo $params[2];}?>"><?= $categoryName; ?></a></li>
             </ol>
         </nav>
-        <div class="row gy-3">
+        <div class="row gy-3 text-center d-flex justify-content-center flex-row">
             <!--
                 this will loop through all the categories as category.
                 because category is an object you use "->" to get the specific data.
@@ -32,7 +32,7 @@ global $categoryName;
             -->
             <?php global $products; ?>
             <?php foreach ($products as $product): ?>
-                <div class="col-sm-4 col-md-3 card-group">
+                <div class="col-sm-6 col-md-4 col-lg-3 card-group">
                     <div class='card bg-dark mx-2 border border-3 border-dark rounded-2' style='width: 18rem;'>
                         <img src='/img/<?= $product->picture; ?>' class='card-img-top' alt='Image of $pageType'>
                         <div class='card-body'>
