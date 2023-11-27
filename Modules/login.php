@@ -271,7 +271,7 @@ function logIn($user): string
     if (str_contains($message, "member")) {
         header("Location: member");
     } else if (str_contains($message, "admin")) {
-        header("Location: admin");
+        header("Location: admin/home");
     } else {
         return $message;
     }
