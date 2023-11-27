@@ -72,8 +72,9 @@ include_once('defaults/head.php');
                 </div>
                 <br>
                 <label>
-                    <input type="submit" name="login-submit" value="Register">
+                    <input type="submit" name="login-submit" value="Log in">
                 </label>
+                <a href="register">Don't have an account? Click here</a>
             </form>
             <div class="error-field">
                 <?= $mainErrorField; ?>

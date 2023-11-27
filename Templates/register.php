@@ -85,6 +85,7 @@ include_once('defaults/head.php');
                     <label>
                         <input type="submit" name="reg-submit" value="Register">
                     </label>
+                    <a href="register">Already have an account? Click here</a>
                 </form>
                 <div class="error-field">
                     <?= $mainErrorField; ?>
