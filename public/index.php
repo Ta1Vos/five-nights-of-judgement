@@ -46,6 +46,9 @@ $titleSuffix = "";
 //if you want to send a message to the user you can use this variable.
 $message = "";
 
+$navbarCategoryContent = null;
+loadNavbarContent();
+
 /*$params[1] is the action (the page you are visiting).
  *$params[2] is parameter you give to the page.
  *the switch statement checks which page you want to go.
@@ -87,18 +90,34 @@ switch ($params[1]) {
         break;
 
     case 'login':
-        $titleSuffix = ' | Home';
-        include_once "../Templates/home.php";
+        $titleSuffix = ' | Log In';
+
+        //Values
+        $firstName = null;
+        $lastName = null;
+        $email = null;
+        $password = null;
+        $passwordConfirm = null;
+        //Error fields
+        $firstNameError = null;
+        $lastNameError = null;
+        $emailError = null;
+        $passwordError = null;
+        $passwordConfirmError = null;
+        $mainErrorField = null;
+
+        validateLogIn();
+        include_once "../Templates/login.php";
         break;
 
     case 'logout':
-        $titleSuffix = ' | Home';
+        $titleSuffix = ' | Log Out';
         include_once "../Templates/home.php";
         break;
 
     case 'register':
         $titleSuffix = ' | Register';
-        $errorMessage = null;
+
         //Values
         $firstName = null;
         $lastName = null;

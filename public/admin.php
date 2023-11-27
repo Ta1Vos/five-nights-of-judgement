@@ -6,24 +6,32 @@ if (!isAdmin()) {
     logout();
     header ("location:/home");
 } else {
+    echo "<br>";
+    var_dump($params);
+    echo "<br>";
 /* $params[2] is de action
    $params[3] is een getal die de delete action nodig heeft
 */
-    switch ($params[2]) {
+    if (isset($params[2])) {
+        switch ($params[2]) {
 
-        case 'home':
-            break;
+            case 'home':
+                break;
 
-        case 'products':
-            break;
+            case 'products':
+                break;
 
-        case 'add':
-            break;
+            case 'add':
+                break;
 
-        case 'delete':
-            break;
+            case 'delete':
+                break;
 
-        default:
-            break;
+            default:
+                break;
+        }
+    } else {
+        logout();
+        header ("location:/home");
     }
 }

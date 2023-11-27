@@ -1,43 +1,5 @@
 <?php
 
-function checkLogin($user): string
-{
-    try {
-        global $pdo;
-
-        $dbUser = $pdo->prepare("SELECT * FROM registered_user WHERE first_name = :first_name AND last_name = :last_name AND password = :password");
-        $dbUser->bindParam("first_name", $user["first_name"]);
-        $dbUser->bindParam("last_name", $user["last_name"]);
-        $dbUser->bindParam("password", $user["password"]);
-        $dbUser->execute();
-        $dbUser = $dbUser->fetchAll(PDO::FETCH_CLASS, 'User');
-
-        if (count($dbUser) > 0) {
-            $dbUser = $dbUser[0];
-
-            if (!empty($dbUser->first_name) && !empty($dbUser->last_name) &&!empty($dbUser->password)) {
-                if ($user["first_name"] == $dbUser->first_name && $user["last_name"] == $dbUser->last_name &&$user["password"] == $dbUser->password) {
-                    $_SESSION["user"] = $dbUser;
-
-                    if (isMember()) {
-                        return "login true";
-                    } else if (isAdmin()) {
-                        return "admin login true";
-                    } else {
-                        return "Something went wrong!";
-                    }
-                }
-            } else {
-                return "Something went wrong!";
-            }
-        }
-
-        return "no account detected";
-    } catch (PDOException $exception) {
-        return "Something went wrong! Error code: $exception";
-    }
-}
-
 function isAdmin(): bool
 {
     //controleer of er ingelogd is en de user de rol admin heeft
@@ -66,6 +28,99 @@ function isMember(): bool
     return false;
 }
 
+function checkLogin($user): string
+{
+    try {
+        global $pdo;
+
+        $dbUser = $pdo->prepare("SELECT * FROM registered_user WHERE first_name = :first_name AND last_name = :last_name");
+        $dbUser->bindParam("first_name", $user["first_name"]);
+        $dbUser->bindParam("last_name", $user["last_name"]);
+        $dbUser->execute();
+        $dbUser = $dbUser->fetchAll(PDO::FETCH_CLASS, 'User');
+
+        if (count($dbUser) > 0) {
+            $dbUser = $dbUser[0];
+
+            if (!empty($dbUser->first_name) && !empty($dbUser->last_name) && !empty($dbUser->password)) {
+                if ($user["first_name"] == $dbUser->first_name && $user["last_name"] == $dbUser->last_name && $user["password"] == $dbUser->password) {
+                    $_SESSION["user"] = $dbUser;
+
+                    if (isMember()) {
+                        return "member logged in!";
+                    } else if (isAdmin()) {
+                        return "admin logged in!";
+                    } else {
+                        return "Something went wrong!";
+                    }
+                }
+            } else {
+                return "Something went wrong!";
+            }
+        }
+
+        return "no account detected";
+    } catch (PDOException $exception) {
+        return "Something went wrong! Error code: $exception";
+    }
+}
+
+//Code used in 2 places, for the shared inputs
+function validateInputs($firstName, $lastName, $email, $password, $emailPost): array
+{
+    $wrongInput = false;
+    $firstNameError = null;
+    $lastNameError = null;
+    $emailError = null;
+    $passwordError = null;
+
+    if (empty($firstName)) {
+        $firstNameError = "*Please fill in this field";
+        $wrongInput = true;
+    } else if (strlen($firstName) > 255) {
+        $firstNameError = "*Please pick a first name shorter than 255 characters!";
+        $wrongInput = true;
+    }
+
+    if (empty($lastName)) {
+        $lastNameError = "*Please fill in this field";
+        $wrongInput = true;
+    } else if (strlen($lastName) > 255) {
+        $lastNameError = "*Please pick a first name shorter than 255 characters!";
+        $wrongInput = true;
+    }
+
+    if (strlen($email) > 255) {
+        $emailError = "*Please pick an email shorter than 255 characters!";
+        $wrongInput = true;
+    } else if (!empty($email)) {
+        if (!filter_input(INPUT_POST, $emailPost, FILTER_VALIDATE_EMAIL)) {
+            $emailError = "*Please fill in a correct email!";
+            $wrongInput = true;
+        }
+    }
+
+    if (empty($password)) {
+        $passwordError = "*Please fill in this field";
+        $wrongInput = true;
+    } else if (strlen($password) > 100) {
+        $passwordError = "*Please pick a password shorter than 100 characters!";
+        $wrongInput = true;
+    } else if (strlen($password) <= 8) {
+        $passwordError = "*A password has to be longer than 8 characters!";
+        $wrongInput = true;
+    }
+
+    $result["wrong_input"] = $wrongInput;
+    $result["first_name_error"] = $firstNameError;
+    $result["last_name_error"] = $lastNameError;
+    $result["email_error"] = $emailError;
+    $result["password_error"] = $passwordError;
+
+    return $result;
+}
+
+//Validate registration inputs
 function validateRegistration()
 {
     if (isset($_POST['reg-submit'])) {
@@ -89,44 +144,12 @@ function validateRegistration()
         $password = $_POST['reg-password'];
         $passwordConfirm = $_POST['reg-password-confirm'];
 
-        $wrongInput = false;
-
-        if (empty($firstName)) {
-            $firstNameError = "*Please fill in this field";
-            $wrongInput = true;
-        } else if (strlen($firstName) > 255) {
-            $firstNameError = "*Please pick a first name shorter than 255 characters!";
-            $wrongInput = true;
-        }
-
-        if (empty($lastName)) {
-            $lastNameError = "*Please fill in this field";
-            $wrongInput = true;
-        } else if (strlen($lastName) > 255) {
-            $lastNameError = "*Please pick a first name shorter than 255 characters!";
-            $wrongInput = true;
-        }
-
-        if (strlen($email) > 255) {
-            $emailError = "*Please pick an email shorter than 255 characters!";
-            $wrongInput = true;
-        } else if (!empty($email)) {
-            if (!filter_input(INPUT_POST, "reg-email", FILTER_VALIDATE_EMAIL)) {
-                $emailError = "*Please fill in a correct email!";
-                $wrongInput = true;
-            }
-        }
-
-        if (empty($password)) {
-            $passwordError = "*Please fill in this field";
-            $wrongInput = true;
-        } else if (strlen($password) > 100) {
-            $passwordError = "*Please pick a password shorter than 100 characters!";
-            $wrongInput = true;
-        } else if (strlen($password) <= 8) {
-            $passwordError = "*A password has to be longer than 8 characters!";
-            $wrongInput = true;
-        }
+        $result = validateInputs($firstName, $lastName, $email, $password, "reg-email");
+        $firstNameError = $result["first_name_error"];
+        $lastNameError = $result["last_name_error"];
+        $emailError = $result["email_error"];
+        $passwordError = $result["password_error"];
+        $wrongInput = $result["wrong_input"];
 
         if (empty($passwordConfirm)) {
             $passwordConfirmError = "*Please fill in this field";
@@ -149,10 +172,9 @@ function validateRegistration()
             $user["password"] = $password;
 
             $message = makeRegistration($user);
-
+            //Check if the user has been registered, then log them in
             if ($message == "User registered and logged in!") {
-                $mainErrorField = "<span class='text-success'>" . makeRegistration($user) . "</span>";
-                header("Location: index.php");
+                $mainErrorField = logIn($user);
             } else {
                 $mainErrorField = $message;
             }
@@ -160,6 +182,51 @@ function validateRegistration()
             $mainErrorField = "Please fill in all fields and fill them in correctly!";
         }
     }
+
+    return null;
+}
+
+//Validate log in inputs
+function validateLogIn()
+{
+    if (isset($_POST['login-submit'])) {
+        //Accessing inputs
+        global $firstName;
+        global $lastName;
+        global $email;
+        global $password;
+        //Accessing error fields
+        global $firstNameError;
+        global $lastNameError;
+        global $emailError;
+        global $passwordError;
+        global $mainErrorField;
+        //Filling the inputs back in
+        $firstName = $_POST['login-fname'];
+        $lastName = $_POST['login-lname'];
+        $email = $_POST['login-email'];
+        $password = $_POST['login-password'];
+
+        $result = validateInputs($firstName, $lastName, $email, $password, "login-email");
+        $firstNameError = $result["first_name_error"];
+        $lastNameError = $result["last_name_error"];
+        $emailError = $result["email_error"];
+        $passwordError = $result["password_error"];
+        $wrongInput = $result["wrong_input"];
+
+        if (!$wrongInput) {
+            $user["first_name"] = $firstName;
+            $user["last_name"] = $lastName;
+            $user["email"] = $email;
+            $user["password"] = $password;
+
+            $mainErrorField = logIn($user);
+        } else {
+            $mainErrorField = "Please fill in all fields and fill them in correctly!";
+        }
+    }
+
+    return null;
 }
 
 //Registers an user
@@ -190,8 +257,24 @@ function makeRegistration($user): string
             return "User registered and logged in!";
         }
 
-        return "Account detected";
+        return "Account name detected, please create one with a different name combination!";
     } else {
         return "Something went wrong!";
     }
+}
+
+//Log in the user
+function logIn($user): string
+{
+    $message = checkLogin($user);
+    //Check if message contains true, then log user in
+    if (str_contains($message, "member")) {
+        header("Location: member");
+    } else if (str_contains($message, "admin")) {
+        header("Location: admin/home");
+    } else {
+        return $message;
+    }
+
+    return "";
 }

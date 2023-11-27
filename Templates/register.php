@@ -37,7 +37,7 @@ include_once('defaults/head.php');
                     <br><br><br><br>
                     <div class="col-12">
                         <label>
-                            <div>Last name</div>
+                            <div>* Last name</div>
                             <small class="error-field">
                                 <?= $lastNameError; ?>
                             </small>
@@ -85,6 +85,7 @@ include_once('defaults/head.php');
                     <label>
                         <input type="submit" name="reg-submit" value="Register">
                     </label>
+                    <a href="login">Already have an account? Click here</a>
                 </form>
                 <div class="error-field">
                     <?= $mainErrorField; ?>
