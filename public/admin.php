@@ -6,6 +6,9 @@ if (!isAdmin()) {
     logout();
     header ("location:/home");
 } else {
+    echo "<br>";
+    var_dump($params);
+    echo "<br>";
 /* $params[2] is de action
    $params[3] is een getal die de delete action nodig heeft
 */

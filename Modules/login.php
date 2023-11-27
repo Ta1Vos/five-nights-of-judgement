@@ -1,42 +1,5 @@
 <?php
 
-function checkLogin($user): string
-{
-    try {
-        global $pdo;
-
-        $dbUser = $pdo->prepare("SELECT * FROM registered_user WHERE first_name = :first_name AND last_name = :last_name");
-        $dbUser->bindParam("first_name", $user["first_name"]);
-        $dbUser->bindParam("last_name", $user["last_name"]);
-        $dbUser->execute();
-        $dbUser = $dbUser->fetchAll(PDO::FETCH_CLASS, 'User');
-
-        if (count($dbUser) > 0) {
-            $dbUser = $dbUser[0];
-
-            if (!empty($dbUser->first_name) && !empty($dbUser->last_name) && !empty($dbUser->password)) {
-                if ($user["first_name"] == $dbUser->first_name && $user["last_name"] == $dbUser->last_name && $user["password"] == $dbUser->password) {
-                    $_SESSION["user"] = $dbUser;
-
-                    if (isMember()) {
-                        return "login true";
-                    } else if (isAdmin()) {
-                        return "admin login true";
-                    } else {
-                        return "Something went wrong!";
-                    }
-                }
-            } else {
-                return "Something went wrong!";
-            }
-        }
-
-        return "no account detected";
-    } catch (PDOException $exception) {
-        return "Something went wrong! Error code: $exception";
-    }
-}
-
 function isAdmin(): bool
 {
     //controleer of er ingelogd is en de user de rol admin heeft
@@ -63,6 +26,43 @@ function isMember(): bool
         }
     }
     return false;
+}
+
+function checkLogin($user): string
+{
+    try {
+        global $pdo;
+
+        $dbUser = $pdo->prepare("SELECT * FROM registered_user WHERE first_name = :first_name AND last_name = :last_name");
+        $dbUser->bindParam("first_name", $user["first_name"]);
+        $dbUser->bindParam("last_name", $user["last_name"]);
+        $dbUser->execute();
+        $dbUser = $dbUser->fetchAll(PDO::FETCH_CLASS, 'User');
+
+        if (count($dbUser) > 0) {
+            $dbUser = $dbUser[0];
+
+            if (!empty($dbUser->first_name) && !empty($dbUser->last_name) && !empty($dbUser->password)) {
+                if ($user["first_name"] == $dbUser->first_name && $user["last_name"] == $dbUser->last_name && $user["password"] == $dbUser->password) {
+                    $_SESSION["user"] = $dbUser;
+
+                    if (isMember()) {
+                        return "member logged in!";
+                    } else if (isAdmin()) {
+                        return "admin logged in!";
+                    } else {
+                        return "Something went wrong!";
+                    }
+                }
+            } else {
+                return "Something went wrong!";
+            }
+        }
+
+        return "no account detected";
+    } catch (PDOException $exception) {
+        return "Something went wrong! Error code: $exception";
+    }
 }
 
 //Code used in 2 places, for the shared inputs
@@ -268,8 +268,10 @@ function logIn($user): string
 {
     $message = checkLogin($user);
     //Check if message contains true, then log user in
-    if (str_contains($message, "true")) {
-        header("Location: index.php");
+    if (str_contains($message, "member")) {
+        header("Location: member");
+    } else if (str_contains($message, "admin")) {
+        header("Location: admin");
     } else {
         return $message;
     }
