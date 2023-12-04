@@ -44,6 +44,10 @@ bg-black {
     color: red;
 }
 
+.z-5 {
+    z-index: 5;
+}
+
 @media screen and (max-width: 992px) {
     .navbar-logo {
         width: 50% !important;

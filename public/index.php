@@ -49,7 +49,7 @@ $message = "";
 $navbarCategoryContent = null;
 loadNavbarContent();
 
-/*$params[1] is the action (the page you are visiting).
+/* $params[1] is the action (the page you are visiting).
  *$params[2] is parameter you give to the page.
  *the switch statement checks which page you want to go.
  */
@@ -111,8 +111,10 @@ switch ($params[1]) {
         break;
 
     case 'logout':
+        logout();
         $titleSuffix = ' | Log Out';
         include_once "../Templates/home.php";
+
         break;
 
     case 'register':
@@ -152,7 +154,10 @@ switch ($params[1]) {
     default:
         $titleSuffix = ' | Home';
 
+        //Popular id is a special identifier for the popular pages, it makes it easy for the admin to reset the visits.
+        $popularId = [null, 0];//Value for which row/column is created for the freq. visited.
         $frequentlyVisitedCategories = calculateFrequentlyVisited("category");
+        $popularId = [null, 0];
         $frequentlyVisitedPages = calculateFrequentlyVisited("product");
 
         $frequentlyVisitedCategories = loadCardContents($frequentlyVisitedCategories, "category");

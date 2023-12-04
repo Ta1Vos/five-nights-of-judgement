@@ -4,19 +4,19 @@ global $params;
 //check if user has role admin
 if (!isAdmin()) {
     logout();
-    header ("location:/home");
+    header("location:/home");
 } else {
     echo "<br>";
     var_dump($params);
     echo "<br>";
-/* $params[2] is de action
-   $params[3] is een getal die de delete action nodig heeft
-*/
+
+    /*$params[1] is the admin role in case its being used.
+     * $params[2] is the action (the page you are visiting).
+     *$params[3] is parameter you give to the page.
+     *the switch statement checks which page you want to go.
+     */
     if (isset($params[2])) {
         switch ($params[2]) {
-
-            case 'home':
-                break;
 
             case 'products':
                 break;
@@ -28,10 +28,20 @@ if (!isAdmin()) {
                 break;
 
             default:
+                $titleSuffix = ' | Home';
+
+                $popularId = [0, 0];//Value for which row/column is created for the freq. visited.
+                $frequentlyVisitedCategories = calculateFrequentlyVisited("category");
+                $popularId = [1, 0];
+                $frequentlyVisitedPages = calculateFrequentlyVisited("product");
+
+                $frequentlyVisitedCategories = loadCardContents($frequentlyVisitedCategories, "category");
+                $frequentlyVisitedPages = loadCardContents($frequentlyVisitedPages, "product");
+                include_once "../Templates/home.php";
                 break;
         }
     } else {
         logout();
-        header ("location:/home");
+        header("location:/home");
     }
 }
