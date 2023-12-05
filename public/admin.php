@@ -6,6 +6,8 @@ if (!isAdmin()) {
     logout();
     header("location:/home");
 } else {
+    require '../Modules/admin.php';
+
     echo "<br>";
     var_dump($params);
     echo "<br>";
