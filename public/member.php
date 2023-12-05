@@ -7,10 +7,12 @@ if (!isMember()) {
     header ("location:/home");
 } else {
 
+    /*$params[1] is the member role in case its being used.
+     * $params[2] is the action (the page you are visiting).
+     *$params[3] is parameter you give to the page.
+     *the switch statement checks which page you want to go.
+     */
     switch ($params[2]) {
-
-        case 'home':
-            break;
 
         case 'products':
             break;
@@ -33,7 +35,7 @@ if (!isMember()) {
         case 'review':
             break;
 
-        default:
+        default://Default is always home
             break;
     }
 }
