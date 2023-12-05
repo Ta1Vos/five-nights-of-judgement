@@ -27,7 +27,7 @@ if (!isAdmin()) {
             case 'delete':
                 break;
 
-            default:
+            default://Default is always home
                 $titleSuffix = ' | Home';
 
                 $popularId = [0, 0];//Value for which row/column is created for the freq. visited.
