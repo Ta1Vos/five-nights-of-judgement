@@ -9,7 +9,7 @@ function getTitle() {
  * Compares the keys of an Object and an Array to see if the Array contains the keys of the Object.
  * @param object $object the object you want to compare the array with
  * @param array $content the array you want to compare the object with
- * @return array|false returns either false or an array with the legitimate content
+ * @return array|false returns false if the array doesn't contain all keys. Returns an array with the legitimate content if the keys are equal to the Object.
  */
 function validateObjectWithArray(object $object, array $content):array|false {
     $contentValid = true;
