@@ -8,9 +8,10 @@ function loadNavbarContent() {
     $navbarCategoryContent = null;
     $navbarToggleRedirect = "/categories.php";
 
-    $query = $pdo->prepare("SELECT * FROM category");
-    $query->execute();
-    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    $result = fetchTable("category");
+    if (!$result) {
+        return null;
+    }
 
 //Loops through the categories
     foreach ($result as $item) {

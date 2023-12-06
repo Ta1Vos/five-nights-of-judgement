@@ -6,6 +6,28 @@ function getTitle() {
 }
 
 /**
+ * Fetch a table from $pdo (database) variable.
+ * @param string $dbTableName The name of the table you wish to fetch the columns from
+ * @return array|false Returns false is given table does not exist. Returns an empty array if table is empty, otherwise returns an array with every column.
+ */
+function fetchTable(string $dbTableName):array|false {
+    try {
+        global $pdo;
+        //Validate + Sanitize table name to prevent SQL injection.
+        if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $dbTableName)) {
+            die("Invalid table name. Nice try if you tried to inject SQL.");
+        }
+
+        $query = $pdo->prepare("SELECT * FROM $dbTableName");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $exception){
+        echo "<br><small>Something went wrong upon fetching a table.</small><br>";
+        return false;
+    }
+}
+
+/**
  * Compares the keys of an Object and an Array to see if the Array contains the keys of the Object.
  * @param object $object the object you want to compare the array with
  * @param array $content the array you want to compare the object with

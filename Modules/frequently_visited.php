@@ -5,19 +5,13 @@ function calculateFrequentlyVisited($dbTable): string|array
     if (isset($dbTable)) {
         $mostVisited = [];
 
-        include "database.php";
-        global $pdo;
         global $popularId;//Value for which row/column is created for the freq. visited.
         $popularId[0] = $dbTable;
 
-        //Validate + Sanitize table name to prevent SQL injection.
-        if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $dbTable)) {
-            die("Invalid table name. Nice try if you tried to inject SQL.");
-        }
-
-        $query = $pdo->prepare("SELECT * FROM $dbTable");
-        $query->execute();
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $result = fetchTable($dbTable);
+        if(!$result) {
+            return "Something went wrong!";
+        };
 
         //Checks if the current result is either a product or a category
         if (isset($result[0]["visits"])) {
