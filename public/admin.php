@@ -25,9 +25,18 @@ if (!isAdmin()) {
 
             case 'edit':
                 $titleSuffix = ' | Editing';
+                $titleError = null;
+                $descriptionError = null;
+                $imgError = null;
+                $categoryError = null;
+
+                $inputTitle = null;
+                $inputDescription = null;
+                $inputImg = null;
+                $inputCategory = null;
                 include_once "../Templates/edit-cards.php";
                 break;
-                
+
             case 'add':
                 break;
 
