@@ -7,6 +7,7 @@ if (!isAdmin()) {
     header("location:/home");
 } else {
     require '../Modules/admin.php';
+    require '../Modules/edit-cards.php';
 
     echo "<br>";
     var_dump($params);
@@ -35,7 +36,16 @@ if (!isAdmin()) {
                 $descriptionInput = null;
                 $imageInput = null;
                 $categoryInput = null;
-                include_once "../Templates/edit-cards.php";
+
+                include_once "../Templates/defaults/edit-cards.php"; //WARNING: THIS PART IS ONLY HALF OF THE PAGE
+
+                $includeFile = loadRelatedEditContent();
+
+                if (isset($includeFile)) {
+                    include $includeFile;
+                } else {
+                    include "../Templates/defaults/footer.php";
+                }
                 break;
 
             case 'add':
