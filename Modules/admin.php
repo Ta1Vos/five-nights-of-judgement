@@ -59,3 +59,7 @@ function addToProduct(array $content):bool {
 
     return false;
 }
+
+function validateCardEdit() {
+
+}
