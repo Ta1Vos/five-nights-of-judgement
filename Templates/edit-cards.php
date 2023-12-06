@@ -85,7 +85,7 @@ include_once('defaults/head.php');
                 <div class="error-field mb-3">
                     <?= $mainErrorField; ?>
                 </div>
-                <a href="register">Leave <b>without</b> saving</a>
+                <a href="home">Leave <b>without</b> saving</a>
             </form>
         </div>
 
