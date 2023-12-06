@@ -27,13 +27,14 @@ if (!isAdmin()) {
                 $titleSuffix = ' | Editing';
                 $titleError = null;
                 $descriptionError = null;
-                $imgError = null;
+                $imageError = null;
                 $categoryError = null;
+                $mainErrorField = null;
 
-                $inputTitle = null;
-                $inputDescription = null;
-                $inputImg = null;
-                $inputCategory = null;
+                $titleInput = null;
+                $descriptionInput = null;
+                $imageInput = null;
+                $categoryInput = null;
                 include_once "../Templates/edit-cards.php";
                 break;
 
