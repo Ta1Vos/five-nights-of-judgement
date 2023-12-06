@@ -29,6 +29,7 @@ if (!isAdmin()) {
                 $descriptionError = null;
                 $imageError = null;
                 $categoryError = null;
+                $mainErrorField = null;
 
                 $titleInput = null;
                 $descriptionInput = null;

@@ -25,54 +25,68 @@ include_once('defaults/head.php');
         <div class="row gy-3">
             <form method="post" class="row text-light text-center">
                 <div class="col-12 mb-5">
+                    <div class="fs-3">Title</div>
+                    <small class="error-field">
+                        <?= $titleError; ?>
+                    </small>
+                    <br>
                     <label>
-                        <div class="fs-3">Title</div>
-                        <small class="error-field">
-                            <?= $titleError; ?>
-                        </small>
-                        <br>
-                        <input type="text" name="login-fname" value="<?= $titleInput; ?>">
+                        <input type="text" name="edit-title" value="<?= $titleInput; ?>">
                     </label>
                 </div>
-                <div class="col-12 mb-5">
-                    <label>
-                        <div class="fs-3">Description</div>
-                        <small class="error-field">
-                            <?= $descriptionError; ?>
-                        </small>
-                        <br>
-                        <input type="text" name="login-lname" value="<?= $descriptionInput; ?>">
-                    </label>
+                <div class="col-12 mb-5 d-flex justify-content-center flex-column">
+                    <div class="fs-3">Description</div>
+                    <small class="error-field">
+                        <?= $descriptionError; ?>
+                    </small>
+                    <br>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-4">
+                            <label class="input-group">
+                                    <textarea class="form-control" name="edit-desc"
+                                    ><?= $descriptionInput; ?></textarea>
+                            </label>
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
                 </div>
                 <div class="col-12 mb-5">
-                    <label>
-                        <div class="fs-3">Image</div>
-                        <small class="error-field">
-                            <?= $imageError; ?>
-                        </small>
-                        <br>
-                        <input type="text" name="login-email" value="<?= $imageInput; ?>">
-                    </label>
+                    <div class="fs-3">Image</div>
+                    <small class="error-field">
+                        <?= $imageError; ?>
+                    </small>
+                    <br>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-4">
+                            <label class="input-group">
+                                    <textarea class="form-control" name="edit-img"
+                                    ><?= $imageInput; ?></textarea>
+                            </label>
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
                 </div>
                 <div class="col-12 mb-5">
+                    <div class="fs-3">Category</div>
+                    <small class="error-field">
+                        <?= $categoryError; ?>
+                    </small>
+                    <br>
                     <label>
-                        <div class="fs-3">Category</div>
-                        <small class="error-field">
-                            <?= $categoryError; ?>
-                        </small>
-                        <br>
-                        <input type="text" name="login-password" value="<?= $categoryInput; ?>">
+                        <input type="text" name="edit-category" value="<?= $categoryInput; ?>">
                     </label>
                 </div>
                 <br>
-                <label class="mb-5">
-                    <input type="submit" name="login-submit" value="Save changes">
+                <label class="mb-3">
+                    <input type="submit" name="edit-submit" value="Save changes">
                 </label>
-                <a href="register">Don't have an account? Click here</a>
+                <div class="error-field mb-3">
+                    <?= $mainErrorField; ?>
+                </div>
+                <a href="register">Leave <b>without</b> saving</a>
             </form>
-            <div class="error-field">
-                <?= $mainErrorField; ?>
-            </div>
         </div>
 
         <hr>
