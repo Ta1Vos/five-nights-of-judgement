@@ -23,6 +23,11 @@ if (!isAdmin()) {
             case 'products':
                 break;
 
+            case 'edit':
+                $titleSuffix = ' | Editing';
+                include_once "../Templates/edit-cards.php";
+                break;
+                
             case 'add':
                 break;
 
