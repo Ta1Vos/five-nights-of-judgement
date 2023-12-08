@@ -73,13 +73,15 @@ function validateCardEdit() {
         $imageError = $result["img_error"];
 
         if (!$wrongInput) {
-            if (isset($_GET["id"])) {
-                $id = $_GET["id"];
+            global $params;
+
+            if (isset($params[4])) {
+                $id = $params[4];
                 if (updateCategoryTable($id, $titleInput, $imageInput, $descriptionInput)) {
                     global $params;
 
                     $mainErrorField = "Card successfully edited!";
-                    header("Location: admin/$params[3]");
+                    header("Location: /admin/categories");
                 } else {
                     $mainErrorField = "Something went wrong while attempting a connection with the database! Please contact a developer for further information";
                 }

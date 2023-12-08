@@ -64,12 +64,13 @@ function includeAdminToCards(string $type = "", $id = null): false|string {
     global $params;
 
     if (isAdmin() && $params[1] === "admin" && !empty($type) && isset($id)) {
+
         switch ($type) {
             case "product":
-                return "<a href='edit/product?id=$id' class='z-5 text-decoration-none text-black'><button>Edit product</button></a>";
+                return "<a href='edit/product/$id' class='z-5 text-decoration-none text-black'><button>Edit product</button></a>";
 
             case "category":
-                return "<a href='edit/category?id=$id' class='z-5 text-decoration-none text-black'><button>Edit category</button></a>";
+                return "<a href='edit/category/$id' class='z-5 text-decoration-none text-black'><button>Edit category</button></a>";
         }
     } else {
         logout();

@@ -22,7 +22,7 @@ function updateCategoryTable(string $id, string $name, string $picture, string $
     try {
         global $pdo;
 
-        $query = $pdo->prepare("UPDATE category SET name=:name AND picture=:picture AND description=:description WHERE id=:id");
+        $query = $pdo->prepare("UPDATE category SET name=:name, picture=:picture, description=:description WHERE id=:id");
         $query->bindParam("id", $id);
         $query->bindParam("name", $name);
         $query->bindParam("picture", $picture);
