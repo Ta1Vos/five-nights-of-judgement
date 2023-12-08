@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 06 dec 2023 om 14:05
+-- Gegenereerd op: 08 dec 2023 om 13:49
 -- Serverversie: 10.4.24-MariaDB
 -- PHP-versie: 8.1.6
 
@@ -98,7 +98,7 @@ CREATE TABLE `registered_user` (
   `last_name` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(100) NOT NULL,
-  `role` varchar(10) NOT NULL
+  `role` enum('member','admin') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
