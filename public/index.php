@@ -5,6 +5,7 @@
  */
 
 //make sure you add all the modules.
+require '../Modules/common.php';
 require '../Modules/categories.php';
 require "../Modules/products.php";
 require "../Modules/frequently_visited.php";
@@ -13,7 +14,6 @@ require '../Modules/login.php';
 require '../Modules/logout.php';
 //includes the code to connect to the database
 require '../Modules/database.php';
-require '../Modules/common.php';
 //loads the information of the navbar
 require "../Modules/navbar_content.php";
 global $navbarCategoryContent;

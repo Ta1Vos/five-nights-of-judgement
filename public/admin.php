@@ -23,7 +23,7 @@ if (!isAdmin()) {
 
             case 'products':
                 updateVisits("category", $params[2]);
-                $products=getProducts($params[2]);//Fetches the products
+                $products = getProducts($params[2]);//Fetches the products
                 $categoryName = getCategoryName();//Gets category name for the breadcrumb link
                 include_once "../Templates/products.php";
                 break;

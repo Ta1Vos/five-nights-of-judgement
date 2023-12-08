@@ -45,7 +45,7 @@ bg-black {
 }
 
 .z-5 {
-    z-index: 5;
+    z-index: 5 !important;
 }
 
 @media screen and (max-width: 992px) {

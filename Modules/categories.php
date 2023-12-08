@@ -3,6 +3,8 @@
  * In this file you will write all the code which uses the database.
  * This includes all the SQL statements and the form validation.
  */
+
+//CATEGORY CARD LOADING CAN BE FOUND IN THE WEB PAGE / TEMPLATES FOLDER
 function getCategories():array
 {
     //$pdo is the connection to the database.

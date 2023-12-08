@@ -3,6 +3,7 @@
 <?php
 // Adds the head for the page.
 include_once('defaults/head.php');
+global $adminEditor;
 ?>
 
 <body>
@@ -37,8 +38,9 @@ include_once('defaults/head.php');
                             <h5 class='card-title text-white'><?= $category->name; ?></h5>
                             <hr>
                             <p class="card-text text-light"><?= $category->description; ?></p>
-                            <a href='/category/<?= $category->id; ?>' class='stretched-link'></a>
+                            <a href='/category/<?= $category->id; ?>' class='stretched-link'></a><br>
                         </div>
+                        <?php if (function_exists("includeAdminToCards")) { echo includeAdminToCards("category", $category->id); } ?>
                     </div>
                 </div>
             <?php endforeach; ?>
