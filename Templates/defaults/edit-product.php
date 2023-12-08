@@ -60,5 +60,5 @@
     <div class="error-field mb-3">
         <?= $mainErrorField; ?>
     </div>
-    <a href="home">Leave <b>without</b> saving</a>
+    <a href="/admin/home">Leave <b>without</b> saving</a>
 </form>

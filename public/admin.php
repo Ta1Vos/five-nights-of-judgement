@@ -22,6 +22,28 @@ if (!isAdmin()) {
         switch ($params[2]) {
 
             case 'products':
+                updateVisits("category", $params[2]);
+                $products=getProducts($params[2]);//Fetches the products
+                $categoryName = getCategoryName();//Gets category name for the breadcrumb link
+                include_once "../Templates/products.php";
+                break;
+                break;
+
+            case 'categories':
+                //adds " | Categories:" to the title
+                $titleSuffix = ' | Categories';
+                /*
+                 * calls the function getCategories from categories.php in the modules folder.
+                 * check categories.php for more information.
+                 */
+                $categories = getCategories();
+                //var_dump($categories);die;
+
+                /*
+                 * includes the template categories.php from the templates folder.
+                 * check categories.php for more information.
+                 */
+                include_once "../Templates/categories.php";
                 break;
 
             case 'edit':
@@ -40,6 +62,7 @@ if (!isAdmin()) {
                 include_once "../Templates/defaults/edit-cards.php"; //WARNING: THIS PART IS ONLY HALF OF THE PAGE
 
                 $includeFile = loadRelatedEditContent();
+                validateCardEdit();
 
                 if (isset($includeFile)) {
                     include $includeFile;
