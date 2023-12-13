@@ -4,11 +4,6 @@
 // Adds the head for the page.
 include_once('defaults/head.php');
 global $adminEditor;
-global $firstLinkPiece;
-
-if (!isset($firstLinkPiece)) {
-    $firstLinkPiece = null;
-}
 ?>
 
 <body>
@@ -24,8 +19,8 @@ if (!isset($firstLinkPiece)) {
     <div class="bg-black text-light text-center p-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/home">Home</a></li>
-                <li class="breadcrumb-item"><a href="/categories">Categories</a></li>
+                <li class="breadcrumb-item"><a href="home">Home</a></li>
+                <li class="breadcrumb-item"><a href="categories">Categories</a></li>
             </ol>
         </nav>
         <div class="row gy-3 text-center d-flex justify-content-center flex-row">
@@ -43,7 +38,7 @@ if (!isset($firstLinkPiece)) {
                             <h5 class='card-title text-white'><?= $category->name; ?></h5>
                             <hr>
                             <p class="card-text text-light"><?= $category->description; ?></p>
-                            <a href='<?= $firstLinkPiece; ?>category/<?= $category->id; ?>' class='stretched-link'></a><br>
+                            <a href='/category/<?= $category->id; ?>' class='stretched-link'></a><br>
                         </div>
                         <?php if (function_exists("includeAdminToCards")) { echo includeAdminToCards("category", $category->id); } ?>
                     </div>

@@ -4,11 +4,6 @@
 // Adds the head for the page.
 include_once('defaults/head.php');
 global $categoryName;
-global $firstLinkPiece;
-
-if (!isset($firstLinkPiece)) {
-    $firstLinkPiece = "/";//Adds slash instead of null to prevent number disappearing after "product" in link
-}
 ?>
 
 <body>
@@ -24,8 +19,8 @@ if (!isset($firstLinkPiece)) {
     <div class="bg-black text-light text-center p-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/home">Home</a></li>
-                <li class="breadcrumb-item"><a href="/categories">Categories</a></li>
+                <li class="breadcrumb-item"><a href="home">Home</a></li>
+                <li class="breadcrumb-item"><a href="categories">Categories</a></li>
                 <li class="breadcrumb-item"><a href="/category/<?php if(isset($params[2])){echo $params[2];}?>"><?= $categoryName; ?></a></li>
             </ol>
         </nav>
@@ -43,7 +38,7 @@ if (!isset($firstLinkPiece)) {
                         <div class='card-body'>
                             <hr>
                             <h5 class='card-title text-white'><?= $product->name; ?></h5>
-                            <a href='<?= $firstLinkPiece; ?>product/<?= $product->id; ?>' class='stretched-link'></a>
+                            <a href='/product/<?= $product->id; ?>' class='stretched-link'></a>
                         </div>
                     </div>
                 </div>
