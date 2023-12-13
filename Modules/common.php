@@ -18,11 +18,11 @@ function loadLinkContent():string {
  * Returns the possible additional params of the link to make links for include with the Templates and user levels (admin/member).
  * @return string returns the string for the member, admin or regular user.
  */
-function loadCorrectIncludeFormat($defaultLink):string {
+function loadCorrectIncludeFormat($defaultLink, $textInFrontOfLink = null):string {
     if (isMember()) {
-        return "member/" . $defaultLink;//Returns member link
+        return $textInFrontOfLink . "member/" . $defaultLink;//Returns member link
     } else if (isAdmin()) {
-        return "admin/" . $defaultLink;//Returns admin link
+        return $textInFrontOfLink . "admin/" . $defaultLink;//Returns admin link
     }
 
     return "" . $defaultLink;//Returns nothing except for given link, as nothing has to be changed

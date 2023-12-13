@@ -12,7 +12,7 @@ global $params;
     <?php
     //adds the rest of the default files.
     include_once('header.php');
-    include_once('menu.php');
+    include_once('../Templates/admin/defaults/menu.php');
     //    include_once('defaults/pictures.php');
     ?>
 
