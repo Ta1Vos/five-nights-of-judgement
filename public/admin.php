@@ -82,6 +82,11 @@ if (!isAdmin()) {
                 break;
 
             case 'edit':
+                if (!isset($params[4])) {
+                    echo "Something went wrong";
+                    header("Location: /home");
+                }
+
                 $titleSuffix = ' | Editing';
                 $titleError = null;
                 $descriptionError = null;

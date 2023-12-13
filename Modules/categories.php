@@ -18,6 +18,20 @@ function getCategories():array
     return $categories;
 }
 
+function getSingleCategory($requestedId) {
+    //$pdo is the connection to the database.
+    global $pdo;
+    /*
+     * this will collect all the categories from the category table and makes objects from the category class.
+     * check Category.php in the Classes folder.
+     */
+    $query = $pdo->prepare('SELECT * FROM category WHERE id=:id limit 1');
+    $query->bindParam("id", $requestedId);
+    $query->execute();
+    //gives back all the category objects
+    return $query->fetchAll(PDO::FETCH_CLASS, 'Category');
+}
+
 function getCategoryName($actionParam, $parameterParam):string
 {
     //Requests URI link and the function reads out the information, so it can find the category id

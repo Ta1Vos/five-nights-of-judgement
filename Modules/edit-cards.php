@@ -5,8 +5,10 @@ function loadRelatedEditContent():string|null {
     $includeFile = null;
 
     if ($params[3] == "product") {
+        getProductEditData($params[4]);
         $includeFile = "../Templates/defaults/edit-product.php";
     } else if ($params[3] == "category") {
+        getCategoryEditData($params[4]);
         $includeFile = "../Templates/defaults/edit-category.php";
     } else {
         header("Location: home");
@@ -78,8 +80,6 @@ function validateCardEdit() {
             if (isset($params[4])) {
                 $id = $params[4];
                 if (updateCategoryTable($id, $titleInput, $imageInput, $descriptionInput)) {
-                    global $params;
-
                     $mainErrorField = "Card successfully edited!";
                     header("Location: /admin/categories");
                 } else {
@@ -93,6 +93,43 @@ function validateCardEdit() {
         }
     } else if (isset($_POST["edit-product-submit"])) {
 
+    }
+
+    return null;
+}
+
+function getCategoryEditData(int $categoryId) {
+    $category = getSingleCategory($categoryId);
+
+    if (count($category) > 0) {
+        global $titleInput;
+        global $descriptionInput;
+        global $imageInput;
+
+        $category = $category[0];
+
+        $titleInput = $category->name;
+        $descriptionInput = $category->description;
+        $imageInput = $category->picture;
+    }
+
+    return null;
+}
+
+function getProductEditData(int $productId) {
+    $product = getSingleProduct($productId);
+    if (count($product) > 0) {
+        global $titleInput;
+        global $descriptionInput;
+        global $imageInput;
+        global $categoryInput;
+
+        $product = $product[0];
+
+        $titleInput = $product->name;
+        $descriptionInput = $product->description;
+        $imageInput = $product->picture;
+        $categoryInput = $product->category_id;
     }
 
     return null;

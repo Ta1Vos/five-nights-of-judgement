@@ -1,3 +1,10 @@
+<?php
+global $titleInput;
+global $descriptionInput;
+global $imageInput;
+global $categoryInput;
+?>
+
 <form method="post" class="row text-light text-center">
     <div class="col-12 mb-5">
         <div class="fs-3">Title</div>
