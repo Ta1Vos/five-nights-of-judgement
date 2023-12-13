@@ -45,6 +45,7 @@ if (!isset($firstLinkPiece)) {
                             <h5 class='card-title text-white'><?= $product->name; ?></h5>
                             <a href='<?= $firstLinkPiece; ?>product/<?= $product->id; ?>' class='stretched-link'></a>
                         </div>
+                        <?php if (function_exists("includeAdminToCards")) { echo includeAdminToCards("product", $product->id); } ?>
                     </div>
                 </div>
             <?php endforeach; ?>

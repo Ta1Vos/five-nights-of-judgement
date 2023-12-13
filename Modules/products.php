@@ -12,7 +12,7 @@ function getProducts($id):array
     return $products;
 }
 
-function getSingleProduct($requestedId):product {
+function getSingleProduct($requestedId):array {
     //$pdo is the connection to the database.
     global $pdo;
     /*
@@ -23,7 +23,7 @@ function getSingleProduct($requestedId):product {
     $query->bindParam("id", $requestedId);
     $query->execute();
     //gives back all the category objects
-    return $query->fetch(PDO::FETCH_CLASS, 'Category');
+    return $query->fetchAll(PDO::FETCH_CLASS, 'Category');
 }
 
 function getProductDetails($id):array

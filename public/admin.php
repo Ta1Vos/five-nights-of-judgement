@@ -21,8 +21,13 @@ if (!isAdmin()) {
 
     //Fixes crucial bug with the navbar, in case illegal content is present as the 'id' for a category or a product.
     if (($params[2] == "category" || $params[2] == "product") && $params[3] != intval($params[3])) {
-        echo "<br><br>/$params[1]/$params[3]<br>";
-        header("Location: /$params[1]/$params[3]");//Redirects to the page listed after category or product, as that usually breaks.
+        if ($params[3] != "edit") {//Debugger works differently for edit page, which still needs 2 params
+            echo "<br><br>/$params[1]/$params[3]<br>";
+            header("Location: /$params[1]/$params[3]");//Redirects to the page listed after category or product, as that usually breaks.
+        } else {
+            echo "<br><br>/$params[1]/$params[3]/$params[4]<br>";
+            header("Location: /$params[1]/$params[3]/$params[4]");//Redirects to the page listed after category or product, as that usually breaks.
+        }
     } else if ($params[2] == "edit" && $params[4] != intval($params[4])) {
         if ($params[2] == "edit") {
             header("Location: /$params[1]/$params[3]/$params[4]");//Redirects to the page listed after edit, as that usually breaks.

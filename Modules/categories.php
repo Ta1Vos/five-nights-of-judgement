@@ -18,7 +18,7 @@ function getCategories():array
     return $categories;
 }
 
-function getSingleCategory($requestedId) {
+function getSingleCategory($requestedId):array {
     //$pdo is the connection to the database.
     global $pdo;
     /*
