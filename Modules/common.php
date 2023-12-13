@@ -3,10 +3,11 @@
  * Returns the second params of the link to make links in html/navbar work.
  * @return string returns the string for the member, admin or regular user.
  */
-function loadContent():string {
-    if (isMember()) {
+function loadLinkContent():string {
+    global $params;
+    if (isMember() && $params[1] == "member") {
         return "/member/";//Returns member link
-    } else if (isAdmin()) {
+    } else if (isAdmin() && $params[1] == "admin") {
         return "/admin/";//Returns admin link
     }
 

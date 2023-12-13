@@ -1,5 +1,5 @@
 <?php
-$firstLinkPiece = loadContent();
+$firstLinkPiece = loadLinkContent();
 global $additionalNavbarContent;
 
 if (!isset($firstLinkPiece)) {

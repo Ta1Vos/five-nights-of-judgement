@@ -42,6 +42,8 @@ function calculateFrequentlyVisited($dbTable): string|array
 function loadCardContents($mostVisited, $pageType)
 {
     if (is_array($mostVisited) && isset($pageType)) {
+        $firstLinkPiece = loadLinkContent();
+
         $cardContents = "";
 
         if (count($mostVisited) > 0) {
@@ -55,7 +57,7 @@ function loadCardContents($mostVisited, $pageType)
   <img src='/img/{$category["picture"]}' class='card-img-top' alt='Image of $pageType'>
   <div class='card-body'>
   <p class='card-title'>{$category["name"]}</p>
-  <a href='/$pageType/{$category["id"]}' class='stretched-link'></a>
+  <a href='". $firstLinkPiece ."$pageType/{$category["id"]}' class='stretched-link'></a>
   </div>
   $resetBtn<br>
 </div>";

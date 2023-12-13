@@ -5,7 +5,7 @@ function loadNavbarContent() {
     include "database.php";
     global $params;
 
-    $firstLinkPiece = loadContent();
+    $firstLinkPiece = loadLinkContent();
     // BUG WITH ADMIN - ONLY SENDS TO ADMIN, EVEN WHEN IN 'USER' MODE WHILE ADMIN SESSION IS ACTIVE! TRY MAKE THIS NOT HAPPEN!
     //ISSUE IS THAT WITHOUT ANY / and /ADMIN/ IT DOES NOT DIRECT TO NUMBER
 

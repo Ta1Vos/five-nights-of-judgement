@@ -80,18 +80,26 @@ switch ($params[1]) {
 
     case 'category':
         updateVisits("category", $params[2]);
-        $products=getProducts($params[2]);//Fetches the products
-        $categoryName = getCategoryName();//Gets category name for the breadcrumb link
+        $products = getProducts($params[2]);//Fetches the products
+        $categoryName = getCategoryName($params[1], $params[2]);//Gets category name for the breadcrumb link
+
+        //Breadcrumb link for visitors
+        $breadcrumbLink = "<li class='breadcrumb-item'><a href='/category/$params[2]'>$categoryName</a></li>";
+
         include_once "../Templates/products.php";
         break;
 
     case 'product':
         updateVisits("product", $params[2]);//Updates visits by one
-        $productDetails=getProductDetails($params[2]);//Fetches the product details
-        $categoryName = getCategoryName();//Gets category name for the breadcrumb link
+        $productDetails = getProductDetails($params[2]);//Fetches the product details
+        $categoryName = getCategoryName($params[1], $params[2]);//Gets category name for the breadcrumb link
         $reviewMessages = loadReviews($params[2]);//Gets review messages to show all of the reviews
 
         $product = $productDetails[0];
+
+        //Breadcrumb Link for visitors
+        $breadcrumbLink = "<li class='breadcrumb-item'><a href='/category/$product->category_id'>$categoryName</a></li>";
+        $breadcrumbLink .= "<li class='breadcrumb-item'><a href='/product/$product->id'>$product->name</a></li>";
         include_once "../Templates/product-detail.php";
         break;
 

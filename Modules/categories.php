@@ -18,7 +18,7 @@ function getCategories():array
     return $categories;
 }
 
-function getCategoryName():string
+function getCategoryName($actionParam, $parameterParam):string
 {
     //Requests URI link and the function reads out the information, so it can find the category id
     $request = $_SERVER['REQUEST_URI'];
@@ -27,17 +27,17 @@ function getCategoryName():string
     global $pdo;
     $categories = "";
 
-    if (isset($params[1])) {
-        switch ($params[1]) {
+    if (isset($actionParam)) {
+        switch ($actionParam) {
             case "category":
                 //Grabs the id of the category from the link and searches the category name
-                $categories = $pdo->query("SELECT name FROM category WHERE id=$params[2]")->fetchAll(PDO::FETCH_CLASS, 'Category');
+                $categories = $pdo->query("SELECT name FROM category WHERE id=$parameterParam")->fetchAll(PDO::FETCH_CLASS, 'Category');
                 $categories = $categories[0]->name;
                 break;
 
             case "product":
                 //Grabs the id of the product from the link and searches the product. Then display the category_id to
-                $categoryId = $pdo->query("SELECT category_id FROM product WHERE id=" . $params[2])->fetchAll(PDO::FETCH_CLASS, 'Category');
+                $categoryId = $pdo->query("SELECT category_id FROM product WHERE id=" . $parameterParam)->fetchAll(PDO::FETCH_CLASS, 'Category');
                 $categoryId = $categoryId[0]->category_id;
                 //Finds the category name from the fetched category id
                 $categories = $pdo->query("SELECT name FROM category WHERE id=" . $categoryId)->fetchAll(PDO::FETCH_CLASS, 'Category');

@@ -35,16 +35,25 @@ if (!isMember()) {
         case 'category':
             updateVisits("category", $params[3]);
             $products=getProducts($params[3]);//Fetches the products
-            $categoryName = getCategoryName();//Gets category name for the breadcrumb link
+            $categoryName = getCategoryName($params[2], $params[3]);//Gets category name for the breadcrumb link
+
+            //Breadcrumb Link for member
+            $breadcrumbLink = "<li class='breadcrumb-item'><a href='/member/$params[3]'>$categoryName</a></li>";
+
             include_once "../Templates/products.php";
             break;
         case 'product':
             updateVisits("product", $params[3]);//Updates visits by one
             $productDetails=getProductDetails($params[3]);//Fetches the product details
-            $categoryName = getCategoryName();//Gets category name for the breadcrumb link
+            $categoryName = getCategoryName($params[2], $params[3]);//Gets category name for the breadcrumb link
             $reviewMessages = loadReviews($params[3]);//Gets review messages to show all the reviews
 
             $product = $productDetails[0];
+
+            //Breadcrumb Link for member
+            $breadcrumbLink = "<li class='breadcrumb-item'><a href='/member/category/$product->category_id'>$categoryName</a></li>";
+            $breadcrumbLink .= "<li class='breadcrumb-item'><a href='/member/product/$product->id'>$product->name</a></li>";
+
             include_once "../Templates/product-detail.php";
             break;
 

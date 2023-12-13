@@ -4,6 +4,11 @@
 // Adds the head for the page.
 include_once('defaults/head.php');
 global $categoryName;
+global $breadcrumbLink;
+
+if (!isset($firstLinkPiece)) {
+    $firstLinkPiece = null;
+}
 ?>
 
 <body>
@@ -21,7 +26,7 @@ global $categoryName;
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="home">Home</a></li>
                 <li class="breadcrumb-item"><a href="categories">Categories</a></li>
-                <li class="breadcrumb-item"><a href="/category/<?php if(isset($params[2])){echo $params[2];}?>"><?= $categoryName; ?></a></li>
+                <?= $breadcrumbLink; ?>
             </ol>
         </nav>
         <div class="row gy-3 text-center d-flex justify-content-center flex-row">
@@ -38,7 +43,7 @@ global $categoryName;
                         <div class='card-body'>
                             <hr>
                             <h5 class='card-title text-white'><?= $product->name; ?></h5>
-                            <a href='/product/<?= $product->id; ?>' class='stretched-link'></a>
+                            <a href='<?= $firstLinkPiece; ?>product/<?= $product->id; ?>' class='stretched-link'></a>
                         </div>
                     </div>
                 </div>
