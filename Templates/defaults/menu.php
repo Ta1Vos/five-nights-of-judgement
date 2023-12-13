@@ -1,6 +1,19 @@
+<?php
+global $firstLinkPiece;
+global $additionalNavbarContent;
+
+if (!isset($firstLinkPiece)) {
+    $firstLinkPiece = null;
+}
+
+if (!isset($additionalNavbarContent)) {
+    $additionalNavbarContent = null;
+}
+?>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid row text-center">
-        <a class="col navbar-brand p-0 pe-lg-5" href="/home">
+        <a class="col navbar-brand p-0 pe-lg-5" href="<?= $firstLinkPiece;?>home">
             <img src="/img/fnoj_logo.jpg" class="navbar-logo" alt="Logo image">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavbar"
@@ -10,7 +23,7 @@
         <div class="col-8 collapse navbar-collapse" id="myNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/home">home</a>
+                    <a class="nav-link" href="<?= $firstLinkPiece;?>home">home</a>
                 </li>
                 <li class="nav-item dropdown dropdown-hover">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -18,26 +31,27 @@
                         Categories
                     </a>
                     <ul class="dropdown-menu dropdown-hover-content bg-dark text-light text-center">
-                        <li class="nav-item"><a class="nav-link text-white" href="/categories">All Categories</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="<?= $firstLinkPiece;?>categories">All Categories</a></li>
                         <?php if (!empty($navbarCategoryContent)) {
                             echo $navbarCategoryContent;
                         }; ?>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/register">register</a>
+                    <a class="nav-link" href="<?= $firstLinkPiece;?>register">register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact">contact</a>
+                    <a class="nav-link" href="<?= $firstLinkPiece;?>contact">contact</a>
                 </li>
+                <?= $additionalNavbarContent; ?>
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">log in</a>
+                    <a class="nav-link" href="<?= $firstLinkPiece;?>login">log in</a>
                 </li>
             </ul>
         </div>
-        <a class="col navbar-brand p-0 ps-lg-5 text-right" href="/home">
+        <a class="col navbar-brand p-0 ps-lg-5 text-right" href="<?= $firstLinkPiece;?>home">
             <img src="/img/fnoj_logo.jpg" class="navbar-logo d-none d-lg-block" alt="Logo">
         </a>
     </div>
