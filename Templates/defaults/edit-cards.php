@@ -3,6 +3,7 @@
 <?php
 // Adds the head for the page.
 include_once('head.php');
+global $params;
 ?>
 
 <body>
@@ -18,8 +19,8 @@ include_once('head.php');
     <div class="bg-black text-light text-center p-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/home">Home</a></li>
-                <li class="breadcrumb-item"><a href="edit">Admin - Editing</a></li>
+                <li class="breadcrumb-item"><a href="home">Home</a></li>
+                <li class="breadcrumb-item"><a href="/<?= $params[1] ?>/edit/<?= $params[3] ?>/<?= $params[4] ?>">Admin - Editing</a></li>
             </ol>
         </nav>
         <div class="row gy-3 text-center">
