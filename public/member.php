@@ -15,7 +15,7 @@ if (!isMember()) {
 
     //Fixes crucial bug with the navbar, in case illegal content is present as the 'id' for a category or a product.
     if (($params[2] == "category" || $params[2] == "product") && $params[3] != intval($params[3])) {
-        header("Location: /$params[1]/$params[3]");//Redirects to the page listed after category or product, as that usually breaks.
+        header("Location: /$params[1]/$params[3]/$params[4]");//Redirects to the page listed after category or product, as that usually breaks.
     }
 
     switch ($params[2]) {
