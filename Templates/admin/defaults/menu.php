@@ -47,6 +47,12 @@ if (!isset($additionalNavbarContent)) {
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
+                    <a class="nav-link" href="/home">User page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/home">Admin page</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="<?= $firstLinkPiece;?>logout">log out</a>
                 </li>
             </ul>

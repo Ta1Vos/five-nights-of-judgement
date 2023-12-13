@@ -4,6 +4,11 @@
 // Adds the head for the page.
 include_once('defaults/head.php');
 global $categoryName;
+global $firstLinkPiece;
+
+if (!isset($firstLinkPiece)) {
+    $firstLinkPiece = "/";//Adds slash instead of null to prevent number disappearing after "product" in link
+}
 ?>
 
 <body>
@@ -38,7 +43,7 @@ global $categoryName;
                         <div class='card-body'>
                             <hr>
                             <h5 class='card-title text-white'><?= $product->name; ?></h5>
-                            <a href='/product/<?= $product->id; ?>' class='stretched-link'></a>
+                            <a href='<?= $firstLinkPiece; ?>product/<?= $product->id; ?>' class='stretched-link'></a>
                         </div>
                     </div>
                 </div>

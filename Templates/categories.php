@@ -4,6 +4,11 @@
 // Adds the head for the page.
 include_once('defaults/head.php');
 global $adminEditor;
+global $firstLinkPiece;
+
+if (!isset($firstLinkPiece)) {
+    $firstLinkPiece = null;
+}
 ?>
 
 <body>
@@ -38,7 +43,7 @@ global $adminEditor;
                             <h5 class='card-title text-white'><?= $category->name; ?></h5>
                             <hr>
                             <p class="card-text text-light"><?= $category->description; ?></p>
-                            <a href='/category/<?= $category->id; ?>' class='stretched-link'></a><br>
+                            <a href='<?= $firstLinkPiece; ?>category/<?= $category->id; ?>' class='stretched-link'></a><br>
                         </div>
                         <?php if (function_exists("includeAdminToCards")) { echo includeAdminToCards("category", $category->id); } ?>
                     </div>

@@ -119,8 +119,7 @@ switch ($params[1]) {
     case 'logout':
         logout();
         $titleSuffix = ' | Log Out';
-        include_once "../Templates/home.php";
-
+        header("Location: /home");
         break;
 
     case 'register':
