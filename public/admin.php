@@ -18,6 +18,12 @@ if (!isAdmin()) {
      *$params[3] is parameter you give to the page.
      *the switch statement checks which page you want to go.
      */
+
+    //Fixes crucial bug with the navbar, in case illegal content is present as the 'id' for a category or a product.
+    if (($params[2] == "category" || $params[2] == "product") && $params[3] != intval($params[3])) {
+        header("Location: /$params[1]/$params[3]");//Redirects to the page listed after category or product, as that usually breaks.
+    }
+
     if (isset($params[2])) {
         switch ($params[2]) {
 

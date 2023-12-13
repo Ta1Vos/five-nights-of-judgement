@@ -53,6 +53,12 @@ loadNavbarContent();
  *$params[2] is parameter you give to the page.
  *the switch statement checks which page you want to go.
  */
+
+//Fixes crucial bug with the navbar, in case illegal content is present as the 'id' for a category or a product.
+if (($params[1] == "category" || $params[1] == "product") && $params[2] != intval($params[2])) {
+    header("Location: /$params[2]");//Redirects to the page listed after category or product, as that usually breaks.
+}
+
 switch ($params[1]) {
 
     case 'categories':
