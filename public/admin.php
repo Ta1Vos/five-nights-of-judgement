@@ -26,7 +26,6 @@ if (!isAdmin()) {
 
     if (isset($params[2])) {
         switch ($params[2]) {
-
             case 'products':
                 updateVisits("category", $params[2]);
                 $products = getProducts($params[2]);//Fetches the products
@@ -50,6 +49,22 @@ if (!isAdmin()) {
                  * check categories.php for more information.
                  */
                 include_once "../Templates/categories.php";
+                break;
+
+            case 'category':
+                updateVisits("category", $params[3]);
+                $products=getProducts($params[3]);//Fetches the products
+                $categoryName = getCategoryName();//Gets category name for the breadcrumb link
+                include_once "../Templates/products.php";
+                break;
+            case 'product':
+                updateVisits("product", $params[3]);//Updates visits by one
+                $productDetails=getProductDetails($params[3]);//Fetches the product details
+                $categoryName = getCategoryName();//Gets category name for the breadcrumb link
+                $reviewMessages = loadReviews($params[3]);//Gets review messages to show all the reviews
+
+                $product = $productDetails[0];
+                include_once "../Templates/product-detail.php";
                 break;
 
             case 'edit':
