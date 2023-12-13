@@ -2,6 +2,7 @@
 <html>
 <?php
 include_once('defaults/head.php');
+$firstLinkPiece = loadLinkContent();
 ?>
 <body>
 <div class="container bg-dark">
@@ -35,7 +36,7 @@ include_once('defaults/head.php');
                 <div class="col-0 col-lg"></div>
             </div>
             <br>
-            <a class="btn btn-light" href="/categories" role="button">Go to the category page</a>
+            <a class="btn btn-light" href="<?= $firstLinkPiece; ?>categories" role="button">Go to the category page</a>
             <br><br>
             <hr>
         </div>
