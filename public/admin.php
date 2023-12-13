@@ -83,6 +83,11 @@ if (!isAdmin()) {
             case 'delete':
                 break;
 
+            case 'logout':
+                logout();
+                header("Location: /home");
+                break;
+
             default://Default is always home
                 $titleSuffix = ' | Home';
 

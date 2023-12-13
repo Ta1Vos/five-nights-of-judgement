@@ -41,6 +41,11 @@ if (!isMember()) {
         case 'review':
             break;
 
+        case 'logout':
+            logout();
+            header("Location: /home");
+            break;
+
         default://Default is always home
             break;
     }

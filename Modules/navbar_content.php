@@ -1,17 +1,4 @@
 <?php
-/**
- * Returns the second params of the link to make links in html/navbar work.
- * @return string returns the string for the member, admin or regular user.
- */
-function loadContent():string {
-    if (isMember()) {
-        return "/member/";//Returns member link
-    } else if (isAdmin()) {
-        return "/admin/";//Returns admin link
-    }
-
-    return "/";//Returns regular link
-}
 function loadNavbarContent() {
     global $navbarCategoryContent;
     //This file will load the content info the navbar

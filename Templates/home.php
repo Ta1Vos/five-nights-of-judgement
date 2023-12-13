@@ -7,7 +7,7 @@ include_once('defaults/head.php');
 <div class="container bg-dark">
     <?php
     include_once('defaults/header.php');
-    include_once('defaults/menu.php');
+    include_once(loadCorrectIncludeFormat('defaults/menu.php'));
     ?>
     <div class="bg-black text-light text-center">
 

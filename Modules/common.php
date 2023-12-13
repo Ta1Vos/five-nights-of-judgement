@@ -1,5 +1,31 @@
 <?php
+/**
+ * Returns the second params of the link to make links in html/navbar work.
+ * @return string returns the string for the member, admin or regular user.
+ */
+function loadContent():string {
+    if (isMember()) {
+        return "/member/";//Returns member link
+    } else if (isAdmin()) {
+        return "/admin/";//Returns admin link
+    }
 
+    return "/";//Returns regular link
+}
+
+/**
+ * Returns the possible additional params of the link to make links for include with the Templates and user levels (admin/member).
+ * @return string returns the string for the member, admin or regular user.
+ */
+function loadCorrectIncludeFormat($defaultLink):string {
+    if (isMember()) {
+        return "member/" . $defaultLink;//Returns member link
+    } else if (isAdmin()) {
+        return "admin/" . $defaultLink;//Returns admin link
+    }
+
+    return "" . $defaultLink;//Returns nothing except for given link, as nothing has to be changed
+}
 function getTitle() {
     global $title, $titleSuffix;
     return $title . $titleSuffix;

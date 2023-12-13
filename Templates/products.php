@@ -12,7 +12,7 @@ global $categoryName;
     <?php
     //adds the rest of the default files.
     include_once('defaults/header.php');
-    include_once('defaults/menu.php');
+    include_once(loadCorrectIncludeFormat('defaults/menu.php'));
     //    include_once('defaults/pictures.php');
     ?>
 
