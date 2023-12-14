@@ -96,5 +96,4 @@ function createProduct(string $name, string $picture, string $description, int $
         echo "<b>Something went wrong:</b><br><br>$exception<br><br>";
         return false;
     }
-
 }
