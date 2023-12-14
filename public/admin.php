@@ -115,6 +115,28 @@ if (!isAdmin()) {
                 break;
 
             case 'add':
+                $titleSuffix = ' | Creating';
+
+                $titleError = null;
+                $descriptionError = null;
+                $imageError = null;
+                $categoryError = null;
+                $mainErrorField = null;
+
+                $titleInput = null;
+                $descriptionInput = null;
+                $imageInput = null;
+                $categoryInput = null;
+
+                if ($params[3] == "category") {
+                    include_once "../Templates/admin/defaults/add-category.php";
+                } else if ($params[3] == "product") {
+                    include_once "../Templates/admin/defaults/add-product.php";
+                } else {
+                    header("Location: /home");
+                }
+
+                include "../Templates/defaults/footer.php";
                 break;
 
             case 'delete':
