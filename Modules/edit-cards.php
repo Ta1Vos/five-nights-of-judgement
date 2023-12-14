@@ -92,7 +92,43 @@ function validateCardEdit() {
             $mainErrorField = "Please fill in all fields correctly!";
         }
     } else if (isset($_POST["edit-product-submit"])) {
+        //Make category values global, as they are only used inside the product tab
+        global $categoryInput;
+        global $categoryError;
 
+        $titleInput = $_POST["edit-title"];
+        $descriptionInput = $_POST["edit-desc"];
+        $imageInput = $_POST["edit-img"];
+        $categoryInput = $_POST["edit-category"];
+
+        $result = validateSharedEditInputs($titleInput, $descriptionInput, $imageInput);
+        $wrongInput = $result["wrong_input"];
+        $titleError = $result["title_error"];
+        $descriptionError = $result["desc_error"];
+        $imageError = $result["img_error"];
+
+        if (!filter_input(INPUT_POST, 'edit-category', FILTER_VALIDATE_INT)) {
+            $wrongInput = true;
+            $categoryError = "Please fill in a number!";
+        }
+
+        if (!$wrongInput) {
+            global $params;
+
+            if (isset($params[4])) {
+                $id = $params[4];
+                if (updateProductTable($id, $titleInput, $imageInput, $descriptionInput, $categoryInput)) {
+                    $mainErrorField = "Card successfully edited!";
+                    header("Location: /admin/category/$categoryInput");
+                } else {
+                    $mainErrorField = "Something went wrong while attempting a connection with the database! Please contact a developer for further information";
+                }
+            } else {
+                $mainErrorField = "Something went wrong, please try editing another card!";
+            }
+        } else {
+            $mainErrorField = "Please fill in all fields correctly!";
+        }
     }
 
     return null;
