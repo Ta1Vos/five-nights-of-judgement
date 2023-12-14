@@ -170,3 +170,7 @@ function getProductEditData(int $productId) {
 
     return null;
 }
+
+function deleteCategory(int $id, ):bool {
+
+}

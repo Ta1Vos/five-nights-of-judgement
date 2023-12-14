@@ -28,11 +28,8 @@ if (!isAdmin()) {
             echo "<br><br>/$params[1]/$params[3]/$params[4]<br>";
             header("Location: /$params[1]/$params[3]/$params[4]");//Redirects to the page listed after category or product, as that usually breaks.
         }
-    } else if ($params[2] == "edit" && $params[4] != intval($params[4])) {
-        if ($params[2] == "edit") {
-            header("Location: /$params[1]/$params[3]/$params[4]");//Redirects to the page listed after edit, as that usually breaks.
-        }
-
+    } else if (($params[2] == "edit" || $params[2] == "delete") && $params[4] != intval($params[4])) {
+        header("Location: /$params[1]/$params[3]/$params[4]");//Redirects to the page listed after edit, as that usually breaks.
     }
 
     if (isset($params[2])) {
@@ -64,7 +61,7 @@ if (!isAdmin()) {
 
             case 'category':
                 updateVisits("category", $params[3]);
-                $products=getProducts($params[3]);//Fetches the products
+                $products = getProducts($params[3]);//Fetches the products
                 $categoryName = getCategoryName($params[2], $params[3]);//Gets category name for the breadcrumb link
 
                 //Breadcrumb Link for admin
@@ -73,7 +70,7 @@ if (!isAdmin()) {
                 break;
             case 'product':
                 updateVisits("product", $params[3]);//Updates visits by one
-                $productDetails=getProductDetails($params[3]);//Fetches the product details
+                $productDetails = getProductDetails($params[3]);//Fetches the product details
                 $categoryName = getCategoryName($params[2], $params[3]);//Gets category name for the breadcrumb link
                 $reviewMessages = loadReviews($params[3]);//Gets review messages to show all the reviews
 
@@ -120,6 +117,15 @@ if (!isAdmin()) {
                 break;
 
             case 'delete':
+                if (!isset($params[4]) && $params[4] == intval($params[4])) {
+                    echo "Something went wrong";
+                    header("Location: /home");
+                }
+                $titleSuffix = ' | Deleting';
+
+                $categories = getSingleCategory($params[4]);
+
+                include_once "../Templates/admin/defaults/delete-category.php";
                 break;
 
             case 'logout':
