@@ -123,11 +123,17 @@ if (!isAdmin()) {
                 }
                 $titleSuffix = ' | Deleting';
 
-                $categories = getSingleCategory($params[4]);
-
                 $deleteConfirm = checkForDeleteFinalConfirm();
 
-                include_once "../Templates/admin/defaults/delete-category.php";
+                if ($params[3] == "category") {
+                    $categories = getSingleCategory($params[4]);
+                    include_once "../Templates/admin/defaults/delete-category.php";
+                } else if ($params[3] == "product") {
+                    $products = getSingleProduct($params[4]);
+                    include_once "../Templates/admin/defaults/delete-product.php";
+                } else {
+                    header("Location: /home");
+                }
                 break;
 
             case 'logout':

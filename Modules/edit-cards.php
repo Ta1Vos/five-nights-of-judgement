@@ -211,3 +211,16 @@ function deleteCategory(int $id):bool {
 
     return false;
 }
+
+function deleteproduct(int $id):bool {
+    global $pdo;
+
+    $query = $pdo->prepare("DELETE FROM product WHERE id=:id");
+    $query->bindParam("id", $id);
+
+    if ($query->execute()) {
+        return true;
+    }
+
+    return false;
+}
