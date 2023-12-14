@@ -170,3 +170,57 @@ function getProductEditData(int $productId) {
 
     return null;
 }
+
+/**
+ * Function made as a final check to delete a card, used for products and categories.
+ * @return string|null returns either the final confirm button or null if nothing happened or has to be returned.
+ */
+function checkForDeleteFinalConfirm():string|null {
+    global $params;
+
+    if (isset($_POST["confirm-delete"])) {//Final confirmation to delete
+        return "<input type='submit' name='final-confirm-delete' value='I REALLY WANT TO DELETE THIS $params[3]'>";
+    } else if (isset($_POST["final-confirm-delete"])) {//Executes deletion
+        if ($params[3] == "category") {
+            if (deleteCategory($params[4])) {
+                echo "success";
+                header("Location: /home");
+            }
+        } else if ($params[3] == "product") {
+            if (deleteProduct($params[4])) {
+                echo "success";
+                header("Location: /home");
+            }
+        }
+
+        return "Something went wrong upon attempting to delete the $params[3], please contact a developer.";
+    }
+
+    return null;
+}
+
+function deleteCategory(int $id):bool {
+    global $pdo;
+
+    $query = $pdo->prepare("DELETE FROM category WHERE id=:id");
+    $query->bindParam("id", $id);
+
+    if ($query->execute()) {
+        return true;
+    }
+
+    return false;
+}
+
+function deleteproduct(int $id):bool {
+    global $pdo;
+
+    $query = $pdo->prepare("DELETE FROM product WHERE id=:id");
+    $query->bindParam("id", $id);
+
+    if ($query->execute()) {
+        return true;
+    }
+
+    return false;
+}

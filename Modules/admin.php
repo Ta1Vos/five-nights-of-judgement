@@ -67,10 +67,10 @@ function includeAdminToCards(string $type = "", $id = null): false|string {
 
         switch ($type) {
             case "product":
-                return "<a href='/admin/edit/product/$id' class='z-5 text-decoration-none text-black'><button>Edit product</button></a>";
+                return "<a href='/admin/edit/product/$id' class='z-5 text-decoration-none text-black'><button>Edit product</button></a><a href='/admin/delete/product/$id' class='z-5 text-decoration-none text-black'><button>DELETE product</button></a>";
 
             case "category":
-                return "<a href='/admin/edit/category/$id' class='z-5 text-decoration-none text-black'><button>Edit category</button></a>";
+                return "<a href='/admin/edit/category/$id' class='z-5 text-decoration-none text-black'><button>Edit category</button></a><a href='/admin/delete/category/$id' class='z-5 text-decoration-none text-black'><button>DELETE category</button></a>";
         }
     } else {
         logout();

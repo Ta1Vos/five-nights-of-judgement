@@ -5,6 +5,7 @@ global $params;
 if (!isMember()) {
     logout();
     header ("location:/home");
+    die("no u");
 } else {
 
     /*$params[1] is the member role in case its being used.
