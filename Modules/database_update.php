@@ -60,3 +60,19 @@ function updateProductTable(string $id, string $name, string $picture, string $d
         return false;
     }
 }
+
+function createProduct(string $name, string $picture, string $description, int $categoryId):bool {
+    global $pdo;
+
+    $query = $pdo->prepare("INSERT INTO product(name, picture, description, category_id) VALUES (:name, :picture, :description, :category_id)");
+    $query->bindParam("name", $name);
+    $query->bindParam("picture", $picture);
+    $query->bindParam("description", $description);
+    $query->bindParam("category_id", $categoryId);
+
+    if ($query->execute()) {
+        return true;
+    }
+
+    return false;
+}
