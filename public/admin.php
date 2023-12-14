@@ -125,6 +125,8 @@ if (!isAdmin()) {
 
                 $categories = getSingleCategory($params[4]);
 
+                $deleteConfirm = checkForDeleteFinalConfirm();
+
                 include_once "../Templates/admin/defaults/delete-category.php";
                 break;
 
