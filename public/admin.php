@@ -5,6 +5,7 @@ global $params;
 if (!isAdmin()) {
     logout();
     header("location:/home");
+    die("no u");
 } else {
     require '../Modules/admin.php';
     require '../Modules/edit-cards.php';
