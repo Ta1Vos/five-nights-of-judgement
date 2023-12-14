@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 23 nov 2023 om 14:49
--- Serverversie: 10.4.25-MariaDB
--- PHP-versie: 8.1.10
+-- Gegenereerd op: 08 dec 2023 om 13:49
+-- Serverversie: 10.4.24-MariaDB
+-- PHP-versie: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -98,7 +98,7 @@ CREATE TABLE `registered_user` (
   `last_name` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(100) NOT NULL,
-  `role` varchar(10) NOT NULL
+  `role` enum('member','admin') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -109,7 +109,8 @@ INSERT INTO `registered_user` (`id`, `first_name`, `last_name`, `email`, `passwo
 (1, 'Tim', 'Vos', '302196386@student.rocmondriaan.nl', 'testestest', 'member'),
 (2, 'Tee', 'Vos', '302196386@student.rocmondriaan.nl', 'testestest', 'member'),
 (3, 'Tim', 'Vos', '302196386@student.rocmondriaan.nl', 'testestestee', 'member'),
-(4, 'Tim', 'Vos', '302196386@student.rocmondriaan.nl', 'ggggggggggggggggg', 'member');
+(4, 'Tim', 'Vos', '302196386@student.rocmondriaan.nl', 'ggggggggggggggggg', 'member'),
+(5, 'Tim', 'V', '', 'Password1', 'admin');
 
 -- --------------------------------------------------------
 
@@ -179,7 +180,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT voor een tabel `registered_user`
 --
 ALTER TABLE `registered_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT voor een tabel `review`
