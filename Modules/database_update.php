@@ -39,7 +39,16 @@ function updateCategoryTable(string $id, string $name, string $picture, string $
     }
 }
 
-function updateProductTable(string $id, string $name, string $picture, string $description, int $category):bool {
+/**
+ * Updates a product in the product table
+ * @param string $id unique identifier of the product, required to find which product it is
+ * @param string $name
+ * @param string $picture the link of the picture linked to the product
+ * @param string $description
+ * @param int $categoryId the id of the category that is linked to the product
+ * @return bool returns either true or false depending on the success of the execution, true being success.
+ */
+function updateProductTable(string $id, string $name, string $picture, string $description, int $categoryId):bool {
     try {
         global $pdo;
 
@@ -48,7 +57,7 @@ function updateProductTable(string $id, string $name, string $picture, string $d
         $query->bindParam("name", $name);
         $query->bindParam("picture", $picture);
         $query->bindParam("description", $description);
-        $query->bindParam("category", $category);
+        $query->bindParam("category", $categoryId);
 
         if ($query->execute()) {
             return true;
@@ -61,18 +70,31 @@ function updateProductTable(string $id, string $name, string $picture, string $d
     }
 }
 
+/**
+ * @param string $name
+ * @param string $picture the link of the picture linked to the product
+ * @param string $description
+ * @param int $categoryId the id of the category that is linked to the product
+ * @return bool returns either true or false depending on the success of the execution, true being success.
+ */
 function createProduct(string $name, string $picture, string $description, int $categoryId):bool {
-    global $pdo;
+    try {
+        global $pdo;
 
-    $query = $pdo->prepare("INSERT INTO product(name, picture, description, category_id) VALUES (:name, :picture, :description, :category_id)");
-    $query->bindParam("name", $name);
-    $query->bindParam("picture", $picture);
-    $query->bindParam("description", $description);
-    $query->bindParam("category_id", $categoryId);
+        $query = $pdo->prepare("INSERT INTO product(name, picture, description, category_id) VALUES (:name, :picture, :description, :category_id)");
+        $query->bindParam("name", $name);
+        $query->bindParam("picture", $picture);
+        $query->bindParam("description", $description);
+        $query->bindParam("category_id", $categoryId);
 
-    if ($query->execute()) {
-        return true;
+        if ($query->execute()) {
+            return true;
+        }
+
+        return false;
+    } catch (PDOException $exception) {
+        echo "<b>Something went wrong:</b><br><br>$exception<br><br>";
+        return false;
     }
 
-    return false;
 }
