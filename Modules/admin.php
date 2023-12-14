@@ -79,3 +79,20 @@ function includeAdminToCards(string $type = "", $id = null): false|string {
 
     return false;
 }
+
+function addNewCard(string $cardType) {
+    $card = "
+<div class='col-sm-6 col-md-4 col-lg-3 card-group'>
+   <div class='card bg-dark mx-2 border border-3 border-dark rounded-2' style='width: 18rem;'>
+      <img src='/img/create-card.png' class='card-img-top' alt='Placeholder image'>
+         <div class='card-body'>
+            <h5 class='card-title text-white'>Create a new $cardType</h5>
+            <hr>
+            <p class='card-text text-light'>Add a new $cardType to this page.</p>
+            <a href='/admin/add/$cardType' class='stretched-link'></a><br>
+      </div>
+   </div>
+</div>";
+
+    return $card;
+}

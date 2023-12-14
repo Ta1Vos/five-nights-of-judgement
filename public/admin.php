@@ -57,6 +57,9 @@ if (!isAdmin()) {
                  * includes the template categories.php from the templates folder.
                  * check categories.php for more information.
                  */
+
+                $createCard = addNewCard("category");
+
                 include_once "../Templates/categories.php";
                 break;
 
@@ -67,6 +70,9 @@ if (!isAdmin()) {
 
                 //Breadcrumb Link for admin
                 $breadcrumbLink = "<li class='breadcrumb-item'><a href='/admin/category/$params[3]'>$categoryName</a></li>";
+
+                $createCard = addNewCard("product");
+
                 include_once "../Templates/products.php";
                 break;
             case 'product':

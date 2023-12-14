@@ -9,6 +9,13 @@ global $breadcrumbLink;
 if (!isset($firstLinkPiece)) {
     $firstLinkPiece = null;
 }
+
+global $createCard;
+
+if (!isset($createCard)) {
+    echo "AAAAAAAAAAAAAAAAA";
+    $createCard = null;
+}
 ?>
 
 <body>
@@ -50,6 +57,7 @@ if (!isset($firstLinkPiece)) {
                 </div>
             <?php endforeach; ?>
 
+            <?= $createCard; ?>
         </div>
 
         <hr>
