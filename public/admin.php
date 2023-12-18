@@ -134,6 +134,8 @@ if (!isAdmin()) {
                 $imageInput = null;
                 $categoryInput = null;
 
+                validateCardCreation();
+
                 if ($params[3] == "category") {
                     include_once "../Templates/admin/defaults/add-category.php";
                 } else if ($params[3] == "product") {

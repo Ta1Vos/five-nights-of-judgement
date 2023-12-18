@@ -99,6 +99,10 @@ function validateSharedEditInputs($title, $desc, $img):array {
     return $result;
 }
 
+/**
+ * Validates the editing of cards using method _POST.
+ * @return null
+ */
 function validateCardEdit() {
     //Inputs
     global $titleInput;
@@ -271,6 +275,52 @@ function deleteproduct(int $id):bool {
     return false;
 }
 
+/**
+ * @return bool is returned after function execution. True if everything went well, false if content has not been pushed to the database.
+ */
+function addToCategory(string $name, string $picture, string $description):bool {
+    global $pdo;
+
+    $visits = 0;
+
+    $query = $pdo->prepare("INSERT INTO category(name, picture, description, visits) VALUES(:name, :picture, :description, :visits)");
+    $query->bindParam("name", $name);
+    $query->bindParam("picture", $picture);
+    $query->bindParam("description", $description);
+    $query->bindParam("visits", $visits);
+
+    if ($query->execute()) {
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * @return bool is returned after function execution. True if everything went well, false if content has not been pushed to the database.
+ */
+function addToProduct(string $name, string $picture, string $description, int $categoryId):bool {
+    global $pdo;
+
+    $visits = 0;
+
+    $query = $pdo->prepare("INSERT INTO product(name, picture, description, visits, category_id) VALUES(:name, :picture, :description, :visits, :category_id)");
+    $query->bindParam("name", $name);
+    $query->bindParam("picture", $picture);
+    $query->bindParam("description", $description);
+    $query->bindParam("visits", $visits);
+    $query->bindParam("category_id", $categoryId);
+
+    if ($query->execute()) {
+        return true;
+    }
+
+    return false;
+}
+/**
+ * Validates the creating of cards using method _POST.
+ * @return null
+ */
 function validateCardCreation() {
     //Inputs
     global $titleInput;
@@ -283,9 +333,9 @@ function validateCardCreation() {
     global $mainErrorField;
 
     if (isset($_POST["add-category-submit"])) {
-        $titleInput = $_POST["edit-title"];
-        $descriptionInput = $_POST["edit-desc"];
-        $imageInput = $_POST["edit-img"];
+        $titleInput = $_POST["add-title"];
+        $descriptionInput = $_POST["add-desc"];
+        $imageInput = $_POST["add-img"];
 
         $result = validateSharedEditInputs($titleInput, $descriptionInput, $imageInput);
         $wrongInput = $result["wrong_input"];
@@ -296,10 +346,9 @@ function validateCardCreation() {
         if (!$wrongInput) {
             global $params;
 
-            if (isset($params[4])) {
-                $id = $params[4];
-                if (updateCategoryTable($id, $titleInput, $imageInput, $descriptionInput)) {
-                    $mainErrorField = "Card successfully edited!";
+            if (isset($params[3])) {
+                if (addToCategory($titleInput, $descriptionInput, $imageInput)) {
+                    $mainErrorField = "Card successfully created!";
                     header("Location: /admin/categories");
                 } else {
                     $mainErrorField = "Something went wrong while attempting a connection with the database! Please contact a developer for further information";
@@ -315,10 +364,10 @@ function validateCardCreation() {
         global $categoryInput;
         global $categoryError;
 
-        $titleInput = $_POST["edit-title"];
-        $descriptionInput = $_POST["edit-desc"];
-        $imageInput = $_POST["edit-img"];
-        $categoryInput = $_POST["edit-category"];
+        $titleInput = $_POST["add-title"];
+        $descriptionInput = $_POST["add-desc"];
+        $imageInput = $_POST["add-img"];
+        $categoryInput = $_POST["add-category"];
 
         $result = validateSharedEditInputs($titleInput, $descriptionInput, $imageInput);
         $wrongInput = $result["wrong_input"];
@@ -326,7 +375,7 @@ function validateCardCreation() {
         $descriptionError = $result["desc_error"];
         $imageError = $result["img_error"];
 
-        if (!filter_input(INPUT_POST, 'edit-category', FILTER_VALIDATE_INT)) {
+        if (!filter_input(INPUT_POST, 'add-category', FILTER_VALIDATE_INT)) {
             $wrongInput = true;
             $categoryError = "Please fill in a number!";
         }
@@ -334,10 +383,9 @@ function validateCardCreation() {
         if (!$wrongInput) {
             global $params;
 
-            if (isset($params[4])) {
-                $id = $params[4];
-                if (updateProductTable($id, $titleInput, $imageInput, $descriptionInput, $categoryInput)) {
-                    $mainErrorField = "Card successfully edited!";
+            if (isset($params[3])) {
+                if (addToProduct($titleInput, $descriptionInput, $imageInput, $categoryInput)) {
+                    $mainErrorField = "Card successfully created!";
                     header("Location: /admin/category/$categoryInput");
                 } else {
                     $mainErrorField = "Something went wrong while attempting a connection with the database! Please contact a developer for further information";

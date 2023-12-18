@@ -41,7 +41,7 @@ global $categoryInput;
                     </small>
                     <br>
                     <label>
-                        <input type="text" name="edit-title" value="<?= $titleInput; ?>">
+                        <input type="text" name="add-title" value="<?= $titleInput; ?>">
                     </label>
                 </div>
                 <div class="col-12 mb-5 d-flex justify-content-center flex-column">
@@ -54,7 +54,7 @@ global $categoryInput;
                         <div class="col-4"></div>
                         <div class="col-4">
                             <label class="input-group">
-                                    <textarea class="form-control" name="edit-desc"
+                                    <textarea class="form-control" name="add-desc"
                                     ><?= $descriptionInput; ?></textarea>
                             </label>
                         </div>
@@ -71,7 +71,7 @@ global $categoryInput;
                         <div class="col-4"></div>
                         <div class="col-4">
                             <label class="input-group">
-                                    <textarea class="form-control" name="edit-img"
+                                    <textarea class="form-control" name="add-img"
                                     ><?= $imageInput; ?></textarea>
                             </label>
                         </div>
@@ -85,12 +85,12 @@ global $categoryInput;
                     </small>
                     <br>
                     <label>
-                        <input type="text" name="edit-category" value="<?= $categoryInput; ?>">
+                        <input type="text" name="add-category" value="<?= $categoryInput; ?>">
                     </label>
                 </div>
                 <br>
                 <label class="mb-3">
-                    <input type="submit" name="edit-product-submit" value="Save changes">
+                    <input type="submit" name="add-product-submit" value="Save changes">
                 </label>
                 <div class="error-field mb-3">
                     <?= $mainErrorField; ?>
