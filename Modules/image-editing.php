@@ -39,6 +39,12 @@ function fetchFilesFromDirectory(string $directoryLink, bool $excludeDirectories
     return false;
 }
 
+/**
+ * Scan through a directory to find the given filename.
+ * @param string $searchFromDirectoryPath Required | The path to the directory where you would like to start the scan.
+ * @param string $fileName Required | The name you're willing to search.
+ * @return false|string Returns false if file has not been found or if something fails. Returns the string with the updated directory path if the file has been found.
+ */
 function scanForFileName(string $searchFromDirectoryPath, string $fileName): false|string
 {
     $directories = fetchFilesFromDirectory($searchFromDirectoryPath, false, true);
@@ -52,15 +58,16 @@ function scanForFileName(string $searchFromDirectoryPath, string $fileName): fal
 
             //CHECKS IF DIRECTORY CONTAINS DIRECTORIES, OTHERWISE CONTINUES THE FILE CHECK
             if (is_dir($directoryLink)) {
+                //In the case a directory has been found, the function will go to search through that one too, until the end of a directory has been reached.
                 $childDirectoryResult = scanForFileName($directoryLink, $fileName);
-
+                //Only returns the file path if it has been found in a child directory.
                 if ($childDirectoryResult) {
                     return $childDirectoryResult;
                 }
             }
         }
     }
-    //FETCHES ALL THE FILES
+    //Fetches all the files within the current directory to see whether it contains the one that is being searched for.
     $files = fetchFilesFromDirectory($searchFromDirectoryPath, true);
 
     //ONLY CONTINUES IF THERE ARE FILES
@@ -68,15 +75,13 @@ function scanForFileName(string $searchFromDirectoryPath, string $fileName): fal
         //Loops through the directory's files to see if any of them are equal to the one that is being searched.
         foreach ($files as $file) {
             if ($file == $fileName) {
-                echo "<h1>YAY I HAVE FOUND THE FILE</h1>";
-                echo "<h2>DIRECTORY: $searchFromDirectoryPath</h2>";
-                echo "<h2>FILE: $searchFromDirectoryPath/$file</h2>";
-                //The current directory we're in, which contains the right file
+                //Returns the current directory we're in, which contains the right file
                 return $searchFromDirectoryPath . "/$file";
             }
         }
     }
 
+    //Returns false if no file has been found.
     return false;
 }
 
