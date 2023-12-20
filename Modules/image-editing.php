@@ -51,8 +51,6 @@ function scanForFileName(string $searchFromDirectoryPath, string $fileName): fal
 {
     $directories = fetchFilesFromDirectory($searchFromDirectoryPath, false, true);
 
-    var_dump($directories);
-
     if ($directories) {
         //Scans for directories within the directory, then searches within that one
         foreach ($directories as $childDirectory) {
