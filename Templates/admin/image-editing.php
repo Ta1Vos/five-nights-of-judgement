@@ -7,6 +7,12 @@ global $params;
 
 global $productImages;
 global $categoryImages;
+
+global $deleteConfirm;
+
+if (!isset($deleteConfirm)) {
+    $deleteConfirm = "<input type='submit' name='confirm-delete' value='DELETE THIS IMAGE'>";
+}
 ?>
 
 <body>
@@ -45,9 +51,10 @@ global $categoryImages;
                 <select name="select-categories" id="categorySelect">
                     <?php echoArrayContents($categoryImages, "<option value=#replace>", "</option>"); ?>
                 </select>
-                <label for="categorySelect">Select product image to delete</label>
-                <select name="select-products" id="categorySelect">
+                <label for="productSelect">Select product image to delete</label>
+                <select name="select-products" id="productSelect">
                     <?php
+                    //LIST THE IMAGES OF THE PRODUCTS OF THE CATEGORIES
                     foreach ($productImages as $key => $images) {
                         echo "<option value='non-select'></option>";
                         echo "<option value='non-select'>---$key---</option>";
@@ -69,7 +76,7 @@ global $categoryImages;
                     <button>GO BACK, I DON'T WANT TO DELETE ANY IMAGE</button>
                 </a>
                 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                <input type="submit" name="delete-confirm" value="Delete image">
+                <?= $deleteConfirm; ?>
                 <label>
 
                 </label>

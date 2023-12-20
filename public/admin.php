@@ -190,9 +190,23 @@ if (!isAdmin()) {
                     $productImages[$productDir] = fetchFilesFromDirectory("$productsLink/$productDir");
                 }
 
-                var_dump(scanForFileName("../public/img/products", "jj_fnaf_2.png"));
-
                 $categoryImages = fetchFilesFromDirectory("$categoriesLink", true);
+
+                //Ask for delete confirmation in case delete has been pressed
+                $deleteConfirm = checkForDeleteFinalConfirm();
+                //Code in case deletion is confirmed
+                if (isset($deleteConfirm)) {
+                    if ($deleteConfirm == "true") {//Final confirmation confirmed, execution
+                        if (isset($_POST["select-products"])) {
+                            var_dump(scanForFileName("../public/img/products", $_POST["select-products"]));
+                        } else if (isset($_POST["select-categories"])) {
+                            var_dump(scanForFileName("../public/img/categories", $_POST["select-categories"]));
+                        }
+                    } else {//The final confirmation being requested
+                        $_POST["select-products"] = $_POST["select-products"];
+                        $_POST["select-categories"] = $_POST["select-categories"];
+                    }
+                }
 
                 include_once "../Templates/admin/image-editing.php";
 

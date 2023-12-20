@@ -229,21 +229,27 @@ function checkForDeleteFinalConfirm():string|null {
     global $params;
 
     if (isset($_POST["confirm-delete"])) {//Final confirmation to delete
-        return "<input type='submit' name='final-confirm-delete' value='I REALLY WANT TO DELETE THIS $params[3]'>";
+        if (isset($params[3])) {
+            return "<input type='submit' name='final-confirm-delete' value='I REALLY WANT TO DELETE THIS $params[3]'>";
+        }
+
+        return "<input type='submit' name='final-confirm-delete' value='I REALLY WANT TO DELETE THIS'>";
     } else if (isset($_POST["final-confirm-delete"])) {//Executes deletion
-        if ($params[3] == "category") {
-            if (deleteCategory($params[4])) {
-                echo "success";
-                header("Location: /home");
-            }
-        } else if ($params[3] == "product") {
-            if (deleteProduct($params[4])) {
-                echo "success";
-                header("Location: /home");
+        if (isset($params[3])) {
+            if ($params[3] == "category") {
+                if (deleteCategory($params[4])) {
+                    echo "success";
+                    header("Location: /home");
+                }
+            } else if ($params[3] == "product") {
+                if (deleteProduct($params[4])) {
+                    echo "success";
+                    header("Location: /home");
+                }
             }
         }
 
-        return "Something went wrong upon attempting to delete the $params[3], please contact a developer.";
+        return "true";
     }
 
     return null;
