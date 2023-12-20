@@ -178,16 +178,19 @@ if (!isAdmin()) {
 
                 $uploadedImage = null;
                 $selectedImageToDelete = null;
+                $productImages = array();
+                $categoryImages = array();
 
                 $productsLink = "../public/img/products";
+                $categoriesLink = "../public/img/categories";
 
                 $productDirs = fetchFilesFromDirectory("$productsLink", false, true);
-
+                //Fetches the images out of all category maps within the products map.
                 foreach ($productDirs as $productDir) {
-                    echo "<br>";
-                    var_dump(fetchFilesFromDirectory("$productsLink/$productDir"));
-                    echo "<br>";
+                    $productImages[] = fetchFilesFromDirectory("$productsLink/$productDir");
                 }
+
+                $categoryImages = fetchFilesFromDirectory("$categoriesLink", true);
 
                 include_once "../Templates/admin/image-editing.php";
 
