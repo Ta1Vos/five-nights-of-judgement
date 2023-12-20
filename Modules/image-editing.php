@@ -15,7 +15,7 @@ function fetchFilesFromDirectory(string $directoryLink, bool $excludeDirectories
     }
     //Only runs if directories have to be excluded from array
     if (!$excludeDirectories) {
-        foreach ($files as $key => $file) {
+        foreach ($files as $key => &$file) {
             if (is_dir($file)) {
                 unset($files[$key]);//Removes directories out of the array
             }

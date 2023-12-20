@@ -207,6 +207,9 @@ if (!isAdmin()) {
                         $_POST["select-categories"] = $_POST["select-categories"];
                     }
                 }
+                echo "<pre>";
+                var_dump(fetchFilesFromDirectory("$categoriesLink", true));
+                echo "</pre>";
 
                 include_once "../Templates/admin/image-editing.php";
 
