@@ -33,3 +33,25 @@ function fetchFilesFromDirectory(string $directoryLink, bool $excludeDirectories
 
     return false;
 }
+
+/**
+ * Echo all items in an array. Add optional text at the beginning and at the end of the echo.<br><br>
+ * REPLACE DESIRED ITEM VALUES IN THE $contentAtStart AND END $contentAtEnd WITH '#replace' TO MAKE THAT GET REPLACED BY THE VALUE.
+ * @param array $array Required | The array of which you wish to echo the items
+ * @param string $contentAtStart Optional | The content you wish to add in front of the item echo.
+ * @param string $contentAtEnd Optional | The content you wish to add at the end of the item echo.
+ * @return null
+ */
+function echoArrayContents(array $array, string $contentAtStart = "", string $contentAtEnd = "") {
+    foreach ($array as $item) {
+        //Replaces "#replace" with the $item
+        $startContent = str_replace("#replace", $item, $contentAtStart);
+        $endContent = str_replace("#replace", $item, $contentAtEnd);
+        //Echoes content
+        echo $startContent;
+        echo $item;
+        echo $endContent;
+    }
+
+    return null;
+}

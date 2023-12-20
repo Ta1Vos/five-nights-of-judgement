@@ -5,9 +5,8 @@
 include_once('../Templates/defaults/head.php');
 global $params;
 
-global $titleInput;
-global $descriptionInput;
-global $imageInput;
+global $productImages;
+global $categoryImages;
 ?>
 
 <body>
@@ -16,7 +15,7 @@ global $imageInput;
     <?php
     //adds the rest of the default files.
     include_once('../Templates/defaults/header.php');
-    include_once('menu.php');
+    include_once('defaults/menu.php');
     //    include_once('defaults/pictures.php');
     ?>
 
@@ -35,7 +34,27 @@ global $imageInput;
                     <input type="file" name="fileUpload" id="fileToUpload">
                 </label>
                 <label>
-                    <input type="submit" name="fileUpload" value="Upload image">
+                    <input type="submit" name="submit-fileUpload" value="Upload image">
                 </label>
             </form>
             <h2>Delete image</h2>
+            <form method="post" class="row text-light text-center">
+                <label for="categorySelect">Select category image to delete</label>
+                <select name="select-categories" id="categorySelect">
+                    <?php echoArrayContents($categoryImages, "<option value=#replace>", "</option>"); ?>
+                </select>
+                <label for="categorySelect">Select product image to delete</label>
+                <select name="select-categories" id="categorySelect">
+                    <?php
+                    foreach ($productImages as $key => $images) {
+                        echo "<option value='non-select'></option>";
+                        echo "<option value='non-select'>---$key---</option>";
+                        echo "<option value='non-select'></option>";
+                        echoArrayContents($images, "<option value=#replace>", "</option>");
+                    }
+                     ?>
+                </select>
+                <label>
+                    <input type="submit" name="fileUpload" value="Delete image">
+                </label>
+            </form>
