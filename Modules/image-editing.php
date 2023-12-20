@@ -13,25 +13,27 @@ function fetchFilesFromDirectory(string $directoryLink, bool $excludeDirectories
     if (!$files) {
         return false;
     }
-
+    //Only runs if directories have to be excluded from array
     if (!$excludeDirectories) {
         foreach ($files as $key => $file) {
             if (is_dir($file)) {
                 unset($files[$key]);//Removes directories out of the array
             }
         }
-    } else if (!$excludeFiles) {
+    }
+    //Only runs if files have to be excluded from array
+    if (!$excludeFiles) {
         foreach ($files as $key => $file) {
             if (is_file($file)) {
                 unset($files[$key]);//Removes files out of the array
             }
         }
     }
-
+    //Checks if an array has been created by the directory scan, otherwise goes to return false
     if (is_array($files)) {
         $files = array_values($files); //Organizes array
 
-        if (count($files) > 0) {//Checks if content has been found
+        if (count($files) > 0) {//Checks if content has been found and is present in array
             return $files;
         }
     }
