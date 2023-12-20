@@ -7,6 +7,5 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
 <script src="/js/bootstrap.bundle.js"></script>
 <script defer src="/js/navbar.js"></script> <!-- Code that activates the hover on the dropdown in the navbar -->
-<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
-<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+<script src="/js/maps.js"></script>
 </head>

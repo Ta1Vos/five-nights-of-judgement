@@ -1,6 +1,11 @@
 let accessToken = "pk.eyJ1IjoibWF4bWlsbGlvbi1wZWdhc3VzIiwiYSI6ImNscWRvM3hlcTBoenQycXRrdWt6eXllaXgifQ.nQ84ZACkBSCYyhrMfGUyoQ";
-mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
-let map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11'
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl-csp';
+import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker'; // Load worker code separately with worker-loader
+
+mapboxgl.workerClass = MapboxWorker; // Wire up loaded worker to be used instead of the default
+const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    center: [-74.5, 40], // starting position [lng, lat]
+    zoom: 9 // starting zoom
 });

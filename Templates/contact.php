@@ -10,7 +10,7 @@ include_once('defaults/head.php');
 <div class="container bg-dark">
     <?php
     //adds the rest of the default files.
-    include_once('defaults/header.php');
+    include_once('defaults/contact-head.php');
     include_once(loadCorrectIncludeFormat('defaults/menu.php'));
     //    include_once('defaults/pictures.php');
     ?>

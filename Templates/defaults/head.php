@@ -7,4 +7,5 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
     <script src="/js/bootstrap.bundle.js"></script>
     <script defer src="/js/navbar.js"></script> <!-- Code that activates the hover on the dropdown in the navbar -->
+    <link rel="icon" href="/public/img/fnoj_logo.jpg">
 </head>
