@@ -190,6 +190,8 @@ if (!isAdmin()) {
                     $productImages[$productDir] = fetchFilesFromDirectory("$productsLink/$productDir");
                 }
 
+                var_dump(scanForFileName("../public/img/products", "jj_fnaf_2.png"));
+
                 $categoryImages = fetchFilesFromDirectory("$categoriesLink", true);
 
                 include_once "../Templates/admin/image-editing.php";

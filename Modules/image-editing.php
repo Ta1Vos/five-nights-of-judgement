@@ -6,8 +6,13 @@
  * @param bool $excludeFiles Optional | Choose whether you'd like to include or exclude FILES fetched, setting this to true will NOT fetch FILES. Default is false.
  * @return bool|array returns either false or an array, false if the array/directory is empty. The array is returned if it contains content.
  */
-function fetchFilesFromDirectory(string $directoryLink, bool $excludeDirectories = false, bool $excludeFiles = false):false|array {
+function fetchFilesFromDirectory(string $directoryLink, bool $excludeDirectories = false, bool $excludeFiles = false): false|array
+{
     $files = scandir($directoryLink);
+
+    if (!$files) {
+        return false;
+    }
 
     if (!$excludeDirectories) {
         foreach ($files as $key => $file) {
@@ -34,6 +39,47 @@ function fetchFilesFromDirectory(string $directoryLink, bool $excludeDirectories
     return false;
 }
 
+function scanForFileName(string $searchFromDirectoryPath, string $fileName): false|string
+{
+    $directories = fetchFilesFromDirectory($searchFromDirectoryPath, false, true);
+
+    var_dump($directories);
+
+    if ($directories) {
+        //Scans for directories within the directory, then searches within that one
+        foreach ($directories as $childDirectory) {
+            $directoryLink = $searchFromDirectoryPath . "/" . $childDirectory;
+
+            //CHECKS IF DIRECTORY CONTAINS DIRECTORIES, OTHERWISE CONTINUES THE FILE CHECK
+            if (is_dir($directoryLink)) {
+                $childDirectoryResult = scanForFileName($directoryLink, $fileName);
+
+                if ($childDirectoryResult) {
+                    return $childDirectoryResult;
+                }
+            }
+        }
+    }
+    //FETCHES ALL THE FILES
+    $files = fetchFilesFromDirectory($searchFromDirectoryPath, true);
+
+    //ONLY CONTINUES IF THERE ARE FILES
+    if ($files) {
+        //Loops through the directory's files to see if any of them are equal to the one that is being searched.
+        foreach ($files as $file) {
+            if ($file == $fileName) {
+                echo "<h1>YAY I HAVE FOUND THE FILE</h1>";
+                echo "<h2>DIRECTORY: $searchFromDirectoryPath</h2>";
+                echo "<h2>FILE: $searchFromDirectoryPath/$file</h2>";
+                //The current directory we're in, which contains the right file
+                return $searchFromDirectoryPath . "/$file";
+            }
+        }
+    }
+
+    return false;
+}
+
 /**
  * Echo all items in an array. Add optional text at the beginning and at the end of the echo.<br><br>
  * REPLACE DESIRED ITEM VALUES IN THE $contentAtStart AND END $contentAtEnd WITH '#replace' TO MAKE THAT GET REPLACED BY THE VALUE.
@@ -42,7 +88,8 @@ function fetchFilesFromDirectory(string $directoryLink, bool $excludeDirectories
  * @param string $contentAtEnd Optional | The content you wish to add at the end of the item echo.
  * @return null
  */
-function echoArrayContents(array $array, string $contentAtStart = "", string $contentAtEnd = "") {
+function echoArrayContents(array $array, string $contentAtStart = "", string $contentAtEnd = "")
+{
     foreach ($array as $item) {
         //Replaces "#replace" with the $item
         $startContent = str_replace("#replace", $item, $contentAtStart);
@@ -54,4 +101,9 @@ function echoArrayContents(array $array, string $contentAtStart = "", string $co
     }
 
     return null;
+}
+
+function deleteImage()
+{
+
 }
