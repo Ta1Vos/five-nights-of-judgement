@@ -172,6 +172,18 @@ if (!isAdmin()) {
                 header("Location: /home");
                 break;
 
+            case 'image-editing':
+                $titleSuffix = ' | Image Editing';
+                require "../Modules/image-editing.php";
+
+                $uploadedImage = null;
+                $selectedImageToDelete = null;
+
+                include_once "../Templates/admin/image-editing.php";
+
+                include "../Templates/defaults/footer.php";
+                break;
+
             default://Default is always home
                 $titleSuffix = ' | Home';
 
