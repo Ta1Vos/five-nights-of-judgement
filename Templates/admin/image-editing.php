@@ -23,7 +23,8 @@ global $categoryImages;
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="home">Home</a></li>
-                <li class="breadcrumb-item"><a href="/<?= $params[1] ?>/add/<?= $params[3] ?>">Admin - Category Creating</a></li>
+                <li class="breadcrumb-item"><a href="/<?= $params[1] ?>/add/<?= $params[3] ?>">Admin - Category
+                        Creating</a></li>
             </ol>
         </nav>
         <div class="row gy-3 text-center">
@@ -37,6 +38,7 @@ global $categoryImages;
                     <input type="submit" name="submit-fileUpload" value="Upload image">
                 </label>
             </form>
+            <br><br><br><br><br><br><br>
             <h2>Delete image</h2>
             <form method="post" class="row text-light text-center">
                 <label for="categorySelect">Select category image to delete</label>
@@ -44,7 +46,7 @@ global $categoryImages;
                     <?php echoArrayContents($categoryImages, "<option value=#replace>", "</option>"); ?>
                 </select>
                 <label for="categorySelect">Select product image to delete</label>
-                <select name="select-categories" id="categorySelect">
+                <select name="select-products" id="categorySelect">
                     <?php
                     foreach ($productImages as $key => $images) {
                         echo "<option value='non-select'></option>";
@@ -52,9 +54,23 @@ global $categoryImages;
                         echo "<option value='non-select'></option>";
                         echoArrayContents($images, "<option value=#replace>", "</option>");
                     }
-                     ?>
+                    ?>
                 </select>
+                <div class="col-12 fs-3">
+                    Deleting an <br><span class="fw-bold fs-2">image</span><br> will permanently remove it from
+                    existence!
+                </div>
+                <div class="col-12">
+                    <hr>
+                    <br>
+                    <div class="fs-1">Confirmation:</div>
+                </div>
+                <a href="/admin/categories">
+                    <button>GO BACK, I DON'T WANT TO DELETE ANY IMAGE</button>
+                </a>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <input type="submit" name="delete-confirm" value="Delete image">
                 <label>
-                    <input type="submit" name="fileUpload" value="Delete image">
+
                 </label>
             </form>
