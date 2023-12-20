@@ -179,6 +179,16 @@ if (!isAdmin()) {
                 $uploadedImage = null;
                 $selectedImageToDelete = null;
 
+                $productsLink = "../public/img/products";
+
+                $productDirs = fetchFilesFromDirectory("$productsLink", false, true);
+
+                foreach ($productDirs as $productDir) {
+                    echo "<br>";
+                    var_dump(fetchFilesFromDirectory("$productsLink/$productDir"));
+                    echo "<br>";
+                }
+
                 include_once "../Templates/admin/image-editing.php";
 
                 include "../Templates/defaults/footer.php";
