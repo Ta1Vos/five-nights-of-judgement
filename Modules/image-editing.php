@@ -32,10 +32,12 @@ function fetchFilesFromDirectory(string $directoryLink, bool $excludeDirectories
 
     //Checks if an array has been created by the directory scan, otherwise goes to return false
     if (is_array($files)) {
-        if (trim($files[0]) == "." || trim($files[1] == "..")) {//Removes special directories called "." and ".." in case they are present
-            $files = array_slice($files, 2);
+        if (isset($files[0])) {
+            if (trim($files[0]) == "." || trim($files[1] == "..")) {//Removes special directories called "." and ".." in case they are present
+                $files = array_slice($files, 2);
+            }
         }
-        
+
         $files = array_values($files); //Organizes array
 
         if (count($files) > 0) {//Checks if content has been found and is present in array
