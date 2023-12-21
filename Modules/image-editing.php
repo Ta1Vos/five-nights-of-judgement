@@ -14,7 +14,7 @@ function fetchFilesFromDirectory(string $directoryLink, bool $excludeDirectories
         return false;
     }
     //Only runs if directories have to be excluded from array
-    if (!$excludeDirectories) {
+    if ($excludeDirectories) {
         foreach ($files as $key => &$file) {
             if (is_dir($file)) {
                 unset($files[$key]);//Removes directories out of the array
@@ -22,15 +22,20 @@ function fetchFilesFromDirectory(string $directoryLink, bool $excludeDirectories
         }
     }
     //Only runs if files have to be excluded from array
-    if (!$excludeFiles) {
-        foreach ($files as $key => $file) {
+    if ($excludeFiles) {
+        foreach ($files as $key => &$file) {
             if (is_file($file)) {
                 unset($files[$key]);//Removes files out of the array
             }
         }
     }
+
     //Checks if an array has been created by the directory scan, otherwise goes to return false
     if (is_array($files)) {
+        if (trim($files[0]) == "." || trim($files[1] == "..")) {//Removes special directories called "." and ".." in case they are present
+            $files = array_slice($files, 2);
+        }
+        
         $files = array_values($files); //Organizes array
 
         if (count($files) > 0) {//Checks if content has been found and is present in array
