@@ -181,30 +181,43 @@ if (!isAdmin()) {
                 $productImages = array();
                 $categoryImages = array();
 
+                $selectedDeleteProduct = null;
+                $selectedDeleteCategory = null;
+
+                if (isset($_POST["selected-delete-product"])) {
+                    $selectedDeleteProduct = $_POST["selected-delete-product"];
+                    $selectedDeleteCategory = $_POST["selected-delete-category"];
+                }
+
                 $productsLink = "../public/img/products";
                 $categoriesLink = "../public/img/categories";
-
+                //Fetch all product images
                 $productDirs = fetchFilesFromDirectory("$productsLink", false, true);
+
                 //Fetches the images out of all category maps within the products map.
                 foreach ($productDirs as $productDir) {
                     $productImages[$productDir] = fetchFilesFromDirectory("$productsLink/$productDir");
                 }
 
+                //Fetch all category images
                 $categoryImages = fetchFilesFromDirectory("$categoriesLink", true);
 
                 //Ask for delete confirmation in case delete has been pressed
                 $deleteConfirm = checkForDeleteFinalConfirm();
+
                 //Code in case deletion is confirmed
                 if (isset($deleteConfirm)) {
                     if ($deleteConfirm == "true") {//Final confirmation confirmed, execution
+                        echo "---<br>";
+                        var_dump($_POST["selected-delete-product"]);echo"<br>";
+                        var_dump($_POST["selected-delete-category"]);
+                        echo "---<br>";
                         if (isset($_POST["select-products"])) {
                             var_dump(scanForFileName("../public/img/products", $_POST["select-products"]));
-                        } else if (isset($_POST["select-categories"])) {
+                        }
+                        if (isset($_POST["select-categories"])) {
                             var_dump(scanForFileName("../public/img/categories", $_POST["select-categories"]));
                         }
-                    } else {//The final confirmation being requested
-                        $_POST["select-products"] = $_POST["select-products"];
-                        $_POST["select-categories"] = $_POST["select-categories"];
                     }
                 }
                 echo "<pre>";

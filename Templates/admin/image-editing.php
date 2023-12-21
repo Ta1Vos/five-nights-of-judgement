@@ -8,6 +8,9 @@ global $params;
 global $productImages;
 global $categoryImages;
 
+global $selectedDeleteProduct;
+global $selectedDeleteCategory;
+
 global $deleteConfirm;
 
 if (!isset($deleteConfirm)) {
@@ -48,18 +51,19 @@ if (!isset($deleteConfirm)) {
             <h2>Delete image</h2>
             <form method="post" class="row text-light text-center">
                 <label for="categorySelect">Select category image to delete</label>
-                <select name="select-categories" id="categorySelect">
-                    <?php echoArrayContents($categoryImages, "<option value=#replace>", "</option>"); ?>
+                <select name="selected-delete-category" id="categorySelect" value="<?= $selectedDeleteCategory; ?>">
+                    <option value='non-select'>-</option>";
+                    <?php echoArrayContents($categoryImages, "<option value=#replace ". echoUnderCondition($selectedDeleteProduct, "#replace", "selected") .">", "</option>"); ?>
                 </select>
                 <label for="productSelect">Select product image to delete</label>
-                <select name="select-products" id="productSelect">
+                <select name="selected-delete-product" id="productSelect" value="<?= $selectedDeleteProduct; ?>">
                     <?php
                     //LIST THE IMAGES OF THE PRODUCTS OF THE CATEGORIES
                     foreach ($productImages as $key => $images) {
-                        echo "<option value='non-select'></option>";
+                        echo "<option value='non-select'>-</option>";
                         echo "<option value='non-select'>---$key---</option>";
                         echo "<option value='non-select'></option>";
-                        echoArrayContents($images, "<option value=#replace>", "</option>");
+                        echoArrayContents($images, "<option value=#replace ". echoUnderCondition($selectedDeleteProduct, "#replace", "selected") .">", "</option>");
                     }
                     ?>
                 </select>
