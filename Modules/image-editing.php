@@ -98,12 +98,9 @@ function scanForFileName(string $searchFromDirectoryPath, string $fileName): fal
  * @param array $array Required | The array of which you wish to echo the items
  * @param string $contentAtStart Optional | The content you wish to add in front of the item echo.
  * @param string $contentAtEnd Optional | The content you wish to add at the end of the item echo.
- * @param array|null $onlyIncludeContentIfTrue Optional | Additional code you wish to include if the $item is equal to $array[0].<br>
- * array[0] should always be the value which the $item has to be equal to for the extra bit (of string) to be added to the echo.<br>
- * array[1] should always be the value/string which gets added if the $item is equal to $array[0].
  * @return null
  */
-function echoArrayContents(array $array, string $contentAtStart = "", string $contentAtEnd = "", array $onlyIncludeContentIfTrue = null)
+function echoArrayContents(array $array, string $contentAtStart = "", string $contentAtEnd = "")
 {
     foreach ($array as $item) {
         //Replaces "#replace" with the $item
@@ -112,12 +109,26 @@ function echoArrayContents(array $array, string $contentAtStart = "", string $co
         //Echoes content
         echo $startContent;
         echo $item;
-
-        if ($item == $onlyIncludeContentIfTrue[0]) echo $onlyIncludeContentIfTrue[1];
-
         echo $endContent;
     }
 
+    return null;
+}
+
+/**
+ * Performs a given echo if $conditionalValue is equal to $secondConditionalValue
+ * @param mixed $conditionalValue Required | The first condition you're checking
+ * @param mixed $secondConditionalValue Required | The second condition you're checking
+ * @param string $echo Required | The echo that occurs if the condition is <b>true</b>
+ * @param string|null $elseEcho Optional | The echo that occurs if the condition is <b>false</b>
+ * @return null
+ */
+function echoUnderCondition(mixed $conditionalValue, mixed $secondConditionalValue, string $echo, string $elseEcho = null) {
+    if ($conditionalValue == $secondConditionalValue) {
+        echo $echo;
+    } else if (isset($elseEcho)) {
+        echo $elseEcho;
+    }
     return null;
 }
 
