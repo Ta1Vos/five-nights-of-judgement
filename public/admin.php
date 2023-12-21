@@ -212,11 +212,25 @@ if (!isAdmin()) {
                         var_dump($_POST["selected-delete-product"]);echo"<br>";
                         var_dump($_POST["selected-delete-category"]);
                         echo "---<br>";
-                        if (isset($_POST["select-products"])) {
-                            var_dump(scanForFileName("../public/img/products", $_POST["select-products"]));
+                        if (isset($selectedDeleteProduct)) {
+                            if ($selectedDeleteProduct != "non-select") {
+                                $filePath = scanForFileName("../public/img/products", $selectedDeleteProduct);
+                                if (deleteImage($filePath)) {
+                                    header("Location: home");
+                                } else {
+                                    echo "<h1>SOMETHING WENT WRONG WHEN DELETING THE IMAGE AT: $filePath</h1>";
+                                }
+                            }
                         }
-                        if (isset($_POST["select-categories"])) {
-                            var_dump(scanForFileName("../public/img/categories", $_POST["select-categories"]));
+                        if (isset($selectedDeleteCategory)) {
+                            if ($selectedDeleteCategory != "non-select") {
+                                $filePath = scanForFileName("../public/img/categories", $selectedDeleteCategory);
+                                if (deleteImage($filePath)) {
+                                    header("Location: home");
+                                } else {
+                                    echo "<h1>SOMETHING WENT WRONG WHEN DELETING THE IMAGE AT: $filePath</h1>";
+                                }
+                            }
                         }
                     }
                 }

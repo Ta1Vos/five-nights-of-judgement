@@ -132,7 +132,19 @@ function echoUnderCondition(mixed $conditionalValue, mixed $secondConditionalVal
     return null;
 }
 
-function deleteImage()
+/**
+ * Delete an image from the img folder.
+ * @param string $pathToImg Required | The path that leads to the image that has to be deleted.
+ * @return bool
+ */
+function deleteImage(string $pathToImg):bool
 {
+    if (file_exists($pathToImg)) {
+        //Extra check which makes sure only files in the map "img" can be deleted.
+        if (str_contains($pathToImg, "img")) {
+            return unlink($pathToImg);
+        }
+    }
 
+    return false;
 }
