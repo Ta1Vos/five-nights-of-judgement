@@ -254,7 +254,6 @@ if (!isAdmin()) {
                                 $filePath = scanForFileName("../public/img/products", $selectedDeleteProduct);
                                 if (deleteImage($filePath)) {
                                     header("Location: home");
-                                    echo "YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAY";
                                 } else {
                                     echo "<h1>SOMETHING WENT WRONG WHEN DELETING THE IMAGE AT: $filePath</h1>";
                                 }
@@ -273,9 +272,6 @@ if (!isAdmin()) {
                         }
                     }
                 }
-                echo "<pre>";
-                var_dump(fetchFilesFromDirectory("$categoriesLink", true));
-                echo "</pre>";
 
                 include_once "../Templates/admin/image-editing.php";
 

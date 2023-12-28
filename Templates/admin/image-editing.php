@@ -94,12 +94,12 @@ if (!isset($deleteConfirm)) {
                 </div>
                 <?php if (isset($catDeletePath)): //Show category if selected ?>
                     <div class="fs-3 fw-bold"><u>Category image</u> you're deleting:</div>
-                    <img src='<?= $catDeletePath; ?>' class='img-fluid' alt='Image of $pageType'>
+                    <img src='<?= $catDeletePath; ?>' class='img-fluid' alt='Image of <?= $catDeletePath ?>'>
                 <?php endif; ?>
                 <?php if (isset($productDeletePath)): //Show product if selected ?>
                     <div class="fs-3 fw-bold"><u>Product image</u> you're deleting:</div>
 
-                    <img src='<?= $productDeletePath; ?>' class='img-fluid' alt='Image of $pageType'>
+                    <img src='<?= $productDeletePath; ?>' class='img-fluid' alt='Image of <?= $productDeletePath ?>'>
                 <?php endif; ?>
                 <div class="col-12 fs-4"></div>
                 <form method="post" class="row text-light text-center">
