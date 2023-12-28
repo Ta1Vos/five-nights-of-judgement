@@ -9,13 +9,16 @@
 function fetchFilesFromDirectory(string $directoryLink, bool $excludeDirectories = false, bool $excludeFiles = false): false|array
 {
     $files = scandir($directoryLink);
+
     if (!$files) {
         return false;
     }
+
     //Only runs if directories have to be excluded from array
     if ($excludeDirectories) {
         foreach ($files as $key => &$file) {
-            if (is_dir("$directoryLink/$file")) {
+            $filePath = "$directoryLink/$file";
+            if (is_dir($filePath)) {
                 unset($files[$key]);//Removes directories out of the array
             }
         }
@@ -23,7 +26,8 @@ function fetchFilesFromDirectory(string $directoryLink, bool $excludeDirectories
     //Only runs if files have to be excluded from array
     if ($excludeFiles) {
         foreach ($files as $key => &$file) {
-            if (is_file("$directoryLink/$file")) {
+            $filePath = "$directoryLink/$file";
+            if (is_file($filePath)) {
                 unset($files[$key]);//Removes files out of the array
             }
         }
@@ -44,6 +48,41 @@ function fetchFilesFromDirectory(string $directoryLink, bool $excludeDirectories
     }
 
     return false;
+}
+
+/**
+ *  Returns an array filled with files and/or directories found in the given directory, but also the children of this directory.
+ * @param string $directoryLink Required | The link that leads to the directory you wish to fetch files from.
+ * @param bool $excludeFiles Optional | Choose whether you'd like to include or exclude FILES fetched, setting this to true will NOT fetch FILES. Default is false.
+ * @return bool|array returns either false or an array, false if the array/directory is empty. The array is returned if it contains content.
+ */
+function fetchAllFilesFromDirectory(string $directoryLink, bool $excludeFiles = false): false|array
+{
+    $files = fetchFilesFromDirectory($directoryLink, false, $excludeFiles);
+
+    if (!$files) {
+        return false;
+    }
+
+    $result = [];
+
+    foreach ($files as $file) {
+        $filePath = "$directoryLink/$file";
+
+        if (is_dir($filePath)) {//Only if a directory is present
+            $subdirectoryFiles[$file] = fetchAllFilesFromDirectory($filePath, $excludeFiles);
+
+            if ($subdirectoryFiles[$file]) {
+                $result = array_merge($result, $subdirectoryFiles);
+            } else {
+                $result[$file] = false;
+            }
+        } else if (!$excludeFiles && $file) {
+            $result[] = $file;
+        }
+    }
+
+    return $result ?: false;
 }
 
 /**
@@ -121,7 +160,8 @@ function echoArrayContents(array $array, string $contentAtStart = "", string $co
  * @param string|null $elseEcho Optional | The echo that occurs if the condition is <b>false</b>
  * @return null
  */
-function echoUnderCondition(mixed $conditionalValue, mixed $secondConditionalValue, string $echo, string $elseEcho = null) {
+function echoUnderCondition(mixed $conditionalValue, mixed $secondConditionalValue, string $echo, string $elseEcho = null)
+{
     if ($conditionalValue == $secondConditionalValue) {
         echo $echo;
     } else if (isset($elseEcho)) {
@@ -135,7 +175,7 @@ function echoUnderCondition(mixed $conditionalValue, mixed $secondConditionalVal
  * @param string $pathToImg Required | The path that leads to the image that has to be deleted.
  * @return bool
  */
-function deleteImage(string $pathToImg):bool
+function deleteImage(string $pathToImg): bool
 {
     if (file_exists($pathToImg)) {
         //Extra check which makes sure only files in the map "img" can be deleted.
