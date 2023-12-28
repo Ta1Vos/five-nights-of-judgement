@@ -184,6 +184,8 @@ if (!isAdmin()) {
                 $selectedDeleteProduct = null;
                 $selectedDeleteCategory = null;
 
+                $loadSelectedDelete = true;//Loads the selection tab
+
                 if (isset($_POST["selected-delete-product"])) {
                     $selectedDeleteProduct = $_POST["selected-delete-product"];
                     $selectedDeleteCategory = $_POST["selected-delete-category"];
@@ -211,11 +213,32 @@ if (!isAdmin()) {
 
                 //Code in case deletion is confirmed
                 if (isset($deleteConfirm)) {
+                    $loadSelectedDelete = false;//Prevents loading of the selection tab
+
+                    $catDeletePath = null;
+                    $productDeletePath = null;
+                    //Fetch the delete category image path
+                    if (isset($selectedDeleteCategory) && $selectedDeleteCategory != "non-select") {
+                        $catDeletePath = scanForFileName("../public/img/categories", $selectedDeleteCategory);
+                        $catDeletePath = str_replace("../public", "", $catDeletePath);//Removes the public directory as it does not exist in browser
+                    }
+                    //Fetch the delete product image path
+                    if (isset($selectedDeleteProduct) && $selectedDeleteProduct != "non-select") {
+                        $productDeletePath = scanForFileName("../public/img/products", $selectedDeleteProduct);
+                        $productDeletePath = str_replace("../public", "", $productDeletePath);//Removes the public directory as it does not exist in browser
+                    }
+                    //Refresh POST and page if nothing has been selected
+                    if (!isset($catDeletePath) && !isset($productDeletePath)) {
+                        $_POST = [];
+                        header("refresh: 0;");
+                    }
+
                     if ($deleteConfirm == "true") {//Final confirmation confirmed, execution
                         echo "---<br>";
                         var_dump($_POST["selected-delete-product"]);echo"<br>";
                         var_dump($_POST["selected-delete-category"]);
                         echo "---<br>";
+                        //Delete product
                         if (isset($selectedDeleteProduct)) {
                             if ($selectedDeleteProduct != "non-select") {
                                 $filePath = scanForFileName("../public/img/products", $selectedDeleteProduct);
@@ -226,6 +249,7 @@ if (!isAdmin()) {
                                 }
                             }
                         }
+                        //Delete category
                         if (isset($selectedDeleteCategory)) {
                             if ($selectedDeleteCategory != "non-select") {
                                 $filePath = scanForFileName("../public/img/categories", $selectedDeleteCategory);
