@@ -288,14 +288,14 @@ if (!isAdmin()) {
 
                 echo "<pre>";var_dump($imgDirLinks);echo"</pre>";
 
-                if (isset($_POST["submit-file-upload"])) {
+                if (isset($_POST["submit-file-upload"])) {//Submit for the image
                     $validateUpload = true;
                     $imageError = null;
 
                     $uploadedFile = $_FILES["file-upload"];
                     $uploadedFileName = $uploadedFile["name"];
 
-                    if (!isset($uploadedFile)) {
+                    if (!isset($uploadedFile)) {//Check if an image has been input
                         if (!getimagesize($uploadedFile["tmp_name"])) {//Makes sure the file is an image
                             $imageError = "You can only submit images!";
                         } else if ($uploadedFile["size"] > 1000000000) {//Does not accept images above 1GB
