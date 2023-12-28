@@ -281,8 +281,34 @@ if (!isAdmin()) {
                 $titleSuffix = ' | Image Deleting';
                 require "../Modules/image-editing.php";
 
-                $uploadedImage = null;
+                if (isset($_POST["submit-file-upload"])) {
+                    $validateUpload = true;
+                    $imageError = null;
 
+                    $uploadedFile = null;
+
+                    if (isset($_POST["file-upload"])) {
+                        $uploadedFile = $_POST["file-upload"];
+
+                        if (getimagesize($uploadedFile)) {
+                            $imageError = "You can only submit images!";
+                        } else if (filesize($uploadedFile) > 1000000000) {//Does not accept images above 1GB
+                            $imageError = "Images have to be below the size of 1 GB";
+                        } else {
+                            if ($validateUpload) {
+                                $requestedFile = $uploadedFile;
+                                include("filereader.php");
+                                $_FILES = array();
+                                $_POST = array();
+                            } else {
+                                echo "<h2>Dit bestand is al ingezonden!</h2>";
+                            }
+                        }
+                    } else {
+                        $imageError = "No file has been selected!";
+                        $validateUpload = false;
+                    }
+                }
 
 
                 include_once "../Templates/admin/image-creating.php";

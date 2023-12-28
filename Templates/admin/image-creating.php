@@ -5,7 +5,7 @@
 include_once('../Templates/defaults/head.php');
 global $params;
 
-global $uploadedImage;
+global $imageError;
 ?>
 
 <body>
@@ -30,9 +30,12 @@ global $uploadedImage;
             <form method="post" enctype="multipart/form-data" class="row text-light text-center">
                 Choose image to upload:
                 <label>
-                    <input type="file" name="fileUpload" id="fileToUpload">
+                    <input type="file" name="file-upload" id="fileToUpload">
                 </label>
                 <label>
-                    <input type="submit" name="submit-fileUpload" value="Upload image">
+                    <input type="submit" name="submit-file-upload" value="Upload image">
                 </label>
             </form>
+            <div class="error-field">
+                <?= $imageError; ?>
+            </div>
