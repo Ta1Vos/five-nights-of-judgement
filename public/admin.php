@@ -281,27 +281,31 @@ if (!isAdmin()) {
                 $titleSuffix = ' | Image Deleting';
                 require "../Modules/image-editing.php";
 
+                $imgDirLinks = [];
+
+                $imgDirLinks["categories"] = "categories";
+                $imgDirLinks["products"] = fetchAllFilesFromDirectory("../public/img/products", true);
+
+                echo "<pre>";var_dump($imgDirLinks);echo"</pre>";
+
                 if (isset($_POST["submit-file-upload"])) {
                     $validateUpload = true;
                     $imageError = null;
 
-                    $uploadedFile = null;
+                    $uploadedFile = $_FILES["file-upload"];
+                    $uploadedFileName = $uploadedFile["name"];
 
-                    if (isset($_POST["file-upload"])) {
-                        $uploadedFile = $_POST["file-upload"];
-
-                        if (getimagesize($uploadedFile)) {
+                    if (!isset($uploadedFile)) {
+                        if (!getimagesize($uploadedFile["tmp_name"])) {//Makes sure the file is an image
                             $imageError = "You can only submit images!";
-                        } else if (filesize($uploadedFile) > 1000000000) {//Does not accept images above 1GB
+                        } else if ($uploadedFile["size"] > 1000000000) {//Does not accept images above 1GB
                             $imageError = "Images have to be below the size of 1 GB";
-                        } else {
+                        } else {//After validation executes script
                             if ($validateUpload) {
-                                $requestedFile = $uploadedFile;
-                                include("filereader.php");
-                                $_FILES = array();
-                                $_POST = array();
+                                $_FILES = [];
+                                $_POST = [];
                             } else {
-                                echo "<h2>Dit bestand is al ingezonden!</h2>";
+                                $imageError = "Something went wrong! Please refresh the page and try again!";
                             }
                         }
                     } else {
