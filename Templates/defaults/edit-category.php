@@ -48,6 +48,8 @@ global $imageInput;
             </div>
             <div class="col-4"></div>
         </div>
+        <a href="/admin/image-adding">Click here to <b><u>add</u></b> images</a><br><br>
+        <a href="/admin/image-deleting">Click here to <b><u>delete</u></b> images</a>
     </div>
     <br>
     <label class="mb-3">

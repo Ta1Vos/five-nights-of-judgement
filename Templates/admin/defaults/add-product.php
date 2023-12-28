@@ -77,6 +77,8 @@ global $categoryInput;
                         </div>
                         <div class="col-4"></div>
                     </div>
+                    <a href="/admin/image-adding">Click here to <b><u>add</u></b> images</a><br><br>
+                    <a href="/admin/image-deleting">Click here to <b><u>delete</u></b> images</a>
                 </div>
                 <div class="col-12 mb-5">
                     <div class="fs-3">Category</div>

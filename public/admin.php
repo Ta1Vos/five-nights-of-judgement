@@ -277,8 +277,8 @@ if (!isAdmin()) {
                 include "../Templates/defaults/footer.php";
                 break;
 
-            case "image-creating":
-                $titleSuffix = ' | Image Deleting';
+            case "image-adding":
+                $titleSuffix = ' | Image Adding';
                 require "../Modules/image-editing.php";
 
                 $imgDirLinks = [];
@@ -338,7 +338,7 @@ if (!isAdmin()) {
                 }
 
 
-                include_once "../Templates/admin/image-creating.php";
+                include_once "../Templates/admin/image-adding.php";
 
                 include "../Templates/defaults/footer.php";
                 break;
