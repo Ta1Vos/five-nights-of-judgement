@@ -187,8 +187,18 @@ if (!isAdmin()) {
                 $loadSelectedDelete = true;//Loads the selection tab
 
                 if (isset($_POST["selected-delete-product"])) {
+                    //Grabs input value out of inputs
                     $selectedDeleteProduct = $_POST["selected-delete-product"];
                     $selectedDeleteCategory = $_POST["selected-delete-category"];
+                } else if (isset($_SESSION["delete-category-img-name"]) || isset($_SESSION["delete-product-img-name"])) {
+                    //Grabs value out of session
+                    if (isset($_SESSION["delete-category-img-name"])) {//Set the category
+                        $selectedDeleteCategory = $_SESSION["delete-category-img-name"];
+                    }
+
+                    if (isset($_SESSION["delete-product-img-name"])) {//Set the product
+                        $selectedDeleteProduct = $_SESSION["delete-product-img-name"];
+                    }
                 }
 
                 $productsLink = "../public/img/products";
@@ -213,37 +223,38 @@ if (!isAdmin()) {
 
                 //Code in case deletion is confirmed
                 if (isset($deleteConfirm)) {
-                    $loadSelectedDelete = false;//Prevents loading of the selection tab
+                    if ($deleteConfirm != "true") {
+                        $loadSelectedDelete = false;//Prevents loading of the selection tab
 
-                    $catDeletePath = null;
-                    $productDeletePath = null;
-                    //Fetch the delete category image path
-                    if (isset($selectedDeleteCategory) && $selectedDeleteCategory != "non-select") {
-                        $catDeletePath = scanForFileName("../public/img/categories", $selectedDeleteCategory);
-                        $catDeletePath = str_replace("../public", "", $catDeletePath);//Removes the public directory as it does not exist in browser
-                    }
-                    //Fetch the delete product image path
-                    if (isset($selectedDeleteProduct) && $selectedDeleteProduct != "non-select") {
-                        $productDeletePath = scanForFileName("../public/img/products", $selectedDeleteProduct);
-                        $productDeletePath = str_replace("../public", "", $productDeletePath);//Removes the public directory as it does not exist in browser
-                    }
-                    //Refresh POST and page if nothing has been selected
-                    if (!isset($catDeletePath) && !isset($productDeletePath)) {
-                        $_POST = [];
-                        header("refresh: 0;");
-                    }
-
-                    if ($deleteConfirm == "true") {//Final confirmation confirmed, execution
-                        echo "---<br>";
-                        var_dump($_POST["selected-delete-product"]);echo"<br>";
-                        var_dump($_POST["selected-delete-category"]);
-                        echo "---<br>";
+                        $catDeletePath = null;
+                        $productDeletePath = null;
+                        //Fetch the delete category image path
+                        if (isset($selectedDeleteCategory) && $selectedDeleteCategory != "non-select") {
+                            $_SESSION["delete-category-img-name"] = $selectedDeleteCategory;
+                            $catDeletePath = scanForFileName("../public/img/categories", $selectedDeleteCategory);
+                            $catDeletePath = str_replace("../public", "", $catDeletePath);//Removes the public directory as it does not exist in browser
+                        }
+                        //Fetch the delete product image path
+                        if (isset($selectedDeleteProduct) && $selectedDeleteProduct != "non-select") {
+                            $_SESSION["delete-product-img-name"] = $selectedDeleteProduct;
+                            $productDeletePath = scanForFileName("../public/img/products", $selectedDeleteProduct);
+                            $productDeletePath = str_replace("../public", "", $productDeletePath);//Removes the public directory as it does not exist in browser
+                        }
+                        //Refresh POST and page if nothing has been selected.
+                        if (!isset($catDeletePath) && !isset($productDeletePath)) {
+                            $_POST = [];
+                            header("refresh: 0;");
+                        }
+                    } else {//Final confirmation confirmed, execution starts
+                        unset($_SESSION["delete-category-img-name"]);
+                        unset($_SESSION["delete-product-img-name"]);
                         //Delete product
                         if (isset($selectedDeleteProduct)) {
                             if ($selectedDeleteProduct != "non-select") {
                                 $filePath = scanForFileName("../public/img/products", $selectedDeleteProduct);
                                 if (deleteImage($filePath)) {
                                     header("Location: home");
+                                    echo "YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAY";
                                 } else {
                                     echo "<h1>SOMETHING WENT WRONG WHEN DELETING THE IMAGE AT: $filePath</h1>";
                                 }

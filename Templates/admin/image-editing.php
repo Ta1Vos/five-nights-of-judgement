@@ -36,8 +36,7 @@ if (!isset($deleteConfirm)) {
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="home">Home</a></li>
-                <li class="breadcrumb-item"><a href="/<?= $params[1] ?>/add/<?= $params[3] ?>">Admin - Category
-                        Creating</a></li>
+                <li class="breadcrumb-item"><a href="/admin/image-editing">Admin - Image editing</a></li>
             </ol>
         </nav>
         <div class="row gy-3 text-center">
