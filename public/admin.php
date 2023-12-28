@@ -196,7 +196,11 @@ if (!isAdmin()) {
 
                 //Fetches the images out of all category maps within the products map.
                 foreach ($productDirs as $productDir) {
-                    $productImages[$productDir] = fetchFilesFromDirectory("$productsLink/$productDir");
+                    $images = fetchFilesFromDirectory("$productsLink/$productDir");
+                    //Filters out bools, in case execution went wrong somewhere. Usually occurs with empty directories
+                    if (is_array($images)) {
+                        $productImages[$productDir] = $images;
+                    }
                 }
 
                 //Fetch all category images

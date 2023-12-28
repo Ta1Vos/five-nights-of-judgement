@@ -53,7 +53,7 @@ if (!isset($deleteConfirm)) {
                 <label for="categorySelect">Select category image to delete</label>
                 <select name="selected-delete-category" id="categorySelect" value="<?= $selectedDeleteCategory; ?>">
                     <option value='non-select'>-</option>";
-                    <?php echoArrayContents($categoryImages, "<option value=#replace ". echoUnderCondition($selectedDeleteProduct, "#replace", "selected") .">", "</option>"); ?>
+                    <?php echoArrayContents($categoryImages, "<option value=#replace>", "</option>"); ?>
                 </select>
                 <label for="productSelect">Select product image to delete</label>
                 <select name="selected-delete-product" id="productSelect" value="<?= $selectedDeleteProduct; ?>">
@@ -63,7 +63,7 @@ if (!isset($deleteConfirm)) {
                         echo "<option value='non-select'>-</option>";
                         echo "<option value='non-select'>---$key---</option>";
                         echo "<option value='non-select'></option>";
-                        echoArrayContents($images, "<option value=#replace ". echoUnderCondition($selectedDeleteProduct, "#replace", "selected") .">", "</option>");
+                        echoArrayContents($images, "<option value=#replace>", "</option>");
                     }
                     ?>
                 </select>
