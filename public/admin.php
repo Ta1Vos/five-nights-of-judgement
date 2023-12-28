@@ -283,10 +283,12 @@ if (!isAdmin()) {
 
                 $imgDirLinks = [];
 
-                $imgDirLinks["categories"] = "categories";
+                $imgDirLinks["categories"] = "../public/img/categories";
                 $imgDirLinks["products"] = fetchAllFilesFromDirectory("../public/img/products", true);
 
-                echo "<pre>";var_dump($imgDirLinks);echo"</pre>";
+                echo "<pre>";
+                var_dump($imgDirLinks);
+                echo "</pre>";
 
                 if (isset($_POST["submit-file-upload"])) {//Submit for the image
                     $validateUpload = true;
@@ -295,22 +297,39 @@ if (!isAdmin()) {
                     $uploadedFile = $_FILES["file-upload"];
                     $uploadedFileName = $uploadedFile["name"];
 
-                    if (!isset($uploadedFile)) {//Check if an image has been input
-                        if (!getimagesize($uploadedFile["tmp_name"])) {//Makes sure the file is an image
+                    if (isset($uploadedFile)) {//Check if an image has been input
+                        $selectedDir = $_POST["directory-to-add-to"];
+                        if (!isset($selectedDir)) {
+                            //Validate selected directory
+                            $imageError = "Please select a directory!";
+                        } else if ($selectedDir == "non-select") {
+                            //Check if an actual directory has been picked
+                            $imageError = "Please select a word in the directory list! (Not '-' or empty spaces) ";
+                        } else if (!getimagesize($uploadedFile["tmp_name"])) {
+                            //Makes sure the file is an image
                             $imageError = "You can only submit images!";
-                        } else if ($uploadedFile["size"] > 1000000000) {//Does not accept images above 1GB
+                        } else if ($uploadedFile["size"] > 1000000000) {
+                            //Does not accept images above 1GB
                             $imageError = "Images have to be below the size of 1 GB";
-                        } else {//After validation executes script
+                        } else {
+                            if (file_exists("$selectedDir/$uploadedFileName")) {//Check if file already exists
+                                $imageError = "This file(name) already exists in this directory!";
+                                $validateUpload = false;
+                            }
+                            //After validation, executes script
                             if ($validateUpload) {
-                                $_FILES = [];
-                                $_POST = [];
+                                if (move_uploaded_file($_FILES["file-upload"]["tmp_name"], "$selectedDir/$uploadedFileName")) {
+                                    $imageError = "The file has been uploaded!";
+                                    header("Location: /admin/home");
+                                } else {
+                                    $imageError = "Something went wrong! Please refresh the page and try again!";
+                                }
                             } else {
                                 $imageError = "Something went wrong! Please refresh the page and try again!";
                             }
                         }
                     } else {
                         $imageError = "No file has been selected!";
-                        $validateUpload = false;
                     }
                 }
 

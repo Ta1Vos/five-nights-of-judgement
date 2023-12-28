@@ -29,18 +29,15 @@ global $imgDirLinks;
         <div class="row gy-3 text-center">
             <h2>Upload image</h2>
             <form method="post" enctype="multipart/form-data" class="row text-light text-center">
-                Choose image to upload:
+                <h4>Choose image to upload:</h4>
                 <label>
                     <input type="file" name="file-upload">
                 </label>
-                <label>
-                    <input type="submit" name="submit-file-upload" value="Upload image">
-                </label>
-                <div class="pt-5">
+                <h4 class="mt-5">
                     Choose directory to upload image to:
-                </div>
+                </h4>
                 <label>
-                    <select name="selected-delete-product" id="productSelect">
+                    <select name="directory-to-add-to" id="productSelect">
                         <?php
                         //LIST THE DIRECTORIES WITH THEIR NAMES
                         foreach ($imgDirLinks as $key => $directory) {
@@ -62,6 +59,9 @@ global $imgDirLinks;
                         }
                         ?>
                     </select>
+                </label>
+                <label class="mt-5">
+                    <input type="submit" name="submit-file-upload" value="Upload image">
                 </label>
             </form>
             <div class="error-field">

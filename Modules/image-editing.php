@@ -75,7 +75,7 @@ function fetchAllFilesFromDirectory(string $directoryLink, bool $excludeFiles = 
             if ($subdirectoryFiles[$file]) {
                 $result = array_merge($result, $subdirectoryFiles);
             } else {
-                $result[$file] = false;
+                $result[$file] = $filePath;
             }
         } else if (!$excludeFiles && $file) {
             $result[] = $file;
