@@ -44,14 +44,14 @@ global $imgDirLinks;
                             //Check if directory contains subdirectories
                             if (!is_array($directory)) {
                                 echo "<option value='non-select'></option>";
-                                echo "<option value='$key'>$key</option>";
+                                echo "<option value='$directory'>$key</option>";
                             } else {
                                 echo "<option value='non-select'>-</option>";
-                                echo "<option value='$key'>-$key-</option>";
+                                echo "<option value='$directory[0]'>-$key-</option>";
                                 //LISTS SUBDIRECTORIES
-                                foreach ($directory as $subdirectoryKey => $item) {
+                                foreach ($directory[1] as $subdirectoryKey => $item) {
                                     echo "<option value='non-select'>--</option>";
-                                    echo "<option value='$subdirectoryKey'>$key--$subdirectoryKey--</option>";
+                                    echo "<option value='$item'>$key--$subdirectoryKey--</option>";
                                 }
 
                                 echo "<option value='non-select'></option>";

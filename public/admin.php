@@ -284,7 +284,7 @@ if (!isAdmin()) {
                 $imgDirLinks = [];
 
                 $imgDirLinks["categories"] = "../public/img/categories";
-                $imgDirLinks["products"] = fetchAllFilesFromDirectory("../public/img/products", true);
+                $imgDirLinks["products"] = ["../public/img/products", fetchAllFilesFromDirectory("../public/img/products", true)];
 
                 echo "<pre>";
                 var_dump($imgDirLinks);
@@ -294,11 +294,11 @@ if (!isAdmin()) {
                     $validateUpload = true;
                     $imageError = null;
 
-                    $uploadedFile = $_FILES["file-upload"];
-                    $uploadedFileName = $uploadedFile["name"];
-
-                    if (isset($uploadedFile)) {//Check if an image has been input
+                    if (!empty($_FILES["file-upload"]["name"])) {//Check if an image has been input
+                        $uploadedFile = $_FILES["file-upload"];
+                        $uploadedFileName = $uploadedFile["name"];
                         $selectedDir = $_POST["directory-to-add-to"];
+
                         if (!isset($selectedDir)) {
                             //Validate selected directory
                             $imageError = "Please select a directory!";
@@ -312,20 +312,24 @@ if (!isAdmin()) {
                             //Does not accept images above 1GB
                             $imageError = "Images have to be below the size of 1 GB";
                         } else {
+                            if ($uploadedFile["error"] !== UPLOAD_ERR_OK) {
+                                $imageError .= "<br>Something went wrong! Please refresh the page and try again!";
+                            }
                             if (file_exists("$selectedDir/$uploadedFileName")) {//Check if file already exists
-                                $imageError = "This file(name) already exists in this directory!";
+                                $imageError .= "<br>This file(name) already exists in this directory!";
                                 $validateUpload = false;
                             }
                             //After validation, executes script
                             if ($validateUpload) {
-                                if (move_uploaded_file($_FILES["file-upload"]["tmp_name"], "$selectedDir/$uploadedFileName")) {
+                                $targetedDir = str_replace("../public/", "", $selectedDir);
+
+                                //Moves file into directory
+                                if (move_uploaded_file($uploadedFile["tmp_name"], "$targetedDir/$uploadedFileName")) {
                                     $imageError = "The file has been uploaded!";
                                     header("Location: /admin/home");
                                 } else {
                                     $imageError = "Something went wrong! Please refresh the page and try again!";
                                 }
-                            } else {
-                                $imageError = "Something went wrong! Please refresh the page and try again!";
                             }
                         }
                     } else {
