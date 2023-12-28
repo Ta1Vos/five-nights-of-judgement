@@ -33,6 +33,17 @@ if (!isAdmin()) {
         header("Location: /$params[1]/$params[3]/$params[4]");//Redirects to the page listed after edit, as that usually breaks.
     }
 
+    //TO DO IN CURRENT BRANCH
+    //
+    //
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //
+    // * Select for all images in edit & create.
+    // * Member editing page for admin
+    // * MVC member part
+    // * Member send reviews
+    // * Admin edit reviews
+
     if (isset($params[2])) {
         switch ($params[2]) {
             case 'products':
