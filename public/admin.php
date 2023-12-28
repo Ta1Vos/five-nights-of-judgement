@@ -172,11 +172,10 @@ if (!isAdmin()) {
                 header("Location: /home");
                 break;
 
-            case 'image-editing':
-                $titleSuffix = ' | Image Editing';
+            case 'image-deleting':
+                $titleSuffix = ' | Image Deleting';
                 require "../Modules/image-editing.php";
 
-                $uploadedImage = null;
                 $selectedImageToDelete = null;
                 $productImages = array();
                 $categoryImages = array();
@@ -273,7 +272,20 @@ if (!isAdmin()) {
                     }
                 }
 
-                include_once "../Templates/admin/image-editing.php";
+                include_once "../Templates/admin/image-deleting.php";
+
+                include "../Templates/defaults/footer.php";
+                break;
+
+            case "image-creating":
+                $titleSuffix = ' | Image Deleting';
+                require "../Modules/image-editing.php";
+
+                $uploadedImage = null;
+
+
+
+                include_once "../Templates/admin/image-creating.php";
 
                 include "../Templates/defaults/footer.php";
                 break;

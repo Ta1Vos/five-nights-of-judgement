@@ -40,17 +40,6 @@ if (!isset($deleteConfirm)) {
             </ol>
         </nav>
         <div class="row gy-3 text-center">
-            <h2>Upload image</h2>
-            <form method="post" enctype="multipart/form-data" class="row text-light text-center">
-                Choose image to upload:
-                <label>
-                    <input type="file" name="fileUpload" id="fileToUpload">
-                </label>
-                <label>
-                    <input type="submit" name="submit-fileUpload" value="Upload image">
-                </label>
-            </form>
-            <br><br><br><br><br><br><br>
             <h2>Delete image</h2>
             <?php if ($loadSelectedDelete): ?>
                 <form method="post" class="row text-light text-center">
