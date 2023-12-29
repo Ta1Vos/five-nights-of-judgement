@@ -38,9 +38,6 @@ if (!isset($additionalNavbarContent)) {
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= $firstLinkPiece;?>register">register</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="<?= $firstLinkPiece;?>contact">contact</a>
                 </li>
                 <?= $additionalNavbarContent; ?>
