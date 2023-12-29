@@ -9,6 +9,12 @@ $firstLinkPiece = loadLinkContent();
 if (!isset($firstLinkPiece)) {
     $firstLinkPiece = null;
 }
+
+global $createCard;
+
+if (!isset($createCard)) {
+    $createCard = null;
+}
 ?>
 
 <body>
@@ -50,6 +56,7 @@ if (!isset($firstLinkPiece)) {
                 </div>
             <?php endforeach; ?>
 
+            <?= $createCard; ?>
         </div>
 
         <hr>

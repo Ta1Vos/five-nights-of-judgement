@@ -1,5 +1,51 @@
 <?php
 
+function validateProductInput(string $action):bool {
+    //Make category values global, as they are only used inside the product tab
+    global $categoryInput;
+    global $categoryError;
+
+    global $titleError;
+    global $descriptionError;
+    global $imageError;
+
+    $titleInput = $_POST["$action-title"];
+    $descriptionInput = $_POST["$action-desc"];
+    $imageInput = $_POST["$action-img"];
+    $categoryInput = $_POST["$action-category"];
+
+    $result = validateSharedEditInputs($titleInput, $descriptionInput, $imageInput);
+    $wrongInput = $result["wrong_input"];
+    $titleError = $result["title_error"];
+    $descriptionError = $result["desc_error"];
+    $imageError = $result["img_error"];
+
+    if (!filter_input(INPUT_POST, "$action-category", FILTER_VALIDATE_INT)) {
+        $wrongInput = true;
+        $categoryError = "Please fill in a number!";
+    }
+
+    return $wrongInput;
+}
+
+function validateCategoryInput(string $action):bool {
+    global $titleError;
+    global $descriptionError;
+    global $imageError;
+
+    $titleInput = $_POST["$action-title"];
+    $descriptionInput = $_POST["$action-desc"];
+    $imageInput = $_POST["$action-img"];
+
+    $result = validateSharedEditInputs($titleInput, $descriptionInput, $imageInput);
+    $wrongInput = $result["wrong_input"];
+    $titleError = $result["title_error"];
+    $descriptionError = $result["desc_error"];
+    $imageError = $result["img_error"];
+
+    return $wrongInput;
+}
+
 function loadRelatedEditContent():string|null {
     global $params;
     $includeFile = null;
@@ -53,6 +99,10 @@ function validateSharedEditInputs($title, $desc, $img):array {
     return $result;
 }
 
+/**
+ * Validates the editing of cards using method _POST.
+ * @return null
+ */
 function validateCardEdit() {
     //Inputs
     global $titleInput;
@@ -179,21 +229,27 @@ function checkForDeleteFinalConfirm():string|null {
     global $params;
 
     if (isset($_POST["confirm-delete"])) {//Final confirmation to delete
-        return "<input type='submit' name='final-confirm-delete' value='I REALLY WANT TO DELETE THIS $params[3]'>";
+        if (isset($params[3])) {
+            return "<input type='submit' name='final-confirm-delete' value='I REALLY WANT TO DELETE THIS $params[3]'>";
+        }
+
+        return "<input type='submit' name='final-confirm-delete' value='I REALLY WANT TO DELETE THIS'>";
     } else if (isset($_POST["final-confirm-delete"])) {//Executes deletion
-        if ($params[3] == "category") {
-            if (deleteCategory($params[4])) {
-                echo "success";
-                header("Location: /home");
-            }
-        } else if ($params[3] == "product") {
-            if (deleteProduct($params[4])) {
-                echo "success";
-                header("Location: /home");
+        if (isset($params[3])) {
+            if ($params[3] == "category") {
+                if (deleteCategory($params[4])) {
+                    echo "success";
+                    header("Location: /home");
+                }
+            } else if ($params[3] == "product") {
+                if (deleteProduct($params[4])) {
+                    echo "success";
+                    header("Location: /home");
+                }
             }
         }
 
-        return "Something went wrong upon attempting to delete the $params[3], please contact a developer.";
+        return "true";
     }
 
     return null;
@@ -223,4 +279,130 @@ function deleteproduct(int $id):bool {
     }
 
     return false;
+}
+
+/**
+ * @return bool is returned after function execution. True if everything went well, false if content has not been pushed to the database.
+ */
+function addToCategory(string $name, string $picture, string $description):bool {
+    global $pdo;
+
+    $visits = 0;
+
+    $query = $pdo->prepare("INSERT INTO category(name, picture, description, visits) VALUES(:name, :picture, :description, :visits)");
+    $query->bindParam("name", $name);
+    $query->bindParam("picture", $picture);
+    $query->bindParam("description", $description);
+    $query->bindParam("visits", $visits);
+
+    if ($query->execute()) {
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * @return bool is returned after function execution. True if everything went well, false if content has not been pushed to the database.
+ */
+function addToProduct(string $name, string $picture, string $description, int $categoryId):bool {
+    global $pdo;
+
+    $visits = 0;
+
+    $query = $pdo->prepare("INSERT INTO product(name, picture, description, visits, category_id) VALUES(:name, :picture, :description, :visits, :category_id)");
+    $query->bindParam("name", $name);
+    $query->bindParam("picture", $picture);
+    $query->bindParam("description", $description);
+    $query->bindParam("visits", $visits);
+    $query->bindParam("category_id", $categoryId);
+
+    if ($query->execute()) {
+        return true;
+    }
+
+    return false;
+}
+/**
+ * Validates the creating of cards using method _POST.
+ * @return null
+ */
+function validateCardCreation() {
+    //Inputs
+    global $titleInput;
+    global $descriptionInput;
+    global $imageInput;
+    //Error fields
+    global $titleError;
+    global $descriptionError;
+    global $imageError;
+    global $mainErrorField;
+
+    if (isset($_POST["add-category-submit"])) {
+        $titleInput = $_POST["add-title"];
+        $descriptionInput = $_POST["add-desc"];
+        $imageInput = $_POST["add-img"];
+
+        $result = validateSharedEditInputs($titleInput, $descriptionInput, $imageInput);
+        $wrongInput = $result["wrong_input"];
+        $titleError = $result["title_error"];
+        $descriptionError = $result["desc_error"];
+        $imageError = $result["img_error"];
+
+        if (!$wrongInput) {
+            global $params;
+
+            if (isset($params[3])) {
+                if (addToCategory($titleInput, $imageInput, $descriptionInput)) {
+                    $mainErrorField = "Card successfully created!";
+                    header("Location: /admin/categories");
+                } else {
+                    $mainErrorField = "Something went wrong while attempting a connection with the database! Please contact a developer for further information";
+                }
+            } else {
+                $mainErrorField = "Something went wrong, please try editing another card!";
+            }
+        } else {
+            $mainErrorField = "Please fill in all fields correctly!";
+        }
+    } else if (isset($_POST["add-product-submit"])) {
+        //Make category values global, as they are only used inside the product tab
+        global $categoryInput;
+        global $categoryError;
+
+        $titleInput = $_POST["add-title"];
+        $descriptionInput = $_POST["add-desc"];
+        $imageInput = $_POST["add-img"];
+        $categoryInput = $_POST["add-category"];
+
+        $result = validateSharedEditInputs($titleInput, $descriptionInput, $imageInput);
+        $wrongInput = $result["wrong_input"];
+        $titleError = $result["title_error"];
+        $descriptionError = $result["desc_error"];
+        $imageError = $result["img_error"];
+
+        if (!filter_input(INPUT_POST, 'add-category', FILTER_VALIDATE_INT)) {
+            $wrongInput = true;
+            $categoryError = "Please fill in a number!";
+        }
+
+        if (!$wrongInput) {
+            global $params;
+
+            if (isset($params[3])) {
+                if (addToProduct($titleInput, $imageInput, $descriptionInput, $categoryInput)) {
+                    $mainErrorField = "Card successfully created!";
+                    header("Location: /admin/category/$categoryInput");
+                } else {
+                    $mainErrorField = "Something went wrong while attempting a connection with the database! Please contact a developer for further information";
+                }
+            } else {
+                $mainErrorField = "Something went wrong, please try editing another card!";
+            }
+        } else {
+            $mainErrorField = "Please fill in all fields correctly!";
+        }
+    }
+
+    return null;
 }

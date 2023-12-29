@@ -5,61 +5,6 @@ function validateCategoryValues($content, $requiredContent) {
 
 }
 
-/**
- * @param array $content the array which you want to add to the Category table
- * @return bool is returned after function execution. True if everything went well, false if array has not been pushed to the database.
- */
-function addToCategory(array $content):bool {
-    $content["id"] = 0;
-    $content["visits"] = 0;
-
-    if (!validateObjectWithArray(new Category, $content)) {
-        return false;
-    }
-
-    global $pdo;
-
-    $query = $pdo->prepare("INSERT INTO category(name, picture, description, visits) VALUES(:name, :picture, :description, :visits)");
-    $query->bindParam("name", $content["name"]);
-    $query->bindParam("picture", $content["picture"]);
-    $query->bindParam("description", $content["description"]);
-    $query->bindParam("visits", $content["visits"]);
-
-    if ($query->execute()) {
-        return true;
-    }
-
-    return false;
-}
-
-/**
- * @param array $content the array which you want to add to the Product table
- * @return bool is returned after function execution. True if everything went well, false if array has not been pushed to the database.
- */
-function addToProduct(array $content):bool {
-    $content["id"] = 0;
-    $content["visits"] = 0;
-
-    if (!validateObjectWithArray(new Product, $content)) {
-        return false;
-    }
-
-    global $pdo;
-
-    $query = $pdo->prepare("INSERT INTO product(name, picture, description, visits, category_id) VALUES(:name, :picture, :description, :visits, :category_id)");
-    $query->bindParam("name", $content["name"]);
-    $query->bindParam("picture", $content["picture"]);
-    $query->bindParam("description", $content["description"]);
-    $query->bindParam("visits", $content["visits"]);
-    $query->bindParam("category_id", $content["category_id"]);
-
-    if ($query->execute()) {
-        return true;
-    }
-
-    return false;
-}
-
 function includeAdminToCards(string $type = "", $id = null): false|string {
     global $params;
 
@@ -78,4 +23,21 @@ function includeAdminToCards(string $type = "", $id = null): false|string {
     }
 
     return false;
+}
+
+function addNewCard(string $cardType) {
+    $card = "
+<div class='col-sm-6 col-md-4 col-lg-3 card-group'>
+   <div class='card bg-dark mx-2 border border-3 border-dark rounded-2' style='width: 18rem;'>
+      <img src='/img/create-card.png' class='card-img-top' alt='Placeholder image'>
+         <div class='card-body'>
+            <h5 class='card-title text-white'>Create a new $cardType</h5>
+            <hr>
+            <p class='card-text text-light'>Add a new $cardType to this page.</p>
+            <a href='/admin/add/$cardType' class='stretched-link'></a><br>
+      </div>
+   </div>
+</div>";
+
+    return $card;
 }
