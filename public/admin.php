@@ -183,6 +183,23 @@ if (!isAdmin()) {
                 header("Location: /home");
                 break;
 
+            case 'member-editing':
+                $titleSuffix = ' | Member editing';
+                $memberSearchBar = null;
+                $moderationActionInput = null;
+                $moderationActionError = null;
+
+                $userEmail = null;
+
+                $deleteUserError = null;
+                $deleteUser = null;
+
+                $mainErrorField = null;
+
+                include_once "../Templates/admin/member-editing.php";
+
+                include "../Templates/defaults/footer.php";
+                break;
             case 'image-deleting':
                 $titleSuffix = ' | Image Deleting';
                 require "../Modules/image-editing.php";
