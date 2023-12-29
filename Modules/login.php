@@ -43,7 +43,7 @@ function checkLogin($user): string
             $dbUser = $dbUser[0];
 
             if (!empty($dbUser->first_name) && !empty($dbUser->last_name) && !empty($dbUser->password)) {
-                if ($user["first_name"] == $dbUser->first_name && $user["last_name"] == $dbUser->last_name && $user["password"] == $dbUser->password) {
+                if ($user["first_name"] == $dbUser->first_name && $user["last_name"] == $dbUser->last_name && $user["email"] == $dbUser->email && $user["password"] == $dbUser->password) {
                     $_SESSION["user"] = $dbUser;
 
                     if (isMember()) {

@@ -7,6 +7,7 @@ global $product;
 global $categoryName;
 global $reviewMessages;
 global $pageReviews;
+global $breadcrumbLink;
 ?>
 
 <body>
@@ -15,17 +16,16 @@ global $pageReviews;
     <?php
     //adds the rest of the default files.
     include_once('defaults/header.php');
-    include_once('defaults/menu.php');
+    include_once(loadCorrectIncludeFormat('defaults/menu.php'));
     //    include_once('defaults/pictures.php');
     ?>
 
     <div class="bg-black text-light text-center p-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/home">Home</a></li>
-                <li class="breadcrumb-item"><a href="/categories">Categories</a></li>
-                <li class="breadcrumb-item"><a href="/category/<?php if(isset($product->category_id)){echo $product->category_id;} ?>"><?= $categoryName; ?></a></li>
-                <li class="breadcrumb-item"><a href="/product/<?php if(isset($product->id)){echo $product->id;} ?>"><?= $product->name ?></a></li>
+                <li class="breadcrumb-item"><a href="home">Home</a></li>
+                <li class="breadcrumb-item"><a href="categories">Categories</a></li>
+                <?= $breadcrumbLink; ?>
             </ol>
         </nav>
         <div class="row gy-3">

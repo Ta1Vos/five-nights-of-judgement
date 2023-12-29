@@ -4,6 +4,18 @@
 // Adds the head for the page.
 include_once('defaults/head.php');
 global $categoryName;
+global $breadcrumbLink;
+
+if (!isset($firstLinkPiece)) {
+    $firstLinkPiece = null;
+}
+
+global $createCard;
+
+if (!isset($createCard)) {
+    echo "AAAAAAAAAAAAAAAAA";
+    $createCard = null;
+}
 ?>
 
 <body>
@@ -12,16 +24,16 @@ global $categoryName;
     <?php
     //adds the rest of the default files.
     include_once('defaults/header.php');
-    include_once('defaults/menu.php');
+    include_once(loadCorrectIncludeFormat('defaults/menu.php'));
     //    include_once('defaults/pictures.php');
     ?>
 
     <div class="bg-black text-light text-center p-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/home">Home</a></li>
-                <li class="breadcrumb-item"><a href="/categories">Categories</a></li>
-                <li class="breadcrumb-item"><a href="/category/<?php if(isset($params[2])){echo $params[2];}?>"><?= $categoryName; ?></a></li>
+                <li class="breadcrumb-item"><a href="home">Home</a></li>
+                <li class="breadcrumb-item"><a href="categories">Categories</a></li>
+                <?= $breadcrumbLink; ?>
             </ol>
         </nav>
         <div class="row gy-3 text-center d-flex justify-content-center flex-row">
@@ -38,12 +50,14 @@ global $categoryName;
                         <div class='card-body'>
                             <hr>
                             <h5 class='card-title text-white'><?= $product->name; ?></h5>
-                            <a href='/product/<?= $product->id; ?>' class='stretched-link'></a>
+                            <a href='<?= $firstLinkPiece; ?>product/<?= $product->id; ?>' class='stretched-link'></a>
                         </div>
+                        <?php if (function_exists("includeAdminToCards")) { echo includeAdminToCards("product", $product->id); } ?>
                     </div>
                 </div>
             <?php endforeach; ?>
 
+            <?= $createCard; ?>
         </div>
 
         <hr>
