@@ -353,7 +353,7 @@ function validateCardCreation() {
             global $params;
 
             if (isset($params[3])) {
-                if (addToCategory($titleInput, $descriptionInput, $imageInput)) {
+                if (addToCategory($titleInput, $imageInput, $descriptionInput)) {
                     $mainErrorField = "Card successfully created!";
                     header("Location: /admin/categories");
                 } else {
@@ -390,7 +390,7 @@ function validateCardCreation() {
             global $params;
 
             if (isset($params[3])) {
-                if (addToProduct($titleInput, $descriptionInput, $imageInput, $categoryInput)) {
+                if (addToProduct($titleInput, $imageInput, $descriptionInput, $categoryInput)) {
                     $mainErrorField = "Card successfully created!";
                     header("Location: /admin/category/$categoryInput");
                 } else {
