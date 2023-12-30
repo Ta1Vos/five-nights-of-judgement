@@ -29,6 +29,7 @@ include_once('../Templates/defaults/head.php');
                     <br>
                     <label>
                         <input type="text" name="search-member" value="<?= $memberSearchBar; ?>">
+                        <input type="submit" name="submit-member-search" value="Search">
                     </label>
                 </div>
                 <br><br><br><br>
