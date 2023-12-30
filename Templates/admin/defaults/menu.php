@@ -40,11 +40,17 @@ if (!isset($additionalNavbarContent)) {
                 <li class="nav-item">
                     <a class="nav-link" href="contact">contact</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="member-editing">member editing</a>
+                </li>
                 <?= $additionalNavbarContent; ?>
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/home">User page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/member">Member page</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/home">Admin page</a>
