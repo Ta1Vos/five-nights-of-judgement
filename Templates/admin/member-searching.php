@@ -5,6 +5,11 @@
 include_once('../Templates/defaults/head.php');
 
 global $memberList;
+global $memberSearchFN;
+global $memberSearchLN;
+
+global $searchError;
+global $selectError;
 ?>
 
 <body>
@@ -31,12 +36,12 @@ global $memberList;
                     <div>First name</div>
                     <br>
                     <label>
-                        <input type="text" name="search-member-fn" value="<?= $memberSearchBar; ?>">
+                        <input type="text" name="search-member-fn" value="<?= $memberSearchFN; ?>">
                     </label>
                     <div class="pt-3">Last name</div>
                     <br>
                     <label>
-                        <input type="text" name="search-member-ln" value="<?= $memberSearchBar; ?>">
+                        <input type="text" name="search-member-ln" value="<?= $memberSearchLN; ?>">
                     </label>
                     <br>
                     <div class="searches p t-3">
@@ -45,8 +50,11 @@ global $memberList;
                         </label>
                         <br>
                         <label class="mt-5">
-                            <input type="submit" name="submit-member-search" value="Select all members">
+                            <input type="submit" name="submit-member-search_all" value="Select all members">
                         </label>
+                    </div>
+                    <div class="error-field mt-2">
+                        <?= $searchError; ?>
                     </div>
                     <br><hr><br>
                     <h3>Found users in list</h3>
@@ -65,7 +73,7 @@ global $memberList;
                 </label>
             </form>
             <div class="error-field">
-                <?= $mainErrorField; ?>
+                <?= $selectError; ?>
             </div>
 
             <hr>

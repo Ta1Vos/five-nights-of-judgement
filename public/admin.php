@@ -187,16 +187,9 @@ if (!isAdmin()) {
                 $titleSuffix = ' | Member searching';
                 require "../Modules/member-editing.php";
 
-                if (isset($params[3])) {
-                    if (!is_int($params[3])) {
-                        //List member page
-                        include "../Templates/defaults/footer.php";
-                        break;
-                    }
-                }
-
                 //Search page
                 $memberSearchBar = null;
+                $memberList = null;
                 $moderationActionInput = null;
                 $moderationActionError = null;
 
@@ -205,18 +198,42 @@ if (!isAdmin()) {
                 $deleteUserError = null;
                 $deleteUser = null;
 
-                $mainErrorField = null;
+                $searchError = null;
+                $selectError = null;
 
-                $memberList = fetchAllMemberNames();
-                $member = searchMemberName("Henry", "");
-                var_dump($member);
+                if (isset($_POST["select-member"])) {//Go to member page of selected member in list
+                    if (isset($_POST["selected-member"])) {
+                        if (filter_input(INPUT_POST, 'selected-member', FILTER_VALIDATE_INT)) {//Check if selected member is a number
+                            $selectedMember = $_POST["selected-member"];
+                            header("Location: /admin/member-listing/$selectedMember");
+                        }
+                    }
+                } else if (isset($_POST["submit-member-search"])) {//Submit a member search by first and/or last name
+                    if (isset($_POST["search-member-fn"]) && isset($_POST["search-member-ln"])) {
+                        $memberSearchFN = $_POST["search-member-fn"];
+                        $memberSearchLN = $_POST["search-member-ln"];
+                        $memberList = searchMemberName($_POST["search-member-fn"], $_POST["search-member-ln"]);
+
+                        if (count($memberList) <= 0) {
+                            $searchError = "No member under this first name / last name has been found!";
+                        }
+                    }
+                } else if (isset($_POST["submit-member-search_all"])) {//Display a list with all the members
+                    $memberList = searchMemberName();
+                }
 
                 include_once "../Templates/admin/member-searching.php";
 
                 include "../Templates/defaults/footer.php";
                 break;
             case 'member-listing':
+                $titleSuffix = ' | Member searching';
 
+                if ($params[3] != intval($params[3])) {//Kick user out if param is not a number
+                    header("Location: /admin/member-searching");
+                }
+
+                require "../Modules/member-editing.php";
                 break;
             case
             'image-deleting':
