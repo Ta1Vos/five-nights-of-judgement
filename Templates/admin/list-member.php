@@ -3,6 +3,8 @@
 <?php
 // Adds the head for the page.
 include_once('../Templates/defaults/head.php');
+global $user;
+global $userEmail;
 ?>
 
 <body>
@@ -24,31 +26,40 @@ include_once('../Templates/defaults/head.php');
         </nav>
         <div class="row gy-3">
             <form method="post" class="row text-light text-center">
-                <div class="col-12">
-                    <div>* Moderation action</div>
-                    <small class="error-field">
-                        <?= $moderationActionError; ?>
-                    </small>
-                    <br>
-                    <label>
-                        <input type="text" name="moderation-action" value="<?= $moderationActionInput; ?>">
-                    </label>
-                </div>
-                <br><br><br><br>
-                <div class="col-12">
-                    <div>Email</div>
+                <div class="row col-12">
+                    <h3 class="mb-5">User information</h3>
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <h5><u>First name</u></h5>
+                        <div class="fn-field">
+                            <?= $user->first_name; ?>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h5><u>Last name</u></h5>
+                        <div class="ln-field">
+                            <?= $user->last_name; ?>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                    <h5 class="mt-5"><u>Email</u></h5>
                     <div class="email-field">
                         <?= $userEmail; ?>
                     </div>
                 </div>
+                <div class="col-12">
+                    <h3 class="mt-5 pt-5">Moderation actions</h3>
+                    <p class="text-decoration-underline mt-5">There are currently no special moderation actions.</p>
+                    <br>
+                </div>
                 <br><br><br><br>
                 <div class="col-12">
-                    <div>* Delete user</div>
+                    <h3 class="mt-5">Delete user</h3>
                     <small class="error-field">
                         <?= $deleteUserError; ?>
                     </small>
                     <div class="delete-user-field">
-                        <button><?= $deleteUser; ?></button>
+                        <input type="submit" name="delete-user" value="Delete/ban user" class="fw-bold">
                     </div>
                 </div>
                 <br>
@@ -60,10 +71,6 @@ include_once('../Templates/defaults/head.php');
 
         <hr>
     </div>
-    <?php
-    include_once('defaults/footer.php');
-
-    ?>
 </div>
 
 </body>

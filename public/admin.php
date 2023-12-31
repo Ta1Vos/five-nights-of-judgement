@@ -212,14 +212,14 @@ if (!isAdmin()) {
                     if (isset($_POST["search-member-fn"]) && isset($_POST["search-member-ln"])) {
                         $memberSearchFN = $_POST["search-member-fn"];
                         $memberSearchLN = $_POST["search-member-ln"];
-                        $memberList = searchMemberName($_POST["search-member-fn"], $_POST["search-member-ln"]);
+                        $memberList = searchUserName($_POST["search-member-fn"], $_POST["search-member-ln"]);
 
                         if (count($memberList) <= 0) {
                             $searchError = "No member under this first name / last name has been found!";
                         }
                     }
                 } else if (isset($_POST["submit-member-search_all"])) {//Display a list with all the members
-                    $memberList = searchMemberName();
+                    $memberList = searchUserName();
                 }
 
                 include_once "../Templates/admin/member-searching.php";
@@ -234,6 +234,26 @@ if (!isAdmin()) {
                 }
 
                 require "../Modules/member-editing.php";
+
+                $userEmail = "No email has been set for this user";
+
+                $deleteUserError = null;
+                $mainErrorField = null;
+
+                $user = searchUserByID($params[3]);
+
+                if (!isset($user->first_name) || !isset($user->last_name)) {//Extra failsafe in case something goes wrong
+                    header("Location: /admin/member-searching");
+                }
+
+                if (isset($user->email)) {
+                    $userEmail = $user->email;
+                }
+
+                $userEmail = $user->email;
+
+                include_once "../Templates/admin/list-member.php";
+                include "../Templates/defaults/footer.php";
                 break;
             case
             'image-deleting':

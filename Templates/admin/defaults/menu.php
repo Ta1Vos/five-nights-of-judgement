@@ -41,7 +41,7 @@ if (!isset($additionalNavbarContent)) {
                     <a class="nav-link" href="contact">contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="member-editing">member editing</a>
+                    <a class="nav-link" href="/admin/member-searching">member editing</a>
                 </li>
                 <?= $additionalNavbarContent; ?>
             </ul>
