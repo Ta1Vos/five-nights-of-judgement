@@ -45,3 +45,23 @@ function searchUserByID(int $id):User|string {
     }
     return "Something went wrong!";
 }
+
+/**
+ * Search a member by requesting their id.
+ * @param int $id Required | The identifier of the user.
+ * @return array|string Returns array with the results | OR | Returns string with an error message
+ */
+function removeUser(int $id):bool {
+    try {
+        global $pdo;
+        $query = $pdo->prepare("DELETE FROM registered_user WHERE id=:id limit 1");
+        $query->bindParam('id', $id);
+
+        if ($query->execute()) {
+            return true;
+        }
+    } catch (PDOException $exception) {
+        echo "Something went wrong -> <br> $exception<br>";
+    }
+    return false;
+}

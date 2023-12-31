@@ -5,6 +5,7 @@
 include_once('../Templates/defaults/head.php');
 global $user;
 global $userEmail;
+global $userDeleteButton;
 ?>
 
 <body>
@@ -26,25 +27,39 @@ global $userEmail;
         </nav>
         <div class="row gy-3">
             <form method="post" class="row text-light text-center">
-                <div class="row col-12">
+                <div class="col-12">
                     <h3 class="mb-5">User information</h3>
-                    <div class="col-3"></div>
-                    <div class="col">
-                        <h5><u>First name</u></h5>
-                        <div class="fn-field">
-                            <?= $user->first_name; ?>
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col">
+                            <h5><u>First name</u></h5>
+                            <div class="fn-field">
+                                <?= $user->first_name; ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <h5><u>Last name</u></h5>
-                        <div class="ln-field">
-                            <?= $user->last_name; ?>
+                        <div class="col">
+                            <h5><u>Last name</u></h5>
+                            <div class="ln-field">
+                                <?= $user->last_name; ?>
+                            </div>
                         </div>
+                        <div class="col-3"></div>
                     </div>
-                    <div class="col-3"></div>
-                    <h5 class="mt-5"><u>Email</u></h5>
-                    <div class="email-field">
-                        <?= $userEmail; ?>
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col">
+                            <h5 class="mt-5"><u>Email</u></h5>
+                            <div class="email-field">
+                                <?= $userEmail; ?>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h5 class="mt-5"><u>Role</u></h5>
+                            <i class="email-field fw-bold">
+                                <?= $user->role; ?>
+                            </i>
+                        </div>
+                        <div class="col-2"></div>
                     </div>
                 </div>
                 <div class="col-12">
@@ -59,7 +74,7 @@ global $userEmail;
                         <?= $deleteUserError; ?>
                     </small>
                     <div class="delete-user-field">
-                        <input type="submit" name="delete-user" value="Delete/ban user" class="fw-bold">
+                        <?= $userDeleteButton; ?>
                     </div>
                 </div>
                 <br>

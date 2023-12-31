@@ -236,6 +236,7 @@ if (!isAdmin()) {
                 require "../Modules/member-editing.php";
 
                 $userEmail = "No email has been set for this user";
+                $userDeleteButton = "<input type='submit' name='delete-user' value='Delete/ban user' class='fw-bold'>";
 
                 $deleteUserError = null;
                 $mainErrorField = null;
@@ -251,6 +252,32 @@ if (!isAdmin()) {
                 }
 
                 $userEmail = $user->email;
+
+                if (isset($_POST["delete-user"])) {
+                    $userDeleteButton = "
+                    <h5>Input check:</h5>
+                    <small>(input first name and last name)</small><br>
+                    <input type='text' name='confirm-check' class='fw-bold'><br><br>
+                    <input type='submit' name='confirm-delete-user' value='Are you sure you want to Delete/ban this user?' class='fw-bold'>
+                    <br>
+                    ";
+                } else if (isset($_POST["confirm-check"]) && isset($_POST["confirm-delete-user"])) {
+                    $memberNameCheck = $_POST["confirm-check"];
+
+                    if ($memberNameCheck == "$user->first_name $user->last_name") {
+                        if ($user->role != "admin") {
+                            if (removeUser($user->id)) {
+                                $deleteUserError = "User has been removed from the database!";
+                            } else {
+                                $deleteUserError = "Something went wrong while attempting to remove the user. Please contact a developer.";
+                            }
+                        } else {
+                            $deleteUserError = "Unable to remove this user! User is an administrator.";
+                        }
+                    } else {
+                        $deleteUserError = "Input is invalid, it is not equal to '{first name} {last name}' of the user.";
+                    }
+                }
 
                 include_once "../Templates/admin/list-member.php";
                 include "../Templates/defaults/footer.php";
