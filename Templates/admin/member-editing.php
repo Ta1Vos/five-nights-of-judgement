@@ -3,6 +3,8 @@
 <?php
 // Adds the head for the page.
 include_once('../Templates/defaults/head.php');
+
+global $memberList;
 ?>
 
 <body>
@@ -23,57 +25,51 @@ include_once('../Templates/defaults/head.php');
             </ol>
         </nav>
         <div class="row gy-3">
-            <form method="post" class="row text-light text-center">
+            <form method="post" class="row text-light text-center mt-2">
                 <div class="col-12">
-                    <div>* Search bar</div>
+                    <h3>Search by name</h3>
+                    <div>First name</div>
                     <br>
                     <label>
-                        <input type="text" name="search-member" value="<?= $memberSearchBar; ?>">
-                        <input type="submit" name="submit-member-search" value="Search">
+                        <input type="text" name="search-member-fn" value="<?= $memberSearchBar; ?>">
                     </label>
-                </div>
-                <br><br><br><br>
-                <div class="col-12">
-                    <div>* Moderation action</div>
-                    <small class="error-field">
-                        <?= $moderationActionError; ?>
-                    </small>
+                    <div class="pt-3">Last name</div>
                     <br>
                     <label>
-                        <input type="text" name="moderation-action" value="<?= $moderationActionInput; ?>">
+                        <input type="text" name="search-member-ln" value="<?= $memberSearchBar; ?>">
+                    </label>
+                    <br>
+                    <div class="searches pt-3">
+                        <label>
+                            <input type="submit" name="submit-member-search" value="Search">
+                        </label>
+                        <br>
+                        <label class="mt-5">
+                            <input type="submit" name="submit-member-search" value="Select all members">
+                        </label>
+                    </div>
+                    <br><hr><br>
+                    <h3>Found users in list</h3>
+                    <label>
+                        <select name="selected-member">
+                            <?php
+                            //LIST THE IMAGES OF THE PRODUCTS OF THE CATEGORIES
+                            foreach ($memberList as $member) {
+                                echo "<option value='$member->id'>$member->id - $member->first_name $member->last_name</option>";
+                            } ?>
+                        </select>
                     </label>
                 </div>
-                <br><br><br><br>
-                <div class="col-12">
-                    <div>Email</div>
-                    <div class="email-field">
-                        <?= $userEmail; ?>
-                    </div>
-                </div>
-                <br><br><br><br>
-                <div class="col-12">
-                    <div>* Delete user</div>
-                    <small class="error-field">
-                        <?= $deleteUserError; ?>
-                    </small>
-                    <div class="delete-user-field">
-                        <button><?= $deleteUser; ?></button>
-                    </div>
-                </div>
-                <br>
+                <label class="mt-5">
+                    <input type="submit" name="select-member" value="Select member">
+                </label>
             </form>
             <div class="error-field">
                 <?= $mainErrorField; ?>
             </div>
+
+            <hr>
         </div>
-
-        <hr>
-    </div>
-    <?php
-    include_once('defaults/footer.php');
-
-    ?>
-</div>
 
 </body>
 

@@ -185,6 +185,17 @@ if (!isAdmin()) {
 
             case 'member-editing':
                 $titleSuffix = ' | Member editing';
+                require "../Modules/member-editing.php";
+
+                if (isset($params[3])) {
+                    if (!is_int($params[3])) {
+                        //List member page
+                        include "../Templates/defaults/footer.php";
+                        break;
+                    }
+                }
+
+                //Search page
                 $memberSearchBar = null;
                 $moderationActionInput = null;
                 $moderationActionError = null;
@@ -196,11 +207,16 @@ if (!isAdmin()) {
 
                 $mainErrorField = null;
 
+                $memberList = fetchAllMemberNames();
+                $member = searchMemberName("Henry", "");
+                var_dump($member);
+
                 include_once "../Templates/admin/member-editing.php";
 
                 include "../Templates/defaults/footer.php";
                 break;
-            case 'image-deleting':
+            case
+            'image-deleting':
                 $titleSuffix = ' | Image Deleting';
                 require "../Modules/image-editing.php";
 
