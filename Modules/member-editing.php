@@ -10,7 +10,7 @@ function searchUserName(string $firstName = "", string $lastName = ""):array|str
         global $pdo;
         $firstName = '%' . $firstName . '%';
         $lastName = '%' . $lastName . '%';
-        $query = $pdo->prepare("SELECT id, first_name, last_name FROM registered_user WHERE first_name LIKE :first_name AND last_name LIKE :last_name");
+        $query = $pdo->prepare("SELECT id, first_name, last_name, SUBSTRING(role, 1, 1) as role FROM registered_user WHERE first_name LIKE :first_name AND last_name LIKE :last_name");
         $query->bindParam('first_name', $firstName);
         $query->bindParam('last_name', $lastName);
 
@@ -47,9 +47,9 @@ function searchUserByID(int $id):User|string {
 }
 
 /**
- * Search a member by requesting their id.
+ * Remove a user from the database by using their ID.
  * @param int $id Required | The identifier of the user.
- * @return array|string Returns array with the results | OR | Returns string with an error message
+ * @return bool Returns true if user has been removed. Returns false is something went wrong.
  */
 function removeUser(int $id):bool {
     try {

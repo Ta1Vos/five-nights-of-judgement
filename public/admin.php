@@ -235,7 +235,7 @@ if (!isAdmin()) {
 
                 require "../Modules/member-editing.php";
 
-                $userEmail = "No email has been set for this user";
+                $userEmail = null;
                 $userDeleteButton = "<input type='submit' name='delete-user' value='Delete/ban user' class='fw-bold'>";
 
                 $deleteUserError = null;
@@ -248,26 +248,31 @@ if (!isAdmin()) {
                 }
 
                 if (isset($user->email)) {
-                    $userEmail = $user->email;
+                    if ($user->email != null) {
+                        $userEmail = $user->email;
+                    } else {
+                        $userEmail = "<i>No email has been set for this user</i>";
+                    }
                 }
 
-                $userEmail = $user->email;
-
                 if (isset($_POST["delete-user"])) {
-                    $userDeleteButton = "
+                    if ($user->role != "admin") {
+                        $userDeleteButton = "
                     <h5>Input check:</h5>
                     <small>(input first name and last name)</small><br>
                     <input type='text' name='confirm-check' class='fw-bold'><br><br>
                     <input type='submit' name='confirm-delete-user' value='Are you sure you want to Delete/ban this user?' class='fw-bold'>
                     <br>
                     ";
+                    }
                 } else if (isset($_POST["confirm-check"]) && isset($_POST["confirm-delete-user"])) {
                     $memberNameCheck = $_POST["confirm-check"];
 
-                    if ($memberNameCheck == "$user->first_name $user->last_name") {
-                        if ($user->role != "admin") {
-                            if (removeUser($user->id)) {
+                    if ($memberNameCheck == "$user->first_name $user->last_name") {//Extra safe confirmation to delete users
+                        if ($user->role != "admin") {//Admins cannot be removed
+                            if (removeUser($user->id)) {//Remove user
                                 $deleteUserError = "User has been removed from the database!";
+                                header("Location: /admin/member-searching");
                             } else {
                                 $deleteUserError = "Something went wrong while attempting to remove the user. Please contact a developer.";
                             }
@@ -277,6 +282,11 @@ if (!isAdmin()) {
                     } else {
                         $deleteUserError = "Input is invalid, it is not equal to '{first name} {last name}' of the user.";
                     }
+                }
+
+                if ($user->role == "admin") {//Last failsafe so administrators cannot get removed
+                    $deleteUserError = "Unable to remove this user! User is an administrator.";
+                    $userDeleteButton = "";
                 }
 
                 include_once "../Templates/admin/list-member.php";

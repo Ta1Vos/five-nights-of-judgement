@@ -63,7 +63,7 @@ global $selectError;
                             <?php
                             //LIST THE IMAGES OF THE PRODUCTS OF THE CATEGORIES
                             foreach ($memberList as $member) {
-                                echo "<option value='$member->id'>$member->id - $member->first_name $member->last_name</option>";
+                                echo "<option value='$member->id'>$member->id - $member->first_name $member->last_name ($member->role)</option>";
                             } ?>
                         </select>
                     </label>

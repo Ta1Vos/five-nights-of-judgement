@@ -55,7 +55,7 @@ global $userDeleteButton;
                         </div>
                         <div class="col">
                             <h5 class="mt-5"><u>Role</u></h5>
-                            <i class="email-field fw-bold">
+                            <i class="role-field fw-bold">
                                 <?= $user->role; ?>
                             </i>
                         </div>
