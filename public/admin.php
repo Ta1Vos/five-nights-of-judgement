@@ -183,8 +183,8 @@ if (!isAdmin()) {
                 header("Location: /home");
                 break;
 
-            case 'member-editing':
-                $titleSuffix = ' | Member editing';
+            case 'member-searching':
+                $titleSuffix = ' | Member searching';
                 require "../Modules/member-editing.php";
 
                 if (isset($params[3])) {
@@ -211,9 +211,12 @@ if (!isAdmin()) {
                 $member = searchMemberName("Henry", "");
                 var_dump($member);
 
-                include_once "../Templates/admin/member-editing.php";
+                include_once "../Templates/admin/member-searching.php";
 
                 include "../Templates/defaults/footer.php";
+                break;
+            case 'member-listing':
+
                 break;
             case
             'image-deleting':

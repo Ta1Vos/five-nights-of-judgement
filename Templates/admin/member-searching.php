@@ -21,7 +21,7 @@ global $memberList;
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="home">Home</a></li>
-                <li class="breadcrumb-item"><a href="login">Log In</a></li>
+                <li class="breadcrumb-item"><a href="member-editing">Search members</a></li>
             </ol>
         </nav>
         <div class="row gy-3">
@@ -39,7 +39,7 @@ global $memberList;
                         <input type="text" name="search-member-ln" value="<?= $memberSearchBar; ?>">
                     </label>
                     <br>
-                    <div class="searches pt-3">
+                    <div class="searches p t-3">
                         <label>
                             <input type="submit" name="submit-member-search" value="Search">
                         </label>
