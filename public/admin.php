@@ -39,10 +39,10 @@ if (!isAdmin()) {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //
     // * Select for all images in edit & create.
-    // * Member editing page for admin
     // * MVC member part
     // * Member send reviews
     // * Admin edit reviews
+    // * Contact page
 
     if (isset($params[2])) {
         switch ($params[2]) {
