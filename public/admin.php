@@ -39,10 +39,10 @@ if (!isAdmin()) {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //
     // * Select for all images in edit & create.
-    // * Member editing page for admin
     // * MVC member part
     // * Member send reviews
     // * Admin edit reviews
+    // * Contact page
 
     if (isset($params[2])) {
         switch ($params[2]) {
@@ -183,7 +183,117 @@ if (!isAdmin()) {
                 header("Location: /home");
                 break;
 
-            case 'image-deleting':
+            case 'member-searching':
+                $titleSuffix = ' | Member searching';
+                require "../Modules/member-editing.php";
+
+                //Search page
+                $memberSearchBar = null;
+                $memberList = null;
+                $moderationActionInput = null;
+                $moderationActionError = null;
+
+                $userEmail = null;
+
+                $deleteUserError = null;
+                $deleteUser = null;
+
+                $searchError = null;
+                $selectError = null;
+
+                if (isset($_POST["select-member"])) {//Go to member page of selected member in list
+                    if (isset($_POST["selected-member"])) {
+                        if (filter_input(INPUT_POST, 'selected-member', FILTER_VALIDATE_INT)) {//Check if selected member is a number
+                            $selectedMember = $_POST["selected-member"];
+                            header("Location: /admin/member-listing/$selectedMember");
+                        }
+                    }
+                } else if (isset($_POST["submit-member-search"])) {//Submit a member search by first and/or last name
+                    if (isset($_POST["search-member-fn"]) && isset($_POST["search-member-ln"])) {
+                        $memberSearchFN = $_POST["search-member-fn"];
+                        $memberSearchLN = $_POST["search-member-ln"];
+                        $memberList = searchUserName($_POST["search-member-fn"], $_POST["search-member-ln"]);
+
+                        if (count($memberList) <= 0) {
+                            $searchError = "No member under this first name / last name has been found!";
+                        }
+                    }
+                } else if (isset($_POST["submit-member-search_all"])) {//Display a list with all the members
+                    $memberList = searchUserName();
+                }
+
+                include_once "../Templates/admin/member-searching.php";
+
+                include "../Templates/defaults/footer.php";
+                break;
+            case 'member-listing':
+                $titleSuffix = ' | Member searching';
+
+                if ($params[3] != intval($params[3])) {//Kick user out if param is not a number
+                    header("Location: /admin/member-searching");
+                }
+
+                require "../Modules/member-editing.php";
+
+                $userEmail = null;
+                $userDeleteButton = "<input type='submit' name='delete-user' value='Delete/ban user' class='fw-bold'>";
+
+                $deleteUserError = null;
+                $mainErrorField = null;
+
+                $user = searchUserByID($params[3]);
+
+                if (!isset($user->first_name) || !isset($user->last_name)) {//Extra failsafe in case something goes wrong
+                    header("Location: /admin/member-searching");
+                }
+
+                if (isset($user->email)) {
+                    if ($user->email != null) {
+                        $userEmail = $user->email;
+                    } else {
+                        $userEmail = "<i>No email has been set for this user</i>";
+                    }
+                }
+
+                if (isset($_POST["delete-user"])) {
+                    if ($user->role != "admin") {
+                        $userDeleteButton = "
+                    <h5>Input check:</h5>
+                    <small>(input first name and last name)</small><br>
+                    <input type='text' name='confirm-check' class='fw-bold'><br><br>
+                    <input type='submit' name='confirm-delete-user' value='Are you sure you want to Delete/ban this user?' class='fw-bold'>
+                    <br>
+                    ";
+                    }
+                } else if (isset($_POST["confirm-check"]) && isset($_POST["confirm-delete-user"])) {
+                    $memberNameCheck = $_POST["confirm-check"];
+
+                    if ($memberNameCheck == "$user->first_name $user->last_name") {//Extra safe confirmation to delete users
+                        if ($user->role != "admin") {//Admins cannot be removed
+                            if (removeUser($user->id)) {//Remove user
+                                $deleteUserError = "User has been removed from the database!";
+                                header("Location: /admin/member-searching");
+                            } else {
+                                $deleteUserError = "Something went wrong while attempting to remove the user. Please contact a developer.";
+                            }
+                        } else {
+                            $deleteUserError = "Unable to remove this user! User is an administrator.";
+                        }
+                    } else {
+                        $deleteUserError = "Input is invalid, it is not equal to '{first name} {last name}' of the user.";
+                    }
+                }
+
+                if ($user->role == "admin") {//Last failsafe so administrators cannot get removed
+                    $deleteUserError = "Unable to remove this user! User is an administrator.";
+                    $userDeleteButton = "";
+                }
+
+                include_once "../Templates/admin/list-member.php";
+                include "../Templates/defaults/footer.php";
+                break;
+            case
+            'image-deleting':
                 $titleSuffix = ' | Image Deleting';
                 require "../Modules/image-editing.php";
 

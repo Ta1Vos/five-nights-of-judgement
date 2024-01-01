@@ -1,8 +1,8 @@
 <?php
 global $params;
 //$params[2] is de action en $params[3] een getal die de action nodig heeft
-//check if user has role admin
-if (!isMember()) {
+//check if user has role member
+if (!isMember() && !isAdmin()) {
     logout();
     header ("location:/home");
     die("no u");
