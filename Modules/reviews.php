@@ -23,3 +23,61 @@ function loadReviews(int $id):array|false {
 
     return $reviewMessages;
 }
+
+function validateReview(string $description = "", mixed $rating = ""):bool {
+    global $description;
+    global $rating;
+
+    global $descriptionError;
+    global $ratingError;
+
+    $inputValid = true;
+
+    if (!isset($description)) {//Check if description has been filled in
+        $descriptionError = "You must fill something in in the description!";
+        $inputValid = false;
+    }
+
+    if (isset($rating)) {//Check if rating has been filled in
+        if (filter_input(INPUT_POST, "review-rating", FILTER_VALIDATE_INT)) {//Check if it's an integer
+            if ($rating < 0 || $rating > 10) {//Check if the rating is in between 0-10
+                $ratingError = "You must fill in a number inbetween 0 and 10!";
+                $inputValid = false;
+            }
+        } else {
+            $ratingError = "You must fill in a number!";
+            $inputValid = false;
+        }
+    } else {
+        $ratingError = "You must fill something in in the ratings!";
+        $inputValid = false;
+    }
+
+    return $inputValid;
+}
+
+function createReview(string $description, int $rating, int $userId):bool {
+    try {
+        global $pdo;
+        global $params;
+        $dateTime = date("Y-m-d H:i:s");
+        $productId = $params[3];
+
+        $query = $pdo->prepare("INSERT INTO review SET message=:description, rating=:rating, publish_time=:dateTime, product_id=:productId, registered_user_id=:userId");
+        $query->bindParam("description", $description);
+        $query->bindParam("rating", $rating);
+        $query->bindParam("dateTime", $dateTime);
+        $query->bindParam("productId", $productId);
+        $query->bindParam("userId", $userId);
+
+        if ($query->execute()) {
+            return true;
+        }
+    } catch (PDOException $exception) {
+        global $notificationField;
+        echo "<br><small>$exception</small><br>";
+        $notificationField = "<span class='error-field'>Something went wrong upon trying to publish your review. Please contact an administrator!</span>";
+    }
+
+    return false;
+}

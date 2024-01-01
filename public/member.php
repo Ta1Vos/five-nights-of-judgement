@@ -68,13 +68,53 @@ if (!isMember() && !isAdmin()) {
                 $breadcrumbLink = "<li class='breadcrumb-item'><a href='/member/category/$product->category_id'>$categoryName</a></li>";
                 $breadcrumbLink .= "<li class='breadcrumb-item'><a href='/member/product/$product->id'>$product->name</a></li>";
 
-                include_once "../Templates/product-detail.php";
-                break;
+                //REVIEWS
+                $reviewPlacingForm = "<input type='submit' name='open-reviews' class='btn btn-light' value='&plus; Place review'>";
+                $descriptionError = null;
+                $ratingError = null;
+                $notificationField = null;
 
-            case 'review':
-                break;
+                if (isset($_SESSION["review-message"])) {
+                    $notificationField = "Your review has been added!";
+                    unset($_SESSION["review-message"]);
+                } else {
+                    if (isset($_POST["submit-review"]) && isset($_POST["review-description"]) && isset($_POST["review-rating"])) {//VALIDATE AND POST REVIEW
+                        $description = $_POST["review-description"];
+                        $rating = $_POST["review-rating"];
 
-            case 'logout':
+                        if (validateReview($description, $rating)) {
+                            if (isset($_SESSION["user"]->id)) {
+                                $userId = $_SESSION["user"]->id;
+
+                                if (createReview($description, $rating, $userId)) {
+                                    $_POST = [];
+                                    $_SESSION["review-message"] = true;
+                                    header("Refresh: 0");
+                                }
+
+                            } else {
+                                $notificationField = "Something went wrong! Please try logging out and back in.";
+                            }
+                        }
+                    }
+
+                    if (isset($_POST["open-reviews"]) || isset($_POST["submit-review"])) {//SHOW REVIEW PLACING FORM
+                        $reviewPlacingForm = "<hr><br><h4 class='my-3'>Description</h4>";
+                        $reviewPlacingForm .= "<div class='error-field'>$descriptionError</div>";
+                        $reviewPlacingForm .= "<label class='row input-group'><div class='col-2'></div><textarea class='form-control col-8' name='review-description' placeholder='Your review goes here'></textarea><div class='col-2'></div></label>";
+                        $reviewPlacingForm .= "<br><h4 class='my-3'>Rating</h4><small><i class='bi bi-star mx-1'></i>0 - 10<i class='bi bi-star-fill mx-1'></i></small><br>";
+                        $reviewPlacingForm .= "<div class='error-field'>$ratingError</div>";
+                        $reviewPlacingForm .= "<label><input type='number' name='review-rating' min='0' max='10' value='5' class='mt-2'></label><br>";
+                        $reviewPlacingForm .= "<input type='submit' name='submit-review' class='btn btn-light mt-5' value='&plus; Place review'>";
+                    }
+                }
+
+
+                    include_once "../Templates/product-detail.php";
+                    break;
+
+                case
+                    'logout':
                 logout();
                 header("Location: /home");
                 break;
@@ -92,7 +132,8 @@ if (!isMember() && !isAdmin()) {
                 $frequentlyVisitedPages = loadCardContents($frequentlyVisitedPages, "product");
                 include_once "../Templates/home.php";
         }
-    } else {
-        header("Location: /member/home");
-    }
 }
+            else {
+                header("Location: /member/home");
+            }
+        }

@@ -98,6 +98,11 @@ global $breadcrumbLink;
                 </div>
             <?php endforeach; ?>
         </div>
+        <?php
+        if (isMember() || isAdmin()) {
+            include_once "../Templates/member/place-reviews.php";
+        }
+        ?>
     </div>
     <?php
     include_once('defaults/footer.php');
