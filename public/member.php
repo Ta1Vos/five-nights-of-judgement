@@ -119,7 +119,7 @@ if (!isMember() && !isAdmin()) {
                     if (isset($_POST["submit-review"]) && isset($_POST["review-description"]) && isset($_POST["review-rating"])) {//VALIDATE AND POST REVIEW
                         $description = $_POST["review-description"];
                         $rating = $_POST["review-rating"];
-
+                      
                         if (validateReview($description, $rating)) {
                             if (isset($_SESSION["user"]->id)) {
                                 $userId = $_SESSION["user"]->id;
@@ -146,7 +146,6 @@ if (!isMember() && !isAdmin()) {
                         $reviewPlacingForm .= "<input type='submit' name='submit-review' class='btn btn-light mt-5' value='&plus; Place review'>";
                     }
                 }
-
                 include_once "../Templates/product-detail.php";
                 break;
 

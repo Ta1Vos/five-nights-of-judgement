@@ -20,6 +20,10 @@ if (!isAdmin()) {
      *the switch statement checks which page you want to go.
      */
 
+    if (!isset($params[2])) {//Small fix so user does not get instantly logged out
+        header("Location: /admin/home");
+    }
+
     //Fixes crucial bug with the navbar, in case illegal content is present as the 'id' for a category or a product.
     if (($params[2] == "category" || $params[2] == "product") && $params[3] != intval($params[3])) {
         if ($params[3] != "edit") {//Debugger works differently for edit page, which still needs 2 params
@@ -478,7 +482,6 @@ if (!isAdmin()) {
                 break;
         }
     } else {
-        logout();
-        header("location:/home");
+        header("location:/admin/home");
     }
 }

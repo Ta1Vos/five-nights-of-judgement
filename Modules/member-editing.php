@@ -24,29 +24,6 @@ function searchUserName(string $firstName = "", string $lastName = ""):array|str
 }
 
 /**
- * Search a member by requesting their id.
- * @param int $id Required | The identifier of the user.
- * @return array|string Returns array with the results | OR | Returns string with an error message
- */
-function searchUserByID(int $id):User|string {
-    try {
-        global $pdo;
-        $query = $pdo->prepare("SELECT id, first_name, last_name, email, role FROM registered_user WHERE id=:id limit 1");
-        $query->bindParam('id', $id);
-
-        if ($query->execute()) {
-            $result = $query->fetchAll(PDO::FETCH_CLASS, 'User');
-            if (count($result) > 0) {
-                return $result[0];
-            }
-        }
-    } catch (PDOException $exception) {
-        return "Something went wrong -><br> $exception<br>";
-    }
-    return "Something went wrong!";
-}
-
-/**
  * Remove a user from the database by using their ID.
  * @param int $id Required | The identifier of the user.
  * @return bool Returns true if user has been removed. Returns false is something went wrong.

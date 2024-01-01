@@ -6,7 +6,6 @@ include_once('defaults/head.php');
 global $product;
 global $categoryName;
 global $reviewMessages;
-global $pageReviews;
 global $breadcrumbLink;
 ?>
 
@@ -52,8 +51,58 @@ global $breadcrumbLink;
         </div>
         <hr>
         <div class="reviews">
-            <?= $reviewMessages; ?>
+            <?php foreach ($reviewMessages as $reviewMessage):
+                $reviewSender = searchUserByID($reviewMessage->registered_user_id);
+                $rating = $reviewMessage->rating / 2;
+                $halfStar = false;
+                $emptyStars = 5;
+
+                if ($rating != floor($rating)) {
+                    $rating -= 1;
+                    $halfStar = true;
+                }
+                ?>
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="card col-8 bg-dark p-0 my-5">
+                        <div class="card-header bg-secondary">
+                            <?= $reviewSender->first_name ?> <?= $reviewSender->last_name ?>
+                        </div>
+                        <div class="py-3">
+                            <?= $reviewMessage->message ?>
+                        </div>
+                        <div class="card-header bg-secondary">
+                            --&nbsp;
+                            <?php
+                            //ECHOES THE RATING
+                            for ($i=0; $i<$rating; $i++) {
+                                echo "<i class='bi bi-star-fill mx-1'></i>";
+                                $emptyStars--;
+                            }
+                            if ($halfStar) {
+                                echo "<i class='bi bi-star-half mx-1'></i>";
+                                $emptyStars--;
+                            }
+                            //ECHOES EMPTY STARS
+                            for ($i=0; $i<$emptyStars; $i++) {
+                                echo "<i class='bi bi-star mx-1'></i>";
+                            }
+                            ?>
+                            &nbsp;--
+                        </div>
+                        <small class="border-top border-1 border-dark">
+                            <?= $reviewMessage->publish_time ?>
+                        </small>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+            <?php endforeach; ?>
         </div>
+        <?php
+        if (isMember() || isAdmin()) {
+            include_once "../Templates/member/place-reviews.php";
+        }
+        ?>
     </div>
     <?php
     include_once('defaults/footer.php');
