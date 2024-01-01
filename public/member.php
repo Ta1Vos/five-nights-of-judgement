@@ -4,7 +4,7 @@ global $params;
 //check if user has role member
 if (!isMember() && !isAdmin()) {
     logout();
-    header ("location:/home");
+    header("location:/home");
     die("no u");
 } else {
 
@@ -19,7 +19,9 @@ if (!isMember() && !isAdmin()) {
         header("Location: /$params[1]/$params[3]/$params[4]");//Redirects to the page listed after category or product, as that usually breaks.
     }
 
-    switch ($params[2]) {
+    if (isset($params[2])) {
+        switch ($params[2]) {
+
             case 'profile':
                 break;
             case 'edit-profile':
@@ -59,48 +61,60 @@ if (!isMember() && !isAdmin()) {
                 break;
             case 'change-password':
                 break;
->>>>>>> Stashed changes
 
-        case 'categories':
-            break;
+            case 'categories':
+                //adds " | Categories:" to the title
+                $titleSuffix = ' | Categories';
+                /*
+                 * calls the function getCategories from categories.php in the modules folder.
+                 * check categories.php for more information.
+                 */
+                $categories = getCategories();
+                //var_dump($categories);die;
 
-        case 'category':
-            updateVisits("category", $params[3]);
-            $products=getProducts($params[3]);//Fetches the products
-            $categoryName = getCategoryName($params[2], $params[3]);//Gets category name for the breadcrumb link
+                /*
+                 * includes the template categories.php from the templates folder.
+                 * check categories.php for more information.
+                 */
+                include_once "../Templates/categories.php";
+                break;
 
-            //Breadcrumb Link for member
-            $breadcrumbLink = "<li class='breadcrumb-item'><a href='/member/$params[3]'>$categoryName</a></li>";
+            case 'category':
+                updateVisits("category", $params[3]);
+                $products = getProducts($params[3]);//Fetches the products
+                $categoryName = getCategoryName($params[2], $params[3]);//Gets category name for the breadcrumb link
 
-            include_once "../Templates/products.php";
-            break;
-        case 'product':
-            updateVisits("product", $params[3]);//Updates visits by one
-            $productDetails=getProductDetails($params[3]);//Fetches the product details
-            $categoryName = getCategoryName($params[2], $params[3]);//Gets category name for the breadcrumb link
-            $reviewMessages = loadReviews($params[3]);//Gets review messages to show all the reviews
+                //Breadcrumb Link for member
+                $breadcrumbLink = "<li class='breadcrumb-item'><a href='/member/$params[3]'>$categoryName</a></li>";
 
-            $product = $productDetails[0];
+                include_once "../Templates/products.php";
+                break;
+            case 'product':
+                updateVisits("product", $params[3]);//Updates visits by one
+                $productDetails = getProductDetails($params[3]);//Fetches the product details
+                $categoryName = getCategoryName($params[2], $params[3]);//Gets category name for the breadcrumb link
+                $reviewMessages = loadReviews($params[3]);//Gets review messages to show all the reviews
 
-            //Breadcrumb Link for member
-            $breadcrumbLink = "<li class='breadcrumb-item'><a href='/member/category/$product->category_id'>$categoryName</a></li>";
-            $breadcrumbLink .= "<li class='breadcrumb-item'><a href='/member/product/$product->id'>$product->name</a></li>";
+                $product = $productDetails[0];
 
-            include_once "../Templates/product-detail.php";
-            break;
+                //Breadcrumb Link for member
+                $breadcrumbLink = "<li class='breadcrumb-item'><a href='/member/category/$product->category_id'>$categoryName</a></li>";
+                $breadcrumbLink .= "<li class='breadcrumb-item'><a href='/member/product/$product->id'>$product->name</a></li>";
 
-        case 'review':
-            break;
+                //REVIEWS
+                $reviewPlacingForm = "<input type='submit' name='open-reviews' class='btn btn-light' value='&plus; Place review'>";
+                $descriptionError = null;
+                $ratingError = null;
+                $notificationField = null;
 
-        case 'logout':
-            logout();
-            header("Location: /home");
-            break;
+                if (isset($_SESSION["review-message"])) {
+                    $notificationField = "Your review has been added!";
+                    unset($_SESSION["review-message"]);
+                } else {
+                    if (isset($_POST["submit-review"]) && isset($_POST["review-description"]) && isset($_POST["review-rating"])) {//VALIDATE AND POST REVIEW
+                        $description = $_POST["review-description"];
+                        $rating = $_POST["review-rating"];
 
-<<<<<<< Updated upstream
-        default://Default is always home
-            break;
-=======
                         if (validateReview($description, $rating)) {
                             if (isset($_SESSION["user"]->id)) {
                                 $userId = $_SESSION["user"]->id;
@@ -152,6 +166,5 @@ if (!isMember() && !isAdmin()) {
         }
     } else {
         header("Location: /member/home");
->>>>>>> Stashed changes
     }
 }
