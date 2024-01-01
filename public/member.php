@@ -108,13 +108,12 @@ if (!isMember() && !isAdmin()) {
                         $reviewPlacingForm .= "<input type='submit' name='submit-review' class='btn btn-light mt-5' value='&plus; Place review'>";
                     }
                 }
+                
+                include_once "../Templates/product-detail.php";
+                break;
 
-
-                    include_once "../Templates/product-detail.php";
-                    break;
-
-                case
-                    'logout':
+            case
+            'logout':
                 logout();
                 header("Location: /home");
                 break;
@@ -132,8 +131,7 @@ if (!isMember() && !isAdmin()) {
                 $frequentlyVisitedPages = loadCardContents($frequentlyVisitedPages, "product");
                 include_once "../Templates/home.php";
         }
+    } else {
+        header("Location: /member/home");
+    }
 }
-            else {
-                header("Location: /member/home");
-            }
-        }

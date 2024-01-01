@@ -8,7 +8,7 @@ function loadReviews(int $id):array|false {
     global $pdo;//Database connection
 
     //Fetches the reviews
-    $pageReviews = $pdo->prepare("SELECT * FROM review WHERE product_id=:id");
+    $pageReviews = $pdo->prepare("SELECT * FROM review WHERE product_id=:id ORDER BY publish_time");
     $pageReviews->bindParam("id", $id);
 
     if (!$pageReviews->execute()) {
