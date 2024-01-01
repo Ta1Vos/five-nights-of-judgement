@@ -21,9 +21,6 @@ if (!isMember() && !isAdmin()) {
 
     if (isset($params[2])) {
         switch ($params[2]) {
-
-            case 'profile':
-                break;
             case 'edit-profile':
                 $titleSuffix = ' | Edit profile';
                 var_dump($_SESSION);
@@ -59,7 +56,15 @@ if (!isMember() && !isAdmin()) {
 
 
                 break;
+            case 'change-email':
+                $titleSuffix = ' | Email reset';
+
+                include_once "../Templates/change-email.php";
+                break;
             case 'change-password':
+                $titleSuffix = ' | Password reset';
+
+                include_once "../Templates/change-password.php";
                 break;
 
             case 'categories':
