@@ -16,6 +16,7 @@ require '../Modules/logout.php';
 require '../Modules/database.php';
 //loads the information of the navbar
 require "../Modules/navbar_content.php";
+require "../Modules/reviews.php";
 global $navbarCategoryContent;
 
 session_start();
