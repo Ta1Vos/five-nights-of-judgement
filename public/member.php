@@ -21,12 +21,50 @@ if (!isMember() && !isAdmin()) {
 
     if (isset($params[2])) {
         switch ($params[2]) {
+            case 'edit-profile':
+                $titleSuffix = ' | Edit profile';
+                var_dump($_SESSION);
 
-            case 'profile':
+                if (isset($_SESSION["user"]->id)) {
+                    $user = $_SESSION["user"];
+                    $email = "<span class='error-field'>No email has been set!</span>";
+                    $password = null;
+                    $passwordInputType = "password";
+
+                    if ($user->email != null) {
+                        $email = $user->email;
+                    }
+
+                    if (isset($_POST["toggle-password"])) {
+                        $password = $user->password;
+                        $passwordInputType = "text";
+                        $_POST = [];
+                        header("Refresh: 5");
+                    } else {//Encrypts into random characters.
+                        try {
+                            $password = random_bytes(strlen($user->password));
+                        } catch (Exception $exception) {
+                            $password = "something went wrong";
+                        }
+                    }
+
+                    include_once "../Templates/edit-profile.php";
+                } else {
+                    logout();
+                    header("Location: /home");
+                }
+
+
                 break;
-            case 'editprofile':
+            case 'change-email':
+                $titleSuffix = ' | Email reset';
+
+                include_once "../Templates/change-email.php";
                 break;
-            case 'changepassword':
+            case 'change-password':
+                $titleSuffix = ' | Password reset';
+
+                include_once "../Templates/change-password.php";
                 break;
 
             case 'categories':
@@ -81,7 +119,7 @@ if (!isMember() && !isAdmin()) {
                     if (isset($_POST["submit-review"]) && isset($_POST["review-description"]) && isset($_POST["review-rating"])) {//VALIDATE AND POST REVIEW
                         $description = $_POST["review-description"];
                         $rating = $_POST["review-rating"];
-
+                      
                         if (validateReview($description, $rating)) {
                             if (isset($_SESSION["user"]->id)) {
                                 $userId = $_SESSION["user"]->id;
@@ -108,7 +146,6 @@ if (!isMember() && !isAdmin()) {
                         $reviewPlacingForm .= "<input type='submit' name='submit-review' class='btn btn-light mt-5' value='&plus; Place review'>";
                     }
                 }
-                
                 include_once "../Templates/product-detail.php";
                 break;
 
