@@ -109,7 +109,7 @@ if (!isMember() && !isAdmin()) {
                             $mainErrorField = "Email has successfully been changed!";
                             unset($_SESSION["user"]);
                             $_SESSION["user"] = fetchALLUserInfo($user->id);
-                            header("Location: /member/edit-profile");
+                            header("refresh:4; Location: /member/edit-profile");
                         } else if (!$updateResult) {
                             $mainErrorField = "Something went wrong!";
                         } else {
@@ -126,6 +126,60 @@ if (!isMember() && !isAdmin()) {
                 break;
             case 'change-password':
                 $titleSuffix = ' | Password reset';
+
+                $user = $_SESSION["user"];
+
+                $oldPasswordInput = null;
+                $passwordInput = null;
+                $passwordConfirmInput = null;
+
+                $oldPasswordError = null;
+                $passwordError = null;
+                $passwordConfirmError = null;
+
+                if (isset($_POST["submit-password-change"])) {
+                    $oldPasswordInput = $_POST["old-password"];
+                    $passwordInput = $_POST["new-password"];
+                    $passwordConfirmInput = $_POST["new-password-confirm"];
+
+                    $incorrectInput = false;
+
+                    if (empty($passwordInput)) {
+                        $passwordError = "You must fill in a password!";
+                        $incorrectInput = true;
+                    } else if (strlen($passwordInput) > 100) {
+                        $passwordError = "A password cannot be longer than 100 characters!";
+                        $incorrectInput = true;
+                    }
+
+                    if ($passwordConfirmInput != $passwordInput) {
+                        $passwordConfirmError = "The confirmation password is not equal to the new password!";
+                        $incorrectInput = true;
+                    }
+
+                    if (empty($oldPasswordInput)) {
+                        $oldPasswordError = "You must fill in your password!";
+                        $incorrectInput = true;
+                    } else if ($oldPasswordInput != $user->password) {
+                        $oldPasswordError = "The password is incorrect!";
+                        $incorrectInput = true;
+                    }
+
+                    if (!$incorrectInput) {
+                        $updateResult = updateUserPassword($user->id, $passwordInput, $user->password);
+
+                        if ($updateResult == "true") {
+                            $mainErrorField = "Password has successfully been changed!";
+                            unset($_SESSION["user"]);
+                            $_SESSION["user"] = fetchALLUserInfo($user->id);
+                            header("Location: /member/edit-profile");
+                        } else if (!$updateResult) {
+                            $mainErrorField = "Something went wrong!";
+                        } else {
+                            $mainErrorField = $updateResult;
+                        }
+                    }
+                }
 
                 include_once "../Templates/change-password.php";
                 break;
