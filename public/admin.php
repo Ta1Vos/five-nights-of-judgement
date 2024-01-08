@@ -25,7 +25,7 @@ if (!isAdmin()) {
     }
 
     //Fixes crucial bug with the navbar, in case illegal content is present as the 'id' for a category or a product.
-    if (($params[2] == "category" || $params[2] == "product") && $params[3] != intval($params[3])) {
+    if (($params[2] == "category" || $params[2] == "product" || $params[2] == "manage-review") && $params[3] != intval($params[3])) {
         if ($params[3] != "edit") {//Debugger works differently for edit page, which still needs 2 params
             echo "<br><br>/$params[1]/$params[3]<br>";
             header("Location: /$params[1]/$params[3]");//Redirects to the page listed after category or product, as that usually breaks.
@@ -101,6 +101,13 @@ if (!isAdmin()) {
 
                 include_once "../Templates/product-detail.php";
                 break;
+            case 'manage-review':
+//                if (!isset($params[3]) || ($params[3] != intval($params[3]))) {
+//                    echo "Something went wrong";
+//                    header("Location: /home");
+//                }
+
+                $titleSuffix = ' | Manage reviews';
 
             case 'edit':
                 if (!isset($params[4])) {
