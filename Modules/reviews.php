@@ -24,6 +24,32 @@ function loadReviews(int $id):array|false {
     return $reviewMessages;
 }
 
+function fetchSingleReview(int $id):Review|false {
+    try {
+        global $pdo;//Database connection
+
+        //Fetches the reviews
+        $pageReviews = $pdo->prepare("SELECT * FROM review WHERE id=:id limit 1");
+        $pageReviews->bindParam("id", $id);
+
+        if (!$pageReviews->execute()) {
+            return false;
+        }
+
+        $reviewMessages = $pageReviews->fetchAll(PDO::FETCH_CLASS, 'Review');
+
+        if ($reviewMessages <= 0) {
+            $reviewMessages = false;
+        }
+
+        return $reviewMessages;
+    } catch (PDOException $exception) {
+        echo $exception;
+    }
+
+    return false;
+}
+
 function validateReview(string $description = "", mixed $rating = ""):bool {
     global $description;
     global $rating;
