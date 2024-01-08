@@ -12,6 +12,8 @@ require "../Modules/frequently_visited.php";
 require "../Modules/database_update.php";
 require '../Modules/login.php';
 require '../Modules/logout.php';
+
+require "../Modules/edit-profile.php";
 //includes the code to connect to the database
 require '../Modules/database.php';
 //loads the information of the navbar
