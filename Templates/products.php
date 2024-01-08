@@ -13,7 +13,6 @@ if (!isset($firstLinkPiece)) {
 global $createCard;
 
 if (!isset($createCard)) {
-    echo "AAAAAAAAAAAAAAAAA";
     $createCard = null;
 }
 ?>
