@@ -89,7 +89,7 @@ function validateObjectWithArray(object $object, array $content):array|false {
 /**
  * Search a member by requesting their id.
  * @param int $id Required | The identifier of the user.
- * @return array|string Returns array with the results | OR | Returns string with an error message
+ * @return array|string Returns object with the result | OR | Returns string with an error message
  */
 function searchUserByID(int $id):User|string {
     try {

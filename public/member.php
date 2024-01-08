@@ -59,6 +59,69 @@ if (!isMember() && !isAdmin()) {
             case 'change-email':
                 $titleSuffix = ' | Email reset';
 
+                $user = $_SESSION["user"];
+                $email = $user->email;
+
+                $emailInput = null;
+                $emailConfirmInput = null;
+                $passwordInput = null;
+
+                $emailError = null;
+                $emailConfirmError = null;
+                $passwordError = null;
+                $mainErrorField = null;
+
+                if (isset($_POST["submit-email-change"])) {
+                    $emailInput = $_POST["new-email"];
+                    $emailConfirmInput = $_POST["new-email-confirm"];
+                    $passwordInput = $_POST["current-password"];
+
+                    $incorrectInput = false;
+
+                    if (empty($emailInput)) {
+                        $emailError = "You must fill in an email!";
+                        $incorrectInput = true;
+                    } else if (strlen($email) > 255) {
+                        $emailError = "An email cannot be longer than 255 characters!";
+                        $incorrectInput = true;
+                    } else if (!filter_input(INPUT_POST, "new-email", FILTER_VALIDATE_EMAIL)) {
+                        $emailError = "Fill in a valid email! (example: user@server.com)";
+                        $incorrectInput = true;
+                    }
+
+                    if ($emailConfirmInput != $emailInput) {
+                        $emailConfirmError = "The confirmation email is not equal to the new email!";
+                        $incorrectInput = true;
+                    }
+
+                    if (empty($passwordInput)) {
+                        $passwordError = "You must fill in your password!";
+                        $incorrectInput = true;
+                    } else if ($passwordInput != $user->password) {
+                        $passwordError = "The password is incorrect!";
+                        $incorrectInput = true;
+                    }
+
+                    if (!$incorrectInput) {
+                        $updateResult = updateUserEmail($user->id, $emailInput, $user->email);
+
+                        if ($updateResult == "true") {
+                            $mainErrorField = "Email has successfully been changed!";
+                            unset($_SESSION["user"]);
+                            $_SESSION["user"] = fetchALLUserInfo($user->id);
+                            header("Location: /member/edit-profile");
+                        } else if (!$updateResult) {
+                            $mainErrorField = "Something went wrong!";
+                        } else {
+                            $mainErrorField = $updateResult;
+                        }
+                    }
+                }
+
+                if ($email == null) {
+                    $email = "<div class='error-field'>No email has been set!</div>";
+                }
+
                 include_once "../Templates/change-email.php";
                 break;
             case 'change-password':
