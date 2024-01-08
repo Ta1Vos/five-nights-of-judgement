@@ -20,6 +20,10 @@ if (!isAdmin()) {
      *the switch statement checks which page you want to go.
      */
 
+    if (!isset($params[2])) {//Small fix so user does not get instantly logged out
+        header("Location: /admin/home");
+    }
+
     //Fixes crucial bug with the navbar, in case illegal content is present as the 'id' for a category or a product.
     if (($params[2] == "category" || $params[2] == "product") && $params[3] != intval($params[3])) {
         if ($params[3] != "edit") {//Debugger works differently for edit page, which still needs 2 params
@@ -51,7 +55,6 @@ if (!isAdmin()) {
                 $products = getProducts($params[2]);//Fetches the products
                 $categoryName = getCategoryName($params[2], $params[3]);//Gets category name for the breadcrumb link
                 include_once "../Templates/products.php";
-                break;
                 break;
 
             case 'categories':
@@ -478,7 +481,6 @@ if (!isAdmin()) {
                 break;
         }
     } else {
-        logout();
-        header("location:/home");
+        header("location:/admin/home");
     }
 }
