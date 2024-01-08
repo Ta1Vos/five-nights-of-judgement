@@ -81,3 +81,25 @@ function createReview(string $description, int $rating, int $userId):bool {
 
     return false;
 }
+
+/**
+ * Remove a review from the database
+ * @param int $id Required | The identifier of the review you wish to delete.
+ * @return bool
+ */
+function deleteReview(int $id):bool {
+    try {
+        global $pdo;
+
+        $query = $pdo->prepare("DELETE FROM review WHERE id=:id limit 1");
+        $query->bindParam("id", $id);
+
+        if ($query->execute()) {
+            return true;
+        }
+    } catch (PDOException $exception) {
+        echo "Something went wrong: <br> $exception";
+    }
+
+    return false;
+}
