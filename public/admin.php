@@ -43,8 +43,6 @@ if (!isAdmin()) {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //
     // * Select for all images in edit & create.
-    // * MVC member part
-    // * Member send reviews
     // * Admin edit reviews
     // * Contact page
 
