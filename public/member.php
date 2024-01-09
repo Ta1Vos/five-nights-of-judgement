@@ -217,6 +217,9 @@ if (!isMember() && !isAdmin()) {
                 $categoryName = getCategoryName($params[2], $params[3]);//Gets category name for the breadcrumb link
                 $reviewMessages = loadReviews($params[3]);//Gets review messages to show all the reviews
 
+                if (!$reviewMessages)
+                    $reviewMessages = [];
+
                 $product = $productDetails[0];
 
                 //Breadcrumb Link for member

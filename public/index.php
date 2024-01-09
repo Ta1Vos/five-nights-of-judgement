@@ -98,6 +98,9 @@ switch ($params[1]) {
         $categoryName = getCategoryName($params[1], $params[2]);//Gets category name for the breadcrumb link
         $reviewMessages = loadReviews($params[2]);//Gets review messages to show all of the reviews
 
+        if (!$reviewMessages)
+            $reviewMessages = [];
+
         $product = $productDetails[0];
 
         //Breadcrumb Link for visitors

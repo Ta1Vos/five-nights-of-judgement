@@ -67,4 +67,4 @@ global $imgDirLinks;
             <div class="error-field">
                 <?= $imageError; ?>
             </div>
-            <a href="/admin/image-creating">Click here to <b><u>delete</u></b> images instead</a>
+            <a href="/admin/image-deleting">Click here to <b><u>delete</u></b> images instead</a>
