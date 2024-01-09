@@ -4,7 +4,8 @@
  * @param int $id Required | The identifier of the page you're requesting the id from.
  * @return string|null Either returns
  */
-function loadReviews(int $id):array|false {
+function loadReviews(int $id): array|false
+{
     global $pdo;//Database connection
 
     //Fetches the reviews
@@ -27,7 +28,8 @@ function loadReviews(int $id):array|false {
  * @param int $id Required | The identifier of the review you're requesting the id from.
  * @return false|object Either returns false if the fetch fails or the review (object).
  */
-function fetchSingleReview(int $id):false|object {
+function fetchSingleReview(int $id): false|object
+{
     try {
         global $pdo;//Database connection
 
@@ -51,7 +53,14 @@ function fetchSingleReview(int $id):false|object {
     return false;
 }
 
-function validateReview(string $description = "", mixed $rating = ""):bool {
+/**
+ * Validation code for a review submit
+ * @param string $description
+ * @param mixed $rating
+ * @return bool
+ */
+function validateReview(string $description = "", mixed $rating = ""): bool
+{
     global $description;
     global $rating;
 
@@ -83,7 +92,15 @@ function validateReview(string $description = "", mixed $rating = ""):bool {
     return $inputValid;
 }
 
-function createReview(string $description, int $rating, int $userId):bool {
+/**
+ * Create a review
+ * @param string $description Required | The description of the review
+ * @param int $rating Required | The given rating of the review
+ * @param int $userId Required | The userID of the user who submitted the review
+ * @return bool returns false on fail, returns true on successful update
+ */
+function createReview(string $description, int $rating, int $userId): bool
+{
     try {
         global $pdo;
         global $params;
@@ -114,7 +131,8 @@ function createReview(string $description, int $rating, int $userId):bool {
  * @param int $id Required | The identifier of the review you wish to delete.
  * @return bool
  */
-function deleteReview(int $id):bool {
+function deleteReview(int $id): bool
+{
     try {
         global $pdo;
 
@@ -131,7 +149,14 @@ function deleteReview(int $id):bool {
     return false;
 }
 
-function editReviewMessage(int $id, string $message):bool {
+/**
+ * Edit the message of a review
+ * @param int $id Required | The identifier of the review.
+ * @param string $message Required | The replacement message of the review.
+ * @return bool returns false on fail, returns true on successful update
+ */
+function editReviewMessage(int $id, string $message): bool
+{
     try {
         global $pdo;
 
@@ -149,7 +174,13 @@ function editReviewMessage(int $id, string $message):bool {
     return false;
 }
 
-function loadManageReviewSubmit(object $review) {
+/**
+ * Load the submit handling of the Manage Review page.
+ * @param object $review Required | The review object you wish to edit.
+ * @return null
+ */
+function loadManageReviewSubmit(object $review)
+{
     global $confirmBtn;
 
     if (isset($_POST["remove-review"])) {
@@ -176,7 +207,13 @@ function loadManageReviewSubmit(object $review) {
     return null;
 }
 
-function updatePositiveReviewRating(object $review):bool {
+/**
+ * Increase the positive rating of a review by one.
+ * @param object $review Required | The review object you wish to update the positive rating of.
+ * @return bool returns false on fail, returns true on successful update
+ */
+function updatePositiveReviewRating(object $review): bool
+{
     try {
         global $pdo;
 
@@ -185,7 +222,7 @@ function updatePositiveReviewRating(object $review):bool {
         if (!$review)
             return false;
 
-        $rating = $review->review_positive_rating++;
+        $rating = $review->review_positive_rating + 1;
 
         $query = $pdo->prepare("UPDATE review SET review_positive_rating=:positive_rating WHERE id=:id");
         $query->bindParam("id", $review->id);
@@ -201,7 +238,13 @@ function updatePositiveReviewRating(object $review):bool {
     return false;
 }
 
-function updateNegativeReviewRating(object $review):bool {
+/**
+ * Increase the negative rating of a review by one.
+ * @param object $review Required | The review object you wish to update the negative rating of.
+ * @return bool returns false on fail, returns true on successful update
+ */
+function updateNegativeReviewRating(object $review): bool
+{
     try {
         global $pdo;
 
@@ -210,7 +253,7 @@ function updateNegativeReviewRating(object $review):bool {
         if (!$review)
             return false;
 
-        $rating = $review->review_negative_rating++;
+        $rating = $review->review_negative_rating + 1;
 
         $query = $pdo->prepare("UPDATE review SET review_negative_rating=:negative_rating WHERE id=:id");
         $query->bindParam("id", $review->id);
@@ -226,12 +269,53 @@ function updateNegativeReviewRating(object $review):bool {
     return false;
 }
 
-function editReviewRating(object $review) {
-    if (isset($_POST["positive-rating"])) {
-        updatePositiveReviewRating($review);
-    } else if (isset($_POST["negative-rating"])) {
-        updateNegativeReviewRating($review);
+/**
+ * Find the id in the last segment of a string, seperated by dashes (-)
+ * @param string $string Required | the string
+ * @return string returns the id
+ */
+function pullReviewIDFromString(string $string): string
+{
+    $reviewID = explode("-", $string);
+    return $reviewID[count($reviewID) - 1];
+}
+
+/**
+ * Update/Edit the rating of a review by checking a POST. The last separation (-) of the POST MUST include a number
+ * @return null
+ */
+function editReviewRating()
+{
+    //Loop through the POST to see if a review rating has been set. ID is included, so there has to be a loop-check for which type of rating it is.
+    foreach ($_POST as $key => $postItem) {
+        if (str_contains($key, "review-rate-positive")) {//If positive rating has been set
+            $reviewID = pullReviewIDFromString($key);//Extract review ID from POST
+
+            if ($reviewID == intval($reviewID)) {//Checks if id is a number
+                $review = fetchSingleReview($reviewID);//Fetch review
+
+                if (updatePositiveReviewRating($review)) {
+                    header("Refresh: 0");//Refreshes page so rate count is up-to-date
+                }
+
+            }
+
+            echo "Uh Oh! Something went wrong!";
+        } else if (str_contains($key, "review-rate-negative")) {//If negative rating has been set
+            $reviewID = pullReviewIDFromString($key);//Extract review ID from POST
+
+            if ($reviewID == intval($reviewID)) {//Checks if id is a number
+                $review = fetchSingleReview($reviewID);//Fetch review
+
+                if (updateNegativeReviewRating($review)) {
+                    header("Refresh: 0");//Refreshes page so rate count is up-to-date
+                }
+            }
+
+            echo "Uh Oh! Something went wrong!";
+        }
     }
+
 
     return null;
 }

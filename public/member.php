@@ -266,6 +266,9 @@ if (!isMember() && !isAdmin()) {
                         $reviewPlacingForm .= "<input type='submit' name='submit-review' class='btn btn-light mt-5' value='&plus; Place review'>";
                     }
                 }
+                
+                editReviewRating();
+
                 include_once "../Templates/product-detail.php";
                 break;
 
