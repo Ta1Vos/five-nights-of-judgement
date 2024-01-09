@@ -60,7 +60,7 @@ function validateReview(string $description = "", mixed $rating = ""):bool {
 
     $inputValid = true;
 
-    if (!isset($description)) {//Check if description has been filled in
+    if (empty($description)) {//Check if description has been filled in
         $descriptionError = "You must fill something in in the description!";
         $inputValid = false;
     }
