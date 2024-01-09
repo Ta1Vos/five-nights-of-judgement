@@ -104,4 +104,4 @@ if (!isset($deleteConfirm)) {
                     <?= $deleteConfirm; ?>
                 </form>
             <?php endif; ?>
-            <a href="/admin/image-creating">Click here to <b><u>add</u></b> images instead</a>
+            <a href="/admin/image-adding">Click here to <b><u>add</u></b> images instead</a>
