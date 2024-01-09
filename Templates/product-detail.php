@@ -70,9 +70,11 @@ global $breadcrumbLink;
                             <div class="col-6 card-header bg-secondary">
                                 <?= $reviewSender->first_name ?> <?= $reviewSender->last_name ?>
                             </div>
+                            <?php if (isAdmin())://Adds delete button for admin?>
                             <div class="col-3">
                                 <a href="/admin/manage-review/<?= $reviewMessage->id; ?>" class="btn btn-light">Edit review</a>
                             </div>
+                            <?php endif; ?>
                         </div>
                         <div class="py-3">
                             <?= $reviewMessage->message ?>

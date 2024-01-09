@@ -11,20 +11,23 @@ function loadReviews(int $id):array|false {
     $pageReviews = $pdo->prepare("SELECT * FROM review WHERE product_id=:id ORDER BY publish_time");
     $pageReviews->bindParam("id", $id);
 
-    if (!$pageReviews->execute()) {
+    if (!$pageReviews->execute())
         return false;
-    }
 
     $reviewMessages = $pageReviews->fetchAll(PDO::FETCH_CLASS, 'Review');
 
-    if ($reviewMessages <= 0) {
-        $reviewMessages = false;
-    }
+    if (count($reviewMessages) <= 0)
+        return false;
 
     return $reviewMessages;
 }
 
-function fetchSingleReview(int $id):Review|false {
+/**
+ * Load a review message using an identifier.
+ * @param int $id Required | The identifier of the review you're requesting the id from.
+ * @return false|object Either returns false if the fetch fails or the review (object).
+ */
+function fetchSingleReview(int $id):false|object {
     try {
         global $pdo;//Database connection
 
@@ -32,17 +35,15 @@ function fetchSingleReview(int $id):Review|false {
         $pageReviews = $pdo->prepare("SELECT * FROM review WHERE id=:id limit 1");
         $pageReviews->bindParam("id", $id);
 
-        if (!$pageReviews->execute()) {
+        if (!$pageReviews->execute())
             return false;
-        }
 
         $reviewMessages = $pageReviews->fetchAll(PDO::FETCH_CLASS, 'Review');
 
-        if ($reviewMessages <= 0) {
-            $reviewMessages = false;
-        }
+        if (count($reviewMessages) <= 0)
+            return false;
 
-        return $reviewMessages;
+        return $reviewMessages[0];
     } catch (PDOException $exception) {
         echo $exception;
     }

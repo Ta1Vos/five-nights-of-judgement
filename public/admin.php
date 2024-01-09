@@ -102,13 +102,21 @@ if (!isAdmin()) {
                 include_once "../Templates/product-detail.php";
                 break;
             case 'manage-review':
-//                if (!isset($params[3]) || ($params[3] != intval($params[3]))) {
-//                    echo "Something went wrong";
-//                    header("Location: /home");
-//                }
+                if (!isset($params[3]) || ($params[3] != intval($params[3]))) {
+                    echo "Something went wrong";
+                    header("Location: /admin/home");
+                }
+
+                $review = fetchSingleReview($params[3]);
+
+                if (!$review) {
+                    header("Location: /admin/home");
+                }
 
                 $titleSuffix = ' | Manage reviews';
 
+                include_once "../Templates/admin/manage-review.php";
+                break;
             case 'edit':
                 if (!isset($params[4])) {
                     echo "Something went wrong";
