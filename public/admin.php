@@ -43,9 +43,8 @@ if (!isAdmin()) {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //
     // * Select for all images in edit & create.
-    // * Admin edit reviews
     // * Contact page
-    // * Member reviews: Fix error message with no reviews, fix sending empty reviews.
+    // * Other members rate reviews (level of usefulness)
 
     if (isset($params[2])) {
         switch ($params[2]) {
