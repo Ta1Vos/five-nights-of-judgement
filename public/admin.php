@@ -10,10 +10,6 @@ if (!isAdmin()) {
     require '../Modules/admin.php';
     require '../Modules/edit-cards.php';
 
-    echo "<br>";
-    var_dump($params);
-    echo "<br>";
-
     /*$params[1] is the admin role in case its being used.
      * $params[2] is the action (the page you are visiting).
      *$params[3] is parameter you give to the page.
@@ -423,10 +419,6 @@ if (!isAdmin()) {
 
                 $imgDirLinks["categories"] = "../public/img/categories";
                 $imgDirLinks["products"] = ["../public/img/products", fetchAllFilesFromDirectory("../public/img/products", true)];
-
-                echo "<pre>";
-                var_dump($imgDirLinks);
-                echo "</pre>";
 
                 if (isset($_POST["submit-file-upload"])) {//Submit for the image
                     $validateUpload = true;

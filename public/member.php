@@ -23,7 +23,6 @@ if (!isMember() && !isAdmin()) {
         switch ($params[2]) {
             case 'edit-profile':
                 $titleSuffix = ' | Edit profile';
-                var_dump($_SESSION);
 
                 if (isset($_SESSION["user"]->id)) {
                     $user = $_SESSION["user"];

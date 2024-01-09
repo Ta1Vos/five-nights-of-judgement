@@ -50,7 +50,6 @@ function updateUserPassword(int $userID, string $newPassword, string $oldPasswor
         if (!is_object($user)) {
             return false;
         } else if ($user->password != $oldPassword) {
-            var_dump($user);
             return "$user->password | $oldPassword";
         }
 
