@@ -175,3 +175,63 @@ function loadManageReviewSubmit(object $review) {
 
     return null;
 }
+
+function updatePositiveReviewRating(object $review):bool {
+    try {
+        global $pdo;
+
+        $review = fetchSingleReview($review->id);//Refresh review
+
+        if (!$review)
+            return false;
+
+        $rating = $review->review_positive_rating++;
+
+        $query = $pdo->prepare("UPDATE review SET review_positive_rating=:positive_rating WHERE id=:id");
+        $query->bindParam("id", $review->id);
+        $query->bindParam("positive_rating", $rating);
+
+        if ($query->execute()) {
+            return true;
+        }
+    } catch (PDOException $exception) {
+        echo "Something went wrong: <br> $exception";
+    }
+
+    return false;
+}
+
+function updateNegativeReviewRating(object $review):bool {
+    try {
+        global $pdo;
+
+        $review = fetchSingleReview($review->id);//Refresh review
+
+        if (!$review)
+            return false;
+
+        $rating = $review->review_negative_rating++;
+
+        $query = $pdo->prepare("UPDATE review SET review_negative_rating=:negative_rating WHERE id=:id");
+        $query->bindParam("id", $review->id);
+        $query->bindParam("negative_rating", $rating);
+
+        if ($query->execute()) {
+            return true;
+        }
+    } catch (PDOException $exception) {
+        echo "Something went wrong: <br> $exception";
+    }
+
+    return false;
+}
+
+function editReviewRating(object $review) {
+    if (isset($_POST["positive-rating"])) {
+        updatePositiveReviewRating($review);
+    } else if (isset($_POST["negative-rating"])) {
+        updateNegativeReviewRating($review);
+    }
+
+    return null;
+}
