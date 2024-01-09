@@ -27,19 +27,6 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="user_name" id="1229979F-311C-FE19-5C7D-ED0C1415D487">
-<createdBy>timav</createdBy>
-<createdTime>2023-11-20 10:53:48 UTC</createdTime>
-<ownerDesignName>fnoj_ERD</ownerDesignName>
-<engineerTo>
-<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
-</engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>255</dataTypeSize>
-<ownDataTypeParameters>255,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="message" id="9F84F876-AF22-EB4C-F106-F8A78EE9290F">
 <createdBy>timav</createdBy>
 <createdTime>2023-11-20 10:54:10 UTC</createdTime>
@@ -75,6 +62,32 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="review_positive_rating" id="9F34DABC-DA6E-8609-6780-055AEBBA1A3B">
+<createdBy>timav</createdBy>
+<createdTime>2024-01-09 14:27:28 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="review_negative_rating" id="4767CBF4-9D37-D92F-204F-DE1585864CCA">
+<createdBy>timav</createdBy>
+<createdTime>2024-01-09 14:27:29 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="id1" id="E6450FF5-0489-04EA-1B69-AC0E7FD819AE">

@@ -65,6 +65,27 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="review_positive_rating" id="80CF54F7-28F5-0002-C975-F51941EE8201">
+<createdBy>timav</createdBy>
+<createdTime>2024-01-09 14:26:27 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="review_negative_rating" id="8B6D46E4-410F-8910-5E36-2A070850A51A">
+<createdBy>timav</createdBy>
+<createdTime>2024-01-09 14:26:27 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 <Column name="PRODUCT_id" id="6D1F1461-4E8E-6698-1831-FC04E38EBB63">
 <createdBy>timav</createdBy>
 <createdTime>2023-11-20 10:59:10 UTC</createdTime>
@@ -94,6 +115,30 @@
 <associations>
 <colAssociation fkAssociation="623C05A6-5595-2806-4016-75D06787870B" referredColumn="1DACF091-A8D0-1091-A21A-38E4B3476B12"/>
 </associations>
+</Column>
+<Column name="review_positive_rating1" id="7047EA32-E84F-AECD-BD79-C6FDB3CA9C73">
+<createdBy>timav</createdBy>
+<createdTime>2024-01-09 14:28:07 UTC</createdTime>
+<generatorID>9F34DABC-DA6E-8609-6780-055AEBBA1A3B</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="review_negative_rating1" id="2470DC56-73CC-5259-F214-DA70055CF3D0">
+<createdBy>timav</createdBy>
+<createdTime>2024-01-09 14:28:07 UTC</createdTime>
+<generatorID>4767CBF4-9D37-D92F-204F-DE1585864CCA</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
