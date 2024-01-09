@@ -45,6 +45,7 @@ if (!isAdmin()) {
     // * Select for all images in edit & create.
     // * Admin edit reviews
     // * Contact page
+    // * Member reviews: Fix error message with no reviews, fix sending empty reviews.
 
     if (isset($params[2])) {
         switch ($params[2]) {
@@ -109,9 +110,10 @@ if (!isAdmin()) {
 
                 $review = fetchSingleReview($params[3]);
 
-                if (!$review) {
+                if (!$review)//If review has not been fetched
                     header("Location: /admin/home");
-                }
+
+                loadManageReviewSubmit($review);
 
                 $titleSuffix = ' | Manage reviews';
 

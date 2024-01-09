@@ -130,3 +130,48 @@ function deleteReview(int $id):bool {
 
     return false;
 }
+
+function editReviewMessage(int $id, string $message):bool {
+    try {
+        global $pdo;
+
+        $query = $pdo->prepare("UPDATE review SET message=:message WHERE id=:id");
+        $query->bindParam("id", $id);
+        $query->bindParam("message", $message);
+
+        if ($query->execute()) {
+            return true;
+        }
+    } catch (PDOException $exception) {
+        echo "Something went wrong: <br> $exception";
+    }
+
+    return false;
+}
+
+function loadManageReviewSubmit(object $review) {
+    global $confirmBtn;
+
+    if (isset($_POST["remove-review"])) {
+        $confirmBtn = "<input type='submit' name='confirm-remove-review' value='Confirm remove' class='btn btn-light mb-3'><br>";
+    } else if (isset($_POST["force-remove-review"])) {
+        $confirmBtn = "<input type='submit' name='confirm-force-remove-review' value='Confirm delete' class='btn btn-light mb-3'><br>";
+    }
+
+    if (isset($_POST["confirm-remove-review"])) {
+        if (!editReviewMessage($review->id, "<i>[ This post has been removed ]</i>")) {
+            echo "Something went wrong upon attempting to remove the review";
+        } else {
+            header("Location: /admin/home");
+        }
+
+    } else if (isset($_POST["confirm-force-remove-review"])) {
+        if (!deleteReview($review->id)) {
+            echo "Something went wrong upon attempting to remove the review from the database.";
+        } else {
+            header("Location: /admin/home");
+        }
+    }
+
+    return null;
+}

@@ -5,16 +5,13 @@
 include_once('../Templates/defaults/head.php');
 global $adminEditor;
 global $params;
-$firstLinkPiece = loadLinkContent();
 
-if (!isset($firstLinkPiece)) {
-    $firstLinkPiece = null;
-}
-global $deleteConfirm;
+global $review;
 
-if (!isset($deleteConfirm)) {
-    $deleteConfirm = "<input type='submit' name='confirm-delete' value='DELETE THIS PRODUCT'>";
-}
+global $confirmBtn;
+
+if (!isset($confirmBtn))
+    $confirmBtn = null;
 
 ?>
 
@@ -36,37 +33,66 @@ if (!isset($deleteConfirm)) {
             </ol>
         </nav>
         <div class="row gy-3 text-center d-flex justify-content-center flex-row">
-            <div class="col-12 fs-1">
-                Are you sure you wish to delete:
-            </div>
-            <div class="col-12 d-flex justify-content-center">
-                <?php global $products; ?>
-                <?php foreach ($products as $product): ?>
-                    <div class="col-sm-6 col-md-4 col-lg-3 card-group">
-                        <div class='card bg-dark mx-2 border border-3 border-dark rounded-2' style='width: 18rem;'>
-                            <img src='/img/<?= $product->picture; ?>' class='card-img-top' alt='Image of $pageType'>
-                            <div class='card-body'>
-                                <h5 class='card-title text-white'><?= $product->name; ?></h5>
-                                <hr>
-                                <p class="card-text text-light"><?= $product->description; ?></p>
-                                <a href='<?= $firstLinkPiece; ?>category/<?= $product->id; ?>' class='stretched-link'></a><br>
-                            </div>
+            <?php $reviewSender = searchUserByID($review->registered_user_id);
+            $rating = $review->rating / 2;
+            $halfStar = false;
+            $emptyStars = 5;
+
+            if ($rating != floor($rating)) {
+            $rating -= 1;
+            $halfStar = true;
+            }
+            ?>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="card col-8 bg-dark p-0 my-5">
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-6 card-header bg-secondary">
+                            <?= $reviewSender->first_name ?> <?= $reviewSender->last_name ?>
                         </div>
                     </div>
-                <?php $categoryId = $product->category_id;
-                endforeach; ?>
+                    <div class="py-3">
+                        <?= $review->message ?>
+                    </div>
+                    <div class="card-header bg-secondary">
+                        --&nbsp;
+                        <?php
+                        //ECHOES THE RATING
+                        for ($i=0; $i<$rating; $i++) {
+                            echo "<i class='bi bi-star-fill mx-1'></i>";
+                            $emptyStars--;
+                        }
+                        if ($halfStar) {
+                            echo "<i class='bi bi-star-half mx-1'></i>";
+                            $emptyStars--;
+                        }
+                        //ECHOES EMPTY STARS
+                        for ($i=0; $i<$emptyStars; $i++) {
+                            echo "<i class='bi bi-star mx-1'></i>";
+                        }
+                        ?>
+                        &nbsp;--
+                    </div>
+                    <small class="border-top border-1 border-dark">
+                        <?= $review->publish_time ?>
+                    </small>
+                </div>
+                <div class="col-2"></div>
             </div>
-            <div class="col-12 fs-3">
-                Deleting a <br><span class="fw-bold fs-2">product</span><br> will permanently remove it from existence! You can always create a new one.
-            </div>
-            <div class="col-12">
-                <hr><br>
-                <div class="fs-1">Confirmation:</div>
-            </div>
-            <a href="/category/<?= $categoryId; ?>"><button>GO BACK, I DON'T WANT TO DELETE THIS PRODUCT</button></a>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <form method="post" class="col-12">
-                <?= $deleteConfirm; ?>
+            <form method="post">
+                <div class="row">
+                    <div class="col-6">
+                        <h5>Remove review</h5>
+                        <label for="remove">Keeps the post, removes the message</label><br>
+                        <input type="submit" name="remove-review" value="Remove review" class="btn btn-light mb-3" id="remove"><br>
+                        <label for="remove">Completely remove the post</label><br>
+                        <input type="submit" name="force-remove-review" value="Delete review" class="btn btn-light mb-3" id="delete"><br>
+                    </div>
+                </div>
+                <div class="confirm">
+                    <?= $confirmBtn; ?>
+                </div>
             </form>
         </div>
 
