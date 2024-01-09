@@ -98,7 +98,19 @@ global $breadcrumbLink;
                             ?>
                             &nbsp;--
                         </div>
-                        <small class="border-top border-1 border-dark">
+                        <form method="post" class="member-rating pt-1 pb-1 bg-secondary">
+                            <small>Is this review helpful?</small>
+                            <div class="d-flex justify-content-center">
+                                <input type="submit" name="review-rate-positive" value="+1" class="rounded">
+                                <i class="bi bi-hand-thumbs-up me-3 fs-4"></i>
+                                <small>
+                                    <?php echo $reviewMessage->review_positive_rating - $reviewMessage->review_negative_rating; ?>
+                                </small>
+                                <i class="bi bi-hand-thumbs-down ms-3 fs-4"></i>
+                                <input type="submit" name="review-rate-negative" value="-1" class="rounded">
+                            </div>
+                        </form>
+                        <small class="border-top border-1 border-dark py-1">
                             <?= $reviewMessage->publish_time ?>
                         </small>
                     </div>
