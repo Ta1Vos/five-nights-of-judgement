@@ -1,5 +1,5 @@
 body {
-    background-color: gainsboro
+    background-color: gainsboro;
 }
 
 .container {
@@ -25,4 +25,31 @@ body {
 
 .product-img {
     width: 70%;
+}
+
+bg-black {
+    background-color: black !important;
+}
+
+.background-gif {
+    z-index: -1;
+}
+
+.navbar-logo {
+    width: 100% !important;
+    max-width: 117px;
+}
+
+.error-field {
+    color: red;
+}
+
+.z-5 {
+    z-index: 5 !important;
+}
+
+@media screen and (max-width: 992px) {
+    .navbar-logo {
+        width: 50% !important;
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 $host = '127.0.0.1';
-$db   = 'healthone';
+$db   = 'fnoj';
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';

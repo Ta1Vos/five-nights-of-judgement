@@ -5,12 +5,21 @@
  */
 
 //make sure you add all the modules.
+require '../Modules/common.php';
 require '../Modules/categories.php';
+require "../Modules/products.php";
+require "../Modules/frequently_visited.php";
+require "../Modules/database_update.php";
 require '../Modules/login.php';
 require '../Modules/logout.php';
+
+require "../Modules/edit-profile.php";
 //includes the code to connect to the database
 require '../Modules/database.php';
-require '../Modules/common.php';
+//loads the information of the navbar
+require "../Modules/navbar_content.php";
+require "../Modules/reviews.php";
+global $navbarCategoryContent;
 
 session_start();
 //var_dump($_SESSION);
@@ -32,7 +41,7 @@ $request = $_SERVER['REQUEST_URI'];
 $params = explode("/", $request);
 print_r($request);
 //this wil be the title of your page
-$title = "HealthOne";
+$title = "FNOJ";
 
 //this variable will add text to your title. you can use this on the different pages.
 $titleSuffix = "";
@@ -40,10 +49,19 @@ $titleSuffix = "";
 //if you want to send a message to the user you can use this variable.
 $message = "";
 
-/*$params[1] is the action (the page you are visiting).
+$navbarCategoryContent = null;
+loadNavbarContent();
+
+/* $params[1] is the action (the page you are visiting).
  *$params[2] is parameter you give to the page.
  *the switch statement checks which page you want to go.
  */
+
+//Fixes crucial bug with the navbar, in case illegal content is present as the 'id' for a category or a product.
+if (($params[1] == "category" || $params[1] == "product") && $params[2] != intval($params[2])) {
+    header("Location: /$params[2]");//Redirects to the page listed after category or product, as that usually breaks.
+}
+
 switch ($params[1]) {
 
     case 'categories':
@@ -64,30 +82,84 @@ switch ($params[1]) {
         break;
 
     case 'category':
-        include_once "../Templates/home.php";
+        updateVisits("category", $params[2]);
+        $products = getProducts($params[2]);//Fetches the products
+        $categoryName = getCategoryName($params[1], $params[2]);//Gets category name for the breadcrumb link
+
+        //Breadcrumb link for visitors
+        $breadcrumbLink = "<li class='breadcrumb-item'><a href='/category/$params[2]'>$categoryName</a></li>";
+
+        include_once "../Templates/products.php";
         break;
 
     case 'product':
+        updateVisits("product", $params[2]);//Updates visits by one
+        $productDetails = getProductDetails($params[2]);//Fetches the product details
+        $categoryName = getCategoryName($params[1], $params[2]);//Gets category name for the breadcrumb link
+        $reviewMessages = loadReviews($params[2]);//Gets review messages to show all of the reviews
+
+        if (!$reviewMessages)
+            $reviewMessages = [];
+
+        $product = $productDetails[0];
+
+        //Breadcrumb Link for visitors
+        $breadcrumbLink = "<li class='breadcrumb-item'><a href='/category/$product->category_id'>$categoryName</a></li>";
+        $breadcrumbLink .= "<li class='breadcrumb-item'><a href='/product/$product->id'>$product->name</a></li>";
+        include_once "../Templates/product-detail.php";
         break;
 
     case 'login':
-        $titleSuffix = ' | Home';
-        include_once "../Templates/home.php";
+        $titleSuffix = ' | Log In';
+
+        //Values
+        $firstName = null;
+        $lastName = null;
+        $email = null;
+        $password = null;
+        $passwordConfirm = null;
+        //Error fields
+        $firstNameError = null;
+        $lastNameError = null;
+        $emailError = null;
+        $passwordError = null;
+        $passwordConfirmError = null;
+        $mainErrorField = null;
+
+        validateLogIn();
+        include_once "../Templates/login.php";
         break;
 
     case 'logout':
-        $titleSuffix = ' | Home';
-        include_once "../Templates/home.php";
+        logout();
+        $titleSuffix = ' | Log Out';
+        header("Location: /home");
         break;
 
     case 'register':
-        $titleSuffix = ' | Home';
-        include_once "../Templates/home.php";
+        $titleSuffix = ' | Register';
+
+        //Values
+        $firstName = null;
+        $lastName = null;
+        $email = null;
+        $password = null;
+        $passwordConfirm = null;
+        //Error fields
+        $firstNameError = null;
+        $lastNameError = null;
+        $emailError = null;
+        $passwordError = null;
+        $passwordConfirmError = null;
+        $mainErrorField = null;
+
+        validateRegistration();
+        include_once "../Templates/register.php";
         break;
 
     case 'contact':
-        $titleSuffix = ' | Home';
-        include_once "../Templates/home.php";
+        $titleSuffix = ' | Contact';
+        include_once "../Templates/contact.php";
         break;
 
     case 'admin':
@@ -100,6 +172,15 @@ switch ($params[1]) {
 
     default:
         $titleSuffix = ' | Home';
+
+        //Popular id is a special identifier for the popular pages, it makes it easy for the admin to reset the visits.
+        $popularId = [null, 0];//Value for which row/column is created for the freq. visited.
+        $frequentlyVisitedCategories = calculateFrequentlyVisited("category");
+        $popularId = [null, 0];
+        $frequentlyVisitedPages = calculateFrequentlyVisited("product");
+
+        $frequentlyVisitedCategories = loadCardContents($frequentlyVisitedCategories, "category");
+        $frequentlyVisitedPages = loadCardContents($frequentlyVisitedPages, "product");
         include_once "../Templates/home.php";
 }
 

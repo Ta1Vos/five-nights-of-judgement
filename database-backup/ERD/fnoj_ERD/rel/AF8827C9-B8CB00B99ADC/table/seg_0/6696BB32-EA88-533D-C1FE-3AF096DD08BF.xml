@@ -1,0 +1,98 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6696BB32-EA88-533D-C1FE-3AF096DD08BF" name="REGISTERED_USER">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>BCE0947C-24C3-79B7-4F2A-53C85129B603</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="1DACF091-A8D0-1091-A21A-38E4B3476B12">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>F4C47104-7184-D03E-6F8F-56E2E5765ECD</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="first_name" id="5BEADB9C-E494-C605-0E90-DC08BA202BD2">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>B8BAD4D5-1F49-1652-7B43-59F14B8BF9FD</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="last_name" id="47F59E1A-7BD3-F477-CCFB-25D28DA5AA6B">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>B2F7242F-46CA-D725-3F28-83AE2121D3D0</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="email" id="C804718D-9204-ED9C-D980-B7B013384175">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>A93BE9AD-FDDD-20CD-B268-EB1CD6FFCC86</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="password" id="F8307ADA-B90E-F430-1270-6771869E848F">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>7BEF8589-3114-CE28-07D1-92187B44D20D</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="role" id="54ED1063-5982-B237-6FA1-564BCCB25B3A">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 11:07:12 UTC</createdTime>
+<generatorID>6C8359D7-EA01-00BD-1477-91C50A413A1D</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="0BC41ACE-63FB-83CD-C338-9193F8041ECD" name="REGISTERED_USER_PK">
+<createdBy>timav</createdBy>
+<createdTime>2023-11-20 10:59:10 UTC</createdTime>
+<generatorID>778056B5-1144-D981-9A0F-301157D1EBC8</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1DACF091-A8D0-1091-A21A-38E4B3476B12"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

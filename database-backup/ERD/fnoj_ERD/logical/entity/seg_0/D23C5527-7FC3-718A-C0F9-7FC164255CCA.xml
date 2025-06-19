@@ -1,0 +1,110 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="D23C5527-7FC3-718A-C0F9-7FC164255CCA" name="PRODUCT">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:04:58 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="924679B7-733C-14BA-BF0C-7065FBF5A183">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:04:58 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="name" id="EFBE6D31-67B7-C5D8-C4F3-6771AB03C1DF">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:04:58 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="picture" id="1CAB7BA7-B0EB-85B1-64FC-32BF2D636580">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:04:58 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="description" id="AFAE7D85-BA12-E520-8818-E49D387A01CA">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:04:58 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="visits" id="B8F085C4-D81E-5CEC-B8A1-A435D856BCDD">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:04:58 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="A3DFB76B-A312-B26F-F004-7B4512B3C95D">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:05:42 UTC</createdTime>
+<generatorID>F1615559-0829-AA22-2FCC-48C2520C4C4F</generatorID>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="true"/>
+</engineerTo>
+<referedAttribute>AE383754-5293-E2D9-5DB7-2221BA1CF8D3</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="29E00702-6039-BC51-1D9E-35CC94EFA1DF" name="CATEGORY PK">
+<createdBy>SD Student</createdBy>
+<createdTime>2023-11-13 13:04:58 UTC</createdTime>
+<ownerDesignName>fnoj_ERD</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="AF8827C9-1A1D-7289-0784-B8CB00B99ADC" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>924679B7-733C-14BA-BF0C-7065FBF5A183</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
